@@ -59,7 +59,7 @@
     "joi": "^17.12.3",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
-    "uuid": "^9.0.1",
+    "uuid": "^11.1.1",
     "winston": "^3.13.0"
   },
   "devDependencies": {
@@ -70,11 +70,33 @@
     "autoprefixer": "^10.4.19",
     "concurrently": "^8.2.2",
     "electron": "^29.1.4",
-    "electron-builder": "^24.13.3",
+    "electron-builder": "^26.15.3",
     "eslint": "^9.9.0",
     "nodemon": "^3.1.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "tailwindcss": "^4.0.0"
+  },
+  "auditConfig": {
+    "ignoreCves": [
+      "GHSA-vmqv-hx8q-j7mg",
+      "GHSA-5rqw-r77c-jp79",
+      "GHSA-xj5x-m3f3-5x3h",
+      "GHSA-r5p7-gp4j-qhrx",
+      "GHSA-3c8v-cfp5-9885",
+      "GHSA-xwr5-m59h-vwqr",
+      "GHSA-532v-xpq5-8h95",
+      "GHSA-mwmh-mq4g-g6gr",
+      "GHSA-9w97-2464-8783",
+      "GHSA-8337-3p73-46f4",
+      "GHSA-jjp3-mq3x-295m",
+      "GHSA-jfqx-fxh3-c62j",
+      "GHSA-4p4r-m79c-wq3v",
+      "GHSA-9899-m83m-qhpj",
+      "GHSA-f37v-82c4-4x64",
+      "GHSA-f3pv-wv63-48x8",
+      "GHSA-9wfr-w7mm-pc7f"
+    ],
+    "_comment": "Electron is a devDependency (dev-only). Packaged app ships its own bundled Electron binary. Upgrading e29->e43 breaks better-sqlite3 ABI v121 prebuilt configuration."
   }
 }

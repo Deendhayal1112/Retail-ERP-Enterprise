@@ -1,0 +1,45 @@
+{
+  "name": "retail-erp-enterprise",
+  "productName": "Retail ERP Enterprise",
+  "version": "0.1.0",
+  "description": "Enterprise Offline-First Retail ERP Desktop Application",
+  "main": "src/main/main.js",
+  "author": "Deendhayal RR",
+  "license": "Proprietary",
+  "scripts": {
+    "start": "electron .",
+    "dev": "nodemon --exec electron .",
+    "build": "electron-builder",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "echo \"No tests configured yet\""
+  },
+  "dependencies": {
+    "axios": "^1.19.0",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^13.0.2",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "electron-store": "^11.0.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.1",
+    "helmet": "^8.3.0",
+    "joi": "^18.2.3",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "uuid": "^14.0.1",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.4",
+    "concurrently": "^10.0.4",
+    "electron": "^43.2.0",
+    "electron-builder": "^26.15.3",
+    "eslint": "^10.8.0",
+    "nodemon": "^3.1.14",
+    "postcss": "^8.5.25",
+    "prettier": "^3.9.6",
+    "tailwindcss": "^4.3.3"
+  }
+}

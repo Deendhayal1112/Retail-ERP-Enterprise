@@ -1,0 +1,9 @@
+/* RecentActivity.css */
+.recentactivity-placeholder {
+  padding: 1rem;
+  border: 1px dashed var(--border-light || #ccc);
+  border-radius: var(--radius-md || 4px);
+  background-color: var(--bg-card || #fafafa);
+  text-align: center;
+  color: var(--text-muted || #666);
+}

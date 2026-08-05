@@ -1,0 +1,29 @@
+.footer-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 1.5rem;
+  background-color: var(--bg-footer || #0b0f19);
+  border-top: 1px solid var(--border-light || #1e293b);
+  font-size: 0.75rem;
+  color: var(--text-muted || #64748b);
+}
+.footer-status-left, .footer-status-center, .footer-status-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.status-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.status-indicator-dot.online {
+  background-color: var(--success-500 || #22c55e);
+  box-shadow: 0 0 8px var(--success-500 || #22c55e);
+}
+.footer-status-bar .accent {
+  color: var(--text-secondary || #cbd5e1);
+  font-weight: 600;
+}

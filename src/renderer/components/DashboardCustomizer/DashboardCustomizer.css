@@ -1,0 +1,248 @@
+/* DashboardCustomizer.css */
+
+/* Backdrop overlay container */
+.customizer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1050; /* overlay z-index alignment */
+  display: flex;
+  justify-content: flex-end; /* Slide out drawer style from right side */
+  align-items: stretch;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.customizer-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Side Drawer Panel */
+.customizer-drawer {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--bg-card);
+  border-left: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.customizer-backdrop.active .customizer-drawer {
+  transform: translateX(0);
+}
+
+/* ─────────────────────────────────────────────
+ * DRAWER HEADER
+ * ───────────────────────────────────────────── */
+.customizer-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.customizer-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.customizer-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.customizer-subtitle {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.customizer-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.customizer-close-btn:hover {
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * DRAWER SCROLL BODY (Widget Manager List)
+ * ───────────────────────────────────────────── */
+.customizer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.customizer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.customizer-section-title {
+  font-size: 0.675rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Widget Control Card */
+.customizer-widget-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.customizer-widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.customizer-widget-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.customizer-widget-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Toggle Switches */
+.customizer-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: color var(--duration-fast);
+}
+
+.customizer-toggle-btn.visible { color: var(--success-500); }
+.customizer-toggle-btn.hidden  { color: var(--text-muted); }
+
+.customizer-pin-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: color var(--duration-fast);
+}
+
+.customizer-pin-btn.pinned   { color: var(--primary-500); }
+.customizer-pin-btn.unpinned { color: var(--text-muted); }
+
+/* Layout Controls Panel */
+.customizer-layout-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.725rem;
+  color: var(--text-secondary);
+}
+
+.customizer-width-select {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.675rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+/* Drag handle placeholder */
+.customizer-drag-handle {
+  color: var(--text-muted);
+  cursor: grab;
+  font-size: 0.8rem;
+}
+
+/* ─────────────────────────────────────────────
+ * DRAWER FOOTER (Reset Layout Dialog controls)
+ * ───────────────────────────────────────────── */
+.customizer-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border-light);
+  background-color: var(--bg-hover);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.customizer-action-row {
+  display: flex;
+  gap: 10px;
+}
+
+.customizer-primary-btn {
+  flex: 1;
+  background-color: var(--primary-500);
+  color: #ffffff;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--duration-fast);
+  text-align: center;
+}
+
+.customizer-primary-btn:hover {
+  background-color: var(--primary-600);
+}
+
+.customizer-secondary-btn {
+  flex: 1;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  text-align: center;
+}
+
+.customizer-secondary-btn:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}

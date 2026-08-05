@@ -14,6 +14,7 @@ import Dashboard from "../Dashboard/Dashboard.js";
 import GlobalSearch from "../../components/GlobalSearch/GlobalSearch.js";
 import CommandPalette from "../../components/CommandPalette/CommandPalette.js";
 import KeyboardManager from "../../components/KeyboardManager/KeyboardManager.js";
+import DashboardCustomizer from "../../components/DashboardCustomizer/DashboardCustomizer.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -72,6 +73,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 2.7 Instantiate Keyboard Shortcut Manager dialog helper
     const keyboardManager = new KeyboardManager();
     document.body.appendChild(keyboardManager.render());
+
+    // 2.8 Instantiate Dashboard Customizer drawer helper
+    const customizer = new DashboardCustomizer();
+    document.body.appendChild(customizer.render());
+
+    // Connect sidebar settings menu click to trigger Dashboard Customizer slide-out
+    const sidebarSettingsLink = document.querySelector(".item-settings a");
+    if (sidebarSettingsLink) {
+      sidebarSettingsLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        customizer.toggle(true);
+      });
+    }
 
     // 3. Dynamic custom event bindings for Sidebar Navigation Actions
     const logoutLink = document.querySelector(".item-logout a");

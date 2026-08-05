@@ -11,6 +11,7 @@
 
 import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout.js";
 import Dashboard from "../Dashboard/Dashboard.js";
+import GlobalSearch from "../../components/GlobalSearch/GlobalSearch.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -42,6 +43,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (appRoot) {
       appRoot.innerHTML = "";
       appRoot.appendChild(layoutNode);
+    }
+
+    // 2.5 Instantiate Global Search modal
+    const globalSearch = new GlobalSearch();
+    document.body.appendChild(globalSearch.render());
+
+    // Connect top header search input focus to trigger global search modal
+    const headerSearchInput = document.querySelector(".search-input-element");
+    if (headerSearchInput) {
+      headerSearchInput.addEventListener("focus", (e) => {
+        e.preventDefault();
+        headerSearchInput.blur(); // release focus from inline search bar
+        globalSearch.toggle(true);
+      });
+      headerSearchInput.addEventListener("click", (e) => {
+        e.preventDefault();
+        globalSearch.toggle(true);
+      });
     }
 
     // 3. Dynamic custom event bindings for Sidebar Navigation Actions

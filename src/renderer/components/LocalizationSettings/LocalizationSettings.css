@@ -1,0 +1,176 @@
+/* LocalizationSettings.css */
+
+.localization-settings-container {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────────
+ * LEFT COLUMN: FORMS & CONFIGS
+ * ───────────────────────────────────────────── */
+.localization-forms-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.localization-section-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.localization-section-header {
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+}
+
+.localization-section-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Form Fields Grid */
+.localization-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.localization-option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.localization-option-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.localization-option-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.localization-option-desc {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.localization-select {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  min-width: 140px;
+}
+
+.localization-input {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  outline: none;
+  font-family: inherit;
+  width: 140px;
+  box-sizing: border-box;
+}
+
+.localization-input:focus {
+  border-color: var(--primary-400);
+}
+
+/* ─────────────────────────────────────────────
+ * RIGHT COLUMN: LIVE LOCALIZATION PREVIEW
+ * ───────────────────────────────────────────── */
+.localization-preview-column {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.preview-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+}
+
+/* Mock Value Card */
+.mock-value-display-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mock-value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  border-bottom: 1px dashed var(--border-light);
+  padding-bottom: 8px;
+}
+
+.mock-value-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.mock-value-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.mock-value-result {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+}
+
+/* Responsive grid overrides */
+@media (max-width: 1440px) {
+  .localization-settings-container {
+    grid-template-columns: 1fr;
+  }
+}

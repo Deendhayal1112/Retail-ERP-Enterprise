@@ -18,6 +18,7 @@ import CompanyProfile from "../../components/CompanyProfile/CompanyProfile.js";
 import UserManagement from "../../components/UserManagement/UserManagement.js";
 import RoleManagement from "../../components/RoleManagement/RoleManagement.js";
 import AppearanceSettings from "../../components/AppearanceSettings/AppearanceSettings.js";
+import LocalizationSettings from "../../components/LocalizationSettings/LocalizationSettings.js";
 
 export class SettingsCard {
   /**
@@ -277,12 +278,8 @@ export class SettingsContent {
       wrap.appendChild(p1.render(cards1));
 
     } else if (this.section === "localization") {
-      const p1 = new SettingsSection({ title: "Regional Format Overrides" });
-      const cards1 = [
-        new SettingsCard({ title: "System Lang Standard", description: "Translate labels using local translations packages", control: this._createSelect(["English (US)", "Spanish (ES)", "French (FR)"], "English (US)") }).render(),
-        new SettingsCard({ title: "Operator Display Currency", description: "Notation character prepending values quantities", control: this._createSelect(["USD ($)", "EUR (€)", "INR (₹)"], "USD ($)") }).render()
-      ];
-      wrap.appendChild(p1.render(cards1));
+      const locSettings = new LocalizationSettings();
+      wrap.appendChild(locSettings.render());
 
     } else if (this.section === "security") {
       const p1 = new SettingsSection({ title: "Password Policies Configuration" });

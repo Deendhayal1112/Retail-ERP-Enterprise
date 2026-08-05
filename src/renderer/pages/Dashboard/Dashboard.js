@@ -19,6 +19,7 @@
 import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner.js";
 import { KPIGrid } from "../../components/KPICard/KPICard.js";
 import SalesAnalytics from "../../components/SalesAnalytics/SalesAnalytics.js";
+import RevenueAnalytics from "../../components/RevenueAnalytics/RevenueAnalytics.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -251,7 +252,21 @@ export default class DashboardHome {
     kpiCol.appendChild(kpiGrid.render());
     outerContainer.appendChild(kpiCol);
 
-    // Helper to generate custom section nodes
+    // D. Sales Analytics (8 columns) - Imported from external SalesAnalytics component
+    const salesCol = document.createElement("div");
+    salesCol.className = "dashboard-grid-col col-span-8";
+    const salesAnalytics = new SalesAnalytics();
+    salesCol.appendChild(salesAnalytics.render());
+    outerContainer.appendChild(salesCol);
+
+    // E. Revenue Analytics (4 columns) - Imported from external RevenueAnalytics component
+    const revenueCol = document.createElement("div");
+    revenueCol.className = "dashboard-grid-col col-span-4";
+    const revenueAnalytics = new RevenueAnalytics();
+    revenueCol.appendChild(revenueAnalytics.render());
+    outerContainer.appendChild(revenueCol);
+
+    // F. Inventory Summaries & Recent Activity (6 columns each)
     const assembleSection = (title, subtitle, span, bodyNode) => {
       const sectionCol = document.createElement("div");
       sectionCol.className = `dashboard-grid-col col-span-${span}`;
@@ -264,17 +279,6 @@ export default class DashboardHome {
       return sectionCol;
     };
 
-    // D. Sales Analytics (8 columns) - Imported from external SalesAnalytics component
-    const salesCol = document.createElement("div");
-    salesCol.className = "dashboard-grid-col col-span-8";
-    const salesAnalytics = new SalesAnalytics();
-    salesCol.appendChild(salesAnalytics.render());
-    outerContainer.appendChild(salesCol);
-
-    // E. Revenue Overview Placeholder (4 columns)
-    outerContainer.appendChild(assembleSection("Revenue Channel Overview", "Category performance summaries", 4, new PlaceholderChart({ height: 320 }).render()));
-
-    // F. Inventory Summaries & Recent Activity (6 columns each)
     outerContainer.appendChild(assembleSection("Inventory Summary Overview", "Warehouse stock tracking summaries", 6, new PlaceholderList({ itemsCount: 3 }).render()));
     outerContainer.appendChild(assembleSection("Recent Operator Activity", "Audit records transactions feeds", 6, new PlaceholderList({ itemsCount: 3 }).render()));
 

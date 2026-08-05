@@ -13,6 +13,7 @@ import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout.js";
 import Dashboard from "../Dashboard/Dashboard.js";
 import GlobalSearch from "../../components/GlobalSearch/GlobalSearch.js";
 import CommandPalette from "../../components/CommandPalette/CommandPalette.js";
+import KeyboardManager from "../../components/KeyboardManager/KeyboardManager.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -67,6 +68,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 2.6 Instantiate Command Palette modal
     const commandPalette = new CommandPalette();
     document.body.appendChild(commandPalette.render());
+
+    // 2.7 Instantiate Keyboard Shortcut Manager dialog helper
+    const keyboardManager = new KeyboardManager();
+    document.body.appendChild(keyboardManager.render());
 
     // 3. Dynamic custom event bindings for Sidebar Navigation Actions
     const logoutLink = document.querySelector(".item-logout a");

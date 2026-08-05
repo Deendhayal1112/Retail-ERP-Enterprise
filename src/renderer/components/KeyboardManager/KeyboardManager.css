@@ -1,0 +1,172 @@
+/* KeyboardManager.css */
+
+/* Shortcuts dialog backdrop */
+.shortcut-dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 1200; /* sits above command palette */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.shortcut-dialog-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Dialog Container */
+.shortcut-dialog-modal {
+  width: 90%;
+  max-width: 640px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  transform: scale(0.95);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.shortcut-dialog-backdrop.active .shortcut-dialog-modal {
+  transform: scale(1);
+}
+
+/* Header with Search */
+.shortcut-dialog-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shortcut-header-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shortcut-dialog-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.shortcut-dialog-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.shortcut-dialog-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.shortcut-search-field {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.775rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Body container scroll area */
+.shortcut-dialog-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Category lists styles */
+.shortcut-category-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shortcut-category-title {
+  font-size: 0.675rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 4px;
+}
+
+.shortcut-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.775rem;
+  padding: 4px 0;
+}
+
+.shortcut-item-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Key badges */
+.shortcut-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.shortcut-kbd-badge {
+  font-family: inherit;
+  font-size: 0.65rem;
+  font-weight: 700;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Conflict flag indicator */
+.shortcut-conflict-warning {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--warning-600);
+  background-color: rgba(217, 119, 6, 0.08);
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+}
+
+/* Footer guide */
+.shortcut-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background-color: var(--bg-hover);
+  border-top: 1px solid var(--border-light);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}

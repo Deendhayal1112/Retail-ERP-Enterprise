@@ -361,6 +361,70 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize documentation subsystems: ${err.message}`);
   }
 
+  // Initialize Deployment and Operations Subsystem
+  try {
+    const DeploymentManager = require("./deploy/DeploymentManager");
+    const EnvironmentManager = require("./deploy/EnvironmentManager");
+    const OperationsManager = require("./deploy/OperationsManager");
+    const RecoveryManager = require("./deploy/RecoveryManager");
+    const DeploymentValidationManager = require("./deploy/DeploymentValidationManager");
+    const DeploymentEvents = require("./deploy/DeploymentEvents");
+
+    const deployMgr = new DeploymentManager(null);
+    const envMgr = new EnvironmentManager();
+    const opsMgr = new OperationsManager();
+    const recoveryMgr = new RecoveryManager();
+    const validationMgr = new DeploymentValidationManager();
+
+    DeploymentEvents.register({
+      "deploy:get-history": async (event) => {
+        validateSender(event);
+        return await deployMgr.getHistory();
+      },
+      "deploy:run-deployment": async (event, environment, version) => {
+        validateSender(event);
+        deployMgr.mainWindow = windowManager.getMainWindow();
+        return await deployMgr.runDeployment(environment, version);
+      },
+      "deploy:get-variables": async (event) => {
+        validateSender(event);
+        return await envMgr.getVariables();
+      },
+      "deploy:update-variable": async (event, key, val) => {
+        validateSender(event);
+        return await envMgr.updateVariable(key, val);
+      },
+      "deploy:get-health": async (event) => {
+        validateSender(event);
+        return await opsMgr.getHealthStats();
+      },
+      "deploy:toggle-maintenance": async (event) => {
+        validateSender(event);
+        return await opsMgr.toggleMaintenanceMode();
+      },
+      "deploy:get-recovery-plan": async (event) => {
+        validateSender(event);
+        return await recoveryMgr.getRecoveryPlan();
+      },
+      "deploy:run-recovery-step": async (event, stepId) => {
+        validateSender(event);
+        return await recoveryMgr.runRecoveryChecklist(stepId);
+      },
+      "deploy:get-golive-checklist": async (event) => {
+        validateSender(event);
+        return await validationMgr.getChecklist();
+      },
+      "deploy:toggle-golive-step": async (event, id) => {
+        validateSender(event);
+        return await validationMgr.toggleValidation(id);
+      }
+    });
+
+    logger.info("Deployment & Site Reliability Operations subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize deployment subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

@@ -30,6 +30,7 @@ import SecurityCenter from "../Security/SecurityCenter.js";
 import DistributionCenter from "../Release/DistributionCenter.js";
 import ReleaseManagementCenter from "../ReleaseManagement/ReleaseManagementCenter.js";
 import DocumentationCenter from "../Docs/DocumentationCenter.js";
+import DeploymentCenter from "../Deploy/DeploymentCenter.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -149,6 +150,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           // Update header module breadcrumb focus label
           const breadcrumbText = document.querySelector(".breadcrumb-current");
           if (breadcrumbText) breadcrumbText.textContent = "Documentation Center";
+        } else if (route === "deploy-center") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const deployCenter = new DeploymentCenter();
+          deployCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Deployment Center";
         } else if (route === "settings") {
           e.preventDefault();
           pageWrapper.innerHTML = "";

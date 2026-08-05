@@ -69,7 +69,17 @@ const ALLOWED_SEND_CHANNELS = [
   "training:get-courses",
   "training:start-tour",
   "training:enroll",
-  "training:update-progress"
+  "training:update-progress",
+  "deploy:get-history",
+  "deploy:run-deployment",
+  "deploy:get-variables",
+  "deploy:update-variable",
+  "deploy:get-health",
+  "deploy:toggle-maintenance",
+  "deploy:get-recovery-plan",
+  "deploy:run-recovery-step",
+  "deploy:get-golive-checklist",
+  "deploy:toggle-golive-step"
 ];
 
 // Channels from Main to Renderer (Listeners)
@@ -84,7 +94,9 @@ const ALLOWED_RECEIVE_CHANNELS = [
   "signing:progress",
   "signing:completed",
   "docs:download-progress",
-  "docs:download-completed"
+  "docs:download-completed",
+  "deploy:progress",
+  "deploy:completed"
 ];
 
 // ─────────────────────────────────────────────────────────────────────

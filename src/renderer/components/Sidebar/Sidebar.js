@@ -51,6 +51,7 @@ export default class Sidebar {
             children: [
               { key: "release-center", label: "Release Center" },
               { key: "release-management", label: "Release Management" },
+              { key: "deploy-center", label: "Deployment Center" },
               { key: "performance", label: "Performance Center" },
               { key: "renderer-performance", label: "Renderer Optimization" },
               { key: "database-tuning", label: "Database Tuning" },

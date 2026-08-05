@@ -13,6 +13,7 @@
   height: 100vh;
   overflow: hidden;
   background-color: var(--bg-app);
+  position: relative;
 }
 
 /* Sidebar Column Style */
@@ -23,8 +24,9 @@
   border-right: 1px solid var(--border-light);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden; /* Sidebar handles its own inner scroll */
   box-sizing: border-box;
+  transition: width var(--duration-normal) var(--ease-in-out);
 }
 
 /* Right Content Area Pane */
@@ -34,6 +36,7 @@
   height: 100%;
   overflow: hidden;
   box-sizing: border-box;
+  position: relative;
 }
 
 /* Sticky Header Row */
@@ -54,9 +57,11 @@
 .layout-content-viewport {
   flex: 1;
   overflow-y: auto;
-  padding: 32px;
+  padding: 0; /* Let page grid container handle padding dynamically */
   box-sizing: border-box;
   background-color: var(--bg-app);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Main content 12-column grid wrapper */
@@ -80,12 +85,58 @@
   box-sizing: border-box;
 }
 
-/* Responsive Overrides (Collapsible Sidebar Hooks) */
-@media (max-width: var(--bp-md)) {
-  .layout-container {
-    grid-template-columns: 1fr;
+/* ─────────────────────────────────────────────
+ * DESKTOP RESPONSIVE ADAPTIVE RULES (1366px to 2560px)
+ * ───────────────────────────────────────────── */
+
+/* Small Desktop / Low Resolution Laptop (1366px x 768px or lower) */
+@media (max-width: 1366px) {
+  :root {
+    --sidebar-width: 240px; /* Conserve horizontal workspace */
+    --header-height: 64px;  /* Conserve vertical workspace */
   }
-  .layout-sidebar-column {
-    display: none; /* Sidebar hidden on mobile/tablet viewports unless toggled */
+
+  .layout-header-row {
+    padding: 0 24px;
+  }
+
+  .layout-footer-row {
+    padding: 0 24px;
+  }
+}
+
+/* Very Large Monitors / Ultra-wide displays (1920px or higher) */
+@media (min-width: 1920px) {
+  .layout-content-viewport {
+    align-items: center; /* Center content wrapper dynamically */
+  }
+
+  .page-wrapper-grid {
+    max-width: 1600px; /* Prevent excessive stretch of UI rows */
+    margin: 0 auto;
+  }
+}
+
+/* Ultra HD Displays (2560px or higher) */
+@media (min-width: 2560px) {
+  .page-wrapper-grid {
+    max-width: 2000px;
+  }
+}
+
+/* ─────────────────────────────────────────────
+ * HIGH DPI DISPLAYS & RETINA OPTIMIZATION
+ * ───────────────────────────────────────────── */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Sharpen borders on Retina displays */
+  .layout-sidebar-column,
+  .layout-header-row,
+  .layout-footer-row {
+    border-width: 0.5px;
   }
 }

@@ -4,10 +4,11 @@
 .dashboard-grid-container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 24px; /* 24px grid spacing */
-  padding: 32px; /* 32px page padding */
+  gap: 24px; /* Default desktop gap */
+  padding: 32px; /* Default desktop padding */
   box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
 }
 
 .dashboard-grid-row {
@@ -135,11 +136,11 @@
  * DASHBOARD SECTION CARD
  * ───────────────────────────────────────────── */
 .dashboard-section-card {
-  background-color: var(--bg-card); /* Large white cards */
+  background-color: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg); /* Rounded corners */
+  border-radius: var(--radius-lg);
   padding: 24px;
-  box-shadow: var(--shadow-sm); /* Soft shadows */
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -302,9 +303,9 @@
 }
 
 .placeholder-panel-action-btn:hover {
-  background-color: var(--primary-50 || #eef2ff);
-  color: var(--primary-700 || #4338ca);
-  border-color: var(--primary-300 || #a5b4fc);
+  background-color: var(--primary-50);
+  color: var(--primary-700);
+  border-color: var(--primary-300);
 }
 
 /* ─────────────────────────────────────────────
@@ -348,5 +349,66 @@
 @keyframes loading-shimmer {
   to {
     left: 100%;
+  }
+}
+
+/* ─────────────────────────────────────────────
+ * ADAPTIVE RESPONSIVE DESKTOP OVERRIDES
+ * ───────────────────────────────────────────── */
+
+/* Small Desktop / Laptop Screen (1366px or lower) */
+@media (max-width: 1366px) {
+  .dashboard-grid-container {
+    padding: 24px; /* Lower padding to avoid scroll overflows */
+    gap: 16px;    /* Lower column margins */
+  }
+
+  .dashboard-grid-row {
+    gap: 16px;
+  }
+
+  .dashboard-section-card {
+    padding: 16px; /* Save viewport space */
+  }
+
+  .dashboard-welcome-banner-strip {
+    padding: 24px;
+  }
+
+  .welcome-heading {
+    font-size: 1.375rem;
+  }
+
+  .welcome-subtext {
+    font-size: 0.825rem;
+  }
+
+  .placeholder-numeric-value {
+    font-size: 1.25rem;
+  }
+
+  /* Force stack sections on small viewports for KPI cards if needed */
+  .col-span-3 {
+    grid-column: span 6 / span 6; /* Convert 4 columns to 2x2 grid on low widths */
+  }
+}
+
+/* Large monitors (min-width: 1920px) */
+@media (min-width: 1920px) {
+  .dashboard-grid-container {
+    padding: 40px; /* More padding on wide monitors */
+    gap: 32px;
+  }
+
+  .dashboard-grid-row {
+    gap: 32px;
+  }
+
+  .welcome-heading {
+    font-size: 1.875rem;
+  }
+
+  .placeholder-numeric-value {
+    font-size: 1.75rem;
   }
 }

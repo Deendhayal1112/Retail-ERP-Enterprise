@@ -12,6 +12,7 @@
 import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout.js";
 import Dashboard from "../Dashboard/Dashboard.js";
 import GlobalSearch from "../../components/GlobalSearch/GlobalSearch.js";
+import CommandPalette from "../../components/CommandPalette/CommandPalette.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -62,6 +63,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         globalSearch.toggle(true);
       });
     }
+
+    // 2.6 Instantiate Command Palette modal
+    const commandPalette = new CommandPalette();
+    document.body.appendChild(commandPalette.render());
 
     // 3. Dynamic custom event bindings for Sidebar Navigation Actions
     const logoutLink = document.querySelector(".item-logout a");

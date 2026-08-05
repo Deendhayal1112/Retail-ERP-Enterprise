@@ -1,0 +1,272 @@
+/* BIChart.css */
+
+.bi-chart-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 420px;
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────
+ * CHART HEADER & TOOLBAR
+ * ───────────────────────────────────────────── */
+.bi-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.bi-chart-header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bi-chart-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.bi-chart-subtitle {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.bi-chart-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ─────────────────────────────────────────────
+ * TIME RANGE & EXPORT SELECTORS
+ * ───────────────────────────────────────────── */
+.bi-time-selector {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+}
+
+.bi-export-menu {
+  position: relative;
+}
+
+.bi-export-btn {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bi-export-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-dropdown);
+  min-width: 140px;
+}
+
+.bi-export-dropdown.show {
+  display: block;
+}
+
+.bi-export-item {
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color var(--duration-fast);
+}
+
+.bi-export-item:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * CHART VISUAL AREA
+ * ───────────────────────────────────────────── */
+.bi-chart-body-canvas {
+  flex: 1;
+  background-color: var(--bg-hover);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  position: relative;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+/* ─────────────────────────────────────────────
+ * CHART LOADER & EMPTY STATES
+ * ───────────────────────────────────────────── */
+.bi-chart-loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bi-chart-loader-overlay {
+    background-color: rgba(15, 23, 42, 0.7);
+  }
+}
+
+.bi-spinner-ring {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border-light);
+  border-top-color: var(--primary-500);
+  border-radius: 50%;
+  animation: bi-spin 0.8s linear infinite;
+}
+
+@keyframes bi-spin {
+  to { transform: rotate(360deg); }
+}
+
+.bi-empty-state-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.bi-empty-icon {
+  font-size: 2rem;
+}
+
+.bi-empty-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────
+ * CHART LEGEND
+ * ───────────────────────────────────────────── */
+.bi-chart-legend {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.bi-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bi-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.bi-legend-dot.color-1 { background-color: var(--chart-1); }
+.bi-legend-dot.color-2 { background-color: var(--chart-2); }
+.bi-legend-dot.color-3 { background-color: var(--chart-3); }
+
+/* ─────────────────────────────────────────────
+ * MOCK GRAPHICS PLACEHOLDERS
+ * ───────────────────────────────────────────── */
+.bi-placeholder-chart-graphics {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  position: relative;
+  margin-top: 12px;
+  height: 100%;
+}
+
+/* Bar columns */
+.bi-bar-pillar {
+  width: 24px;
+  border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+  background-color: var(--chart-1);
+  transition: filter var(--duration-fast);
+}
+
+.bi-bar-pillar:hover {
+  filter: brightness(1.1);
+}
+
+.bi-bar-pillar.stacked {
+  background: linear-gradient(to top, var(--chart-1) 50%, var(--chart-2) 50%);
+}
+
+/* Progress ring circular graphic */
+.bi-progress-ring-graphics {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.bi-ring-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 10px solid var(--border-light);
+  border-top-color: var(--chart-1);
+  border-right-color: var(--chart-2);
+  transform: rotate(-45deg);
+}
+
+/* Sparklines */
+.bi-sparkline-line {
+  width: 100px;
+  height: 30px;
+  border-bottom: 2px solid var(--chart-1);
+  border-radius: var(--radius-sm);
+  position: relative;
+}

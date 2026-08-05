@@ -17,6 +17,7 @@
 import CompanyProfile from "../../components/CompanyProfile/CompanyProfile.js";
 import UserManagement from "../../components/UserManagement/UserManagement.js";
 import RoleManagement from "../../components/RoleManagement/RoleManagement.js";
+import AppearanceSettings from "../../components/AppearanceSettings/AppearanceSettings.js";
 
 export class SettingsCard {
   /**
@@ -264,11 +265,8 @@ export class SettingsContent {
       wrap.appendChild(roleMgmt.render());
 
     } else if (this.section === "appearance") {
-      const p1 = new SettingsSection({ title: "Workspace Themes Styles" });
-      const cards1 = [
-        new SettingsCard({ title: "Default Interface Color Theme", description: "Initial coloring parameters overlay on client launch", control: this._createSelect(["Light Theme", "Dark Theme", "System Default"], "System Default") }).render()
-      ];
-      wrap.appendChild(p1.render(cards1));
+      const appSettings = new AppearanceSettings();
+      wrap.appendChild(appSettings.render());
 
     } else if (this.section === "notifications") {
       const p1 = new SettingsSection({ title: "Dispatch Preferences" });

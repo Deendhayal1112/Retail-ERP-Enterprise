@@ -173,6 +173,26 @@ app.whenReady().then(() => {
   const { registerAuthIpcHandlers } = require("./ipc/auth.ipc");
   registerAuthIpcHandlers();
 
+  // Register background task IPC handler bindings
+  const { registerBackgroundIpcHandlers } = require("./ipc/background.ipc");
+  registerBackgroundIpcHandlers();
+
+  // Initialize Security, Compliance, and Audit Managers
+  try {
+    const securityManager = require("./security/SecurityManager");
+    const complianceManager = require("./security/ComplianceManager");
+    const auditManager = require("./security/AuditManager");
+    const securityReportManager = require("./security/SecurityReportManager");
+
+    securityManager.initialize();
+    complianceManager.initialize();
+    auditManager.initialize();
+    securityReportManager.initialize();
+    logger.info("Security subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize security subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

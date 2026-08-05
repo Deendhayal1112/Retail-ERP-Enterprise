@@ -9,13 +9,24 @@
 
 "use strict";
 
-import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout.js";
-import Dashboard from "../Dashboard/Dashboard.js";
+import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout.js?v=1.0.1";
+import Dashboard from "../Dashboard/Dashboard.js?v=1.0.1";
 import GlobalSearch from "../../components/GlobalSearch/GlobalSearch.js";
 import CommandPalette from "../../components/CommandPalette/CommandPalette.js";
 import KeyboardManager from "../../components/KeyboardManager/KeyboardManager.js";
 import DashboardCustomizer from "../../components/DashboardCustomizer/DashboardCustomizer.js";
-import SettingsLayout from "../Settings/Settings.js";
+import SettingsLayout from "../Settings/Settings.js?v=1.0.1";
+import PerformanceCenter from "../Performance/PerformanceCenter.js";
+import RendererPerformanceCenter from "../Performance/RendererPerformanceCenter.js";
+import DatabasePerformanceCenter from "../Performance/DatabasePerformanceCenter.js";
+import MemoryManagementCenter from "../Performance/MemoryManagementCenter.js";
+import StartupPerformanceCenter from "../Performance/StartupPerformanceCenter.js";
+import BundleOptimizationCenter from "../Performance/BundleOptimizationCenter.js";
+import BackgroundTaskCenter from "../Performance/BackgroundTaskCenter.js";
+import EnterpriseHealthCenter from "../Performance/EnterpriseHealthCenter.js";
+import EnterpriseQACenter from "../Performance/EnterpriseQACenter.js";
+import CICDDashboard from "../Performance/CICDDashboard.js";
+import SecurityCenter from "../Security/SecurityCenter.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -35,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 2. Instantiate and Render Reusable Dashboard Layout Shell
     const layout = new DashboardLayout();
     const dashboardPage = new Dashboard();
+    let activePerformanceModule = null;
 
     // Render outer shell wrapping the page content node directly
     const layoutNode = layout.render(dashboardPage.render());
@@ -84,14 +96,31 @@ document.addEventListener("DOMContentLoaded", async () => {
         const pageWrapper = document.querySelector(".page-wrapper-grid");
         if (!pageWrapper) return;
 
-        if (route === "settings") {
+        // Cleanup active loops
+        if (activePerformanceModule) {
+          activePerformanceModule.destroy();
+          activePerformanceModule = null;
+        }
+
+        if (route === "security") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const securityCenter = new SecurityCenter();
+          securityCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Security & Compliance";
+        } else if (route === "settings") {
           e.preventDefault();
           pageWrapper.innerHTML = "";
           const settingsModule = new SettingsLayout();
           pageWrapper.appendChild(settingsModule.render());
 
           // Update header module breadcrumb focus label
-          const breadcrumbText = document.querySelector(".breadcrumb-active-label");
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
           if (breadcrumbText) breadcrumbText.textContent = "Settings";
         } else if (route === "dashboard") {
           e.preventDefault();
@@ -99,8 +128,98 @@ document.addEventListener("DOMContentLoaded", async () => {
           pageWrapper.appendChild(dashboardPage.render());
 
           // Update header module breadcrumb focus label
-          const breadcrumbText = document.querySelector(".breadcrumb-active-label");
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
           if (breadcrumbText) breadcrumbText.textContent = "Dashboard";
+        } else if (route === "performance") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new PerformanceCenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Performance Center";
+        } else if (route === "renderer-performance") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new RendererPerformanceCenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Renderer Optimization";
+        } else if (route === "database-tuning") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new DatabasePerformanceCenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Database Tuning";
+        } else if (route === "memory-management") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new MemoryManagementCenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Memory Management";
+        } else if (route === "startup-profiler") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new StartupPerformanceCenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Startup Profiler";
+        } else if (route === "bundle-optimizer") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new BundleOptimizationCenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Bundle Optimizer";
+        } else if (route === "background-tasks") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new BackgroundTaskCenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Background Services";
+        } else if (route === "diagnostics-health") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new EnterpriseHealthCenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Diagnostics & Health";
+        } else if (route === "enterprise-qa") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new EnterpriseQACenter();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Enterprise QA";
+        } else if (route === "cicd-pipeline") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          activePerformanceModule = new CICDDashboard();
+          pageWrapper.appendChild(activePerformanceModule.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "CI/CD Pipeline";
         }
       });
     });

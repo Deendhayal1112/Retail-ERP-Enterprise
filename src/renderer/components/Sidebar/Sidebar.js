@@ -24,68 +24,50 @@ export default class Sidebar {
     this.menuStructure = [
       {
         type: "group",
-        label: "Core Operations",
+        label: "", // empty label to match mockup style
         items: [
-          { key: "dashboard", label: "Dashboard", icon: "📊", permission: "dashboard:read" },
-          { key: "pos", label: "POS Billing", icon: "💳", permission: "billing:create" }
+          { key: "dashboard", label: "Dashboard", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>` },
+          { key: "pos", label: "POS Billing", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="12" y1="10" x2="12" y2="10"></line><line x1="12" y1="14" x2="12" y2="14"></line><line x1="16" y1="10" x2="16" y2="10"></line><line x1="16" y1="14" x2="16" y2="14"></line><line x1="8" y1="10" x2="8" y2="10"></line><line x1="8" y1="14" x2="8" y2="14"></line></svg>`, badge: "F2" },
+          { key: "products", label: "Products", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>` },
+          { key: "inventory", label: "Inventory", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>` },
+          { key: "purchase", label: "Purchase", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>` },
+          { key: "customers", label: "Customers", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>` },
+          { key: "employees", label: "Employees", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>` },
+          { key: "reports", label: "Reports", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>` },
+          { key: "marketing", label: "Marketing", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.5 7.5"></path><path d="M14 14l-1.5-1.5"></path></svg>`, badge: "New" }
         ]
       },
       {
         type: "group",
-        label: "Inventory Mgmt",
+        label: "Tools",
         items: [
-          {
-            key: "products-group",
-            label: "Catalog",
-            icon: "📦",
-            permission: "inventory:read",
-            children: [
-              { key: "products", label: "Products List" },
-              { key: "categories", label: "Categories Grid" }
-            ]
-          },
-          { key: "inventory", label: "Inventory Stock", icon: "📋", permission: "inventory:write" },
-          { key: "purchase", label: "Purchase Orders", icon: "🛍️", permission: "purchase:write" }
-        ]
-      },
-      {
-        type: "group",
-        label: "Partners & staff",
-        items: [
-          { key: "sales", label: "Sales Log", icon: "📈", permission: "reports:read" },
-          { key: "customers", label: "Customers Catalog", icon: "👥", permission: "users:read" },
-          { key: "suppliers", label: "Suppliers List", icon: "🏢", permission: "users:read" },
-          { key: "employees", label: "Employees Roster", icon: "👔", permission: "users:write" }
-        ]
-      },
-      {
-        type: "group",
-        label: "Control Panel",
-        items: [
-          { key: "marketing", label: "Marketing Campaigns", icon: "📢", permission: "marketing:read" },
-          { key: "reports", label: "Reports & Analytics", icon: "📊", permission: "reports:read" },
-          { key: "settings", label: "Settings", icon: "⚙️", permission: "settings:write" },
-          { key: "license", label: "License & Evaluation", icon: "🔑", permission: "settings:write" }
+          { key: "ai-import", label: "AI Invoice Import", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>` },
+          { key: "backup", label: "Backup & Restore", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"></path></svg>` },
+          { key: "performance", label: "Performance Center", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>` },
+          { key: "renderer-performance", label: "Renderer Optimization", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>` },
+          { key: "database-tuning", label: "Database Tuning", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path></svg>` },
+          { key: "memory-management", label: "Memory Management", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>` },
+          { key: "startup-profiler", label: "Startup Profiler", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>` },
+          { key: "bundle-optimizer", label: "Bundle Optimizer", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>` },
+          { key: "background-tasks", label: "Background Tasks", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="2" ry="2"></rect><rect x="2" y="15" width="20" height="6" rx="2" ry="2"></rect><line x1="6" y1="9" x2="6" y2="15"></line></svg>` },
+          { key: "diagnostics-health", label: "Diagnostics & Health", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>` },
+          { key: "enterprise-qa", label: "Enterprise QA", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>` },
+          { key: "cicd-pipeline", label: "CI/CD Pipeline", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="2" ry="2"></rect><rect x="2" y="15" width="20" height="6" rx="2" ry="2"></rect><line x1="6" y1="9" x2="6" y2="15"></line></svg>` },
+          { key: "security", label: "Security & Compliance", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>` },
+          { key: "settings", label: "Settings", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>` },
+          { key: "license", label: "License", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>` },
+          { key: "profile", label: "Profile", icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>` }
         ]
       }
     ];
   }
 
-  /**
-   * Evaluates if the current operator has access to a specific permission key.
-   * @param {string} permission Code string.
-   * @returns {boolean} Check result.
-   */
   hasPermission(permission) {
     if (!permission) return true;
     if (this.options.userPermissions.includes("all")) return true;
     return this.options.userPermissions.includes(permission);
   }
 
-  /**
-   * Renders the complete Sidebar DOM node tree.
-   * @returns {HTMLElement} The sidebar DOM node.
-   */
   render() {
     const sidebarContainer = document.createElement("div");
     sidebarContainer.className = "sidebar-navigation-panel";
@@ -122,26 +104,26 @@ export default class Sidebar {
     return sidebarContainer;
   }
 
-  /**
-   * Renders logo section.
-   */
   renderLogo() {
     const logoArea = document.createElement("div");
     logoArea.className = "sidebar-logo-area";
 
     logoArea.innerHTML = `
-      <div class="logo-icon-box" title="Retail ERP">R</div>
+      <div class="logo-icon-box" title="Retail ERP">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </div>
       <div class="logo-info">
         <h2 class="logo-title">Retail ERP<span class="status-indicator-dot" title="Local System Active"></span></h2>
-        <span class="logo-subtitle">Enterprise Edition</span>
+        <span class="logo-subtitle">Smart Retail Management</span>
       </div>
     `;
     return logoArea;
   }
 
-  /**
-   * Renders group heading wrapper and items list.
-   */
   renderGroup(group) {
     // Check if group has visible items after permission filter
     const visibleItems = group.items.filter(item => this.hasPermission(item.permission));
@@ -149,11 +131,13 @@ export default class Sidebar {
 
     const groupFragment = document.createDocumentFragment();
 
-    // Group Title Header
-    const groupHeader = document.createElement("li");
-    groupHeader.className = "sidebar-group-header";
-    groupHeader.textContent = group.label;
-    groupFragment.appendChild(groupHeader);
+    // Group Title Header (only if label is provided)
+    if (group.label) {
+      const groupHeader = document.createElement("li");
+      groupHeader.className = "sidebar-group-header";
+      groupHeader.textContent = group.label;
+      groupFragment.appendChild(groupHeader);
+    }
 
     // Render each item
     visibleItems.forEach(item => {
@@ -164,9 +148,6 @@ export default class Sidebar {
     return groupFragment;
   }
 
-  /**
-   * Renders item links and sub-menus.
-   */
   renderItem(item) {
     const listItem = document.createElement("li");
     listItem.className = "sidebar-nav-item";
@@ -192,6 +173,14 @@ export default class Sidebar {
       <span class="nav-label">${item.label}</span>
     `;
     link.appendChild(content);
+
+    // Right content (Badge if present)
+    if (item.badge) {
+      const badge = document.createElement("span");
+      badge.className = `sidebar-nav-badge badge-${item.key}`;
+      badge.textContent = item.badge;
+      link.appendChild(badge);
+    }
 
     // If item has children submenus
     if (item.children) {
@@ -249,31 +238,27 @@ export default class Sidebar {
     return listItem;
   }
 
-  /**
-   * Renders the footer metadata, user context, and collapse toggle button.
-   */
   renderFooter(panelContainer) {
     const footer = document.createElement("div");
     footer.className = "sidebar-footer";
 
-    // User Profile
-    const profile = document.createElement("div");
-    profile.className = "sidebar-footer-profile";
-    const initials = this.options.userContext.full_name.split(" ").map(n => n[0]).join("").substring(0, 2);
+    // Store profile metadata
+    const storeInfo = document.createElement("div");
+    storeInfo.className = "sidebar-footer-store-info";
     
-    profile.innerHTML = `
-      <div class="profile-avatar">${initials}</div>
-      <div class="profile-info sidebar-footer-info">
-        <span class="profile-name">${this.options.userContext.full_name}</span>
-        <span class="profile-role">${this.options.userContext.role_name}</span>
+    storeInfo.innerHTML = `
+      <div class="store-details">
+        <span class="store-name">ABC Textiles</span>
+        <span class="store-id">Store ID: ST1001</span>
       </div>
+      <div class="license-badge-row">
+        <span class="license-badge">
+          Licensed <span class="license-check">✓</span>
+        </span>
+      </div>
+      <span class="license-expiry">Valid till: 31 Dec 2025</span>
     `;
-    footer.appendChild(profile);
-
-    // Sidebar divider
-    const divider = document.createElement("div");
-    divider.className = "sidebar-divider";
-    footer.appendChild(divider);
+    footer.appendChild(storeInfo);
 
     // Collapsed Toggle button
     const toggleBtn = document.createElement("button");
@@ -291,10 +276,6 @@ export default class Sidebar {
     return footer;
   }
 
-  /**
-   * Sets the active route key and triggers visual highlights.
-   * @param {string} routeKey Key of the target route.
-   */
   setActiveRoute(routeKey) {
     this.options.activeRoute = routeKey;
     console.log(`[Router Action] Navigating to: ${routeKey}`);
@@ -318,9 +299,6 @@ export default class Sidebar {
     }
   }
 
-  /**
-   * Keyboard arrow key and focus controls.
-   */
   setupKeyboardNavigation() {
     if (!this.element) return;
 

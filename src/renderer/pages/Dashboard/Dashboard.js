@@ -21,6 +21,7 @@ import { KPIGrid } from "../../components/KPICard/KPICard.js";
 import SalesAnalytics from "../../components/SalesAnalytics/SalesAnalytics.js";
 import RevenueAnalytics from "../../components/RevenueAnalytics/RevenueAnalytics.js";
 import InventorySummary from "../../components/InventorySummary/InventorySummary.js";
+import TopSellingProducts from "../../components/TopSellingProducts/TopSellingProducts.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -274,7 +275,14 @@ export default class DashboardHome {
     inventoryCol.appendChild(inventorySummary.render());
     outerContainer.appendChild(inventoryCol);
 
-    // G. Recent Operator Activity (6 columns)
+    // G. Top Selling Products (6 columns) - Imported from external TopSellingProducts component
+    const topSellingCol = document.createElement("div");
+    topSellingCol.className = "dashboard-grid-col col-span-6";
+    const topSelling = new TopSellingProducts();
+    topSellingCol.appendChild(topSelling.render());
+    outerContainer.appendChild(topSellingCol);
+
+    // H. Quick Actions, Notifications, & Upcoming Tasks (4 columns each)
     const assembleSection = (title, subtitle, span, bodyNode) => {
       const sectionCol = document.createElement("div");
       sectionCol.className = `dashboard-grid-col col-span-${span}`;
@@ -287,9 +295,6 @@ export default class DashboardHome {
       return sectionCol;
     };
 
-    outerContainer.appendChild(assembleSection("Recent Operator Activity", "Audit records transactions feeds", 6, new PlaceholderList({ itemsCount: 3 }).render()));
-
-    // H. Quick Actions, Notifications, & Upcoming Tasks (4 columns each)
     outerContainer.appendChild(assembleSection("Quick Operations Menu", "POS billing shortcuts & register tools", 4, new PlaceholderPanel({ buttons: ["⚡ New Invoice", "🏷️ Add Product", "📊 Run Report"] }).render()));
     outerContainer.appendChild(assembleSection("System Alerts & Notifications", "Active database logs warnings", 4, new PlaceholderList({ itemsCount: 2 }).render()));
     outerContainer.appendChild(assembleSection("Upcoming Schedule Tasks", "Store checklist milestones", 4, new PlaceholderList({ itemsCount: 2 }).render()));

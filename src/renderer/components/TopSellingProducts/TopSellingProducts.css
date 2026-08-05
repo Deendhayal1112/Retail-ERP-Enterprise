@@ -1,0 +1,149 @@
+/* TopSellingProducts.css */
+
+.top-selling-products-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 320px;
+}
+
+/* ─────────────────────────────────────────────
+ * HEADER ROW
+ * ───────────────────────────────────────────── */
+.top-selling-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.top-selling-header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.top-selling-title-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.top-selling-subtitle-text {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.top-selling-btn-view-all {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.top-selling-btn-view-all:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * PRODUCT TABLE LIST LAYOUT
+ * ───────────────────────────────────────────── */
+.top-selling-table-wrapper {
+  flex: 1;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.top-selling-table-node {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.775rem;
+}
+
+.top-selling-table-node th {
+  padding: 10px 12px;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.675rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.top-selling-table-node td {
+  padding: 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+/* Table Row Highlights */
+.product-table-row-item {
+  transition: background-color var(--duration-fast);
+}
+
+.product-table-row-item:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Thumbnail holder */
+.product-thumbnail-box {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background-color: var(--neutral-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--neutral-600);
+  font-size: 0.75rem;
+}
+
+/* Progress bar inside table cell */
+.product-sales-progress-track {
+  width: 80px;
+  height: 6px;
+  background-color: var(--border-light);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.product-sales-progress-fill {
+  height: 100%;
+  background-color: var(--primary-500);
+  border-radius: var(--radius-full);
+}
+
+/* Rank indices */
+.product-rank-badge {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Footer Section */
+.top-selling-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  padding-top: 16px;
+  margin-top: auto;
+}

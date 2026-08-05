@@ -18,7 +18,7 @@
 
 import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner.js";
 import { KPIGrid } from "../../components/KPICard/KPICard.js";
-import SalesAnalytics from "../../components/SalesAnalytics/SalesAnalytics.js";
+import SalesTrend from "../../components/SalesTrend/SalesTrend.js";
 import RevenueAnalytics from "../../components/RevenueAnalytics/RevenueAnalytics.js";
 import InventorySummary from "../../components/InventorySummary/InventorySummary.js";
 import TopSellingProducts from "../../components/TopSellingProducts/TopSellingProducts.js";
@@ -258,11 +258,11 @@ export default class DashboardHome {
     kpiCol.appendChild(kpiGrid.render());
     outerContainer.appendChild(kpiCol);
 
-    // D. Sales Analytics (8 columns) - Imported from external SalesAnalytics component
+    // D. Sales Trend (8 columns) - Imported from external SalesTrend component
     const salesCol = document.createElement("div");
     salesCol.className = "dashboard-grid-col col-span-8";
-    const salesAnalytics = new SalesAnalytics();
-    salesCol.appendChild(salesAnalytics.render());
+    const salesTrend = new SalesTrend();
+    salesCol.appendChild(salesTrend.render());
     outerContainer.appendChild(salesCol);
 
     // E. Revenue Analytics (4 columns) - Imported from external RevenueAnalytics component

@@ -134,6 +134,9 @@ class WindowManager {
       logger.info("Main window ready-to-show event received.");
       mainWindow.show();
       mainWindow.focus();
+      if (appConfig.electron.isDev) {
+        mainWindow.webContents.openDevTools();
+      }
     });
 
     // state change event - resize/move to persist window bounds

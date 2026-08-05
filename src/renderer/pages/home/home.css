@@ -1,0 +1,54 @@
+/**
+ * home.css
+ * Retail ERP Enterprise — Home Screen Styling
+ *
+ * Styles the glassmorphic confirmation layout, animations, and window controls.
+ *
+ * Phase 5 — Step 3: Session Management & Login Integration
+ */
+
+/* Custom title bar controls styling */
+.titlebar {
+  -webkit-app-region: drag; /* Allows moving window by dragging titlebar */
+}
+
+.win-btn {
+  -webkit-app-region: no-drag; /* Restores button clickability */
+  display: flex;
+  align-items: center;
+  justify-center: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.win-btn svg {
+  pointer-events: none;
+}
+
+/* Pulse animation for emerald indicator */
+.pulse-glow {
+  animation: pulse 2.5s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.2;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    opacity: 0.6;
+    box-shadow: 0 0 12px 6px rgba(16, 185, 129, 0.2);
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.2;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+}

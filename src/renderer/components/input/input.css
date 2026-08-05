@@ -1,0 +1,110 @@
+/*
+ * input.css
+ * Retail ERP Enterprise — Reusable Text & Password Inputs
+ *
+ * Implements premium modern text field components with outline floating labels,
+ * focus rings, validation error indicators, and inline leading/trailing icon boxes.
+ *
+ * Phase 3 — Step 2: Login Form Components
+ */
+
+/* Reusable Floating Label Container */
+.floating-label-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Floating Input field */
+.floating-input {
+  width: 100% !important;
+  height: 2.875rem !important; /* Perfect height matching mockup */
+  padding-left: 2.75rem !important; /* Spacing for leading icons */
+  padding-right: 2.75rem !important; /* Spacing for trailing icons */
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 0.5rem !important; /* 8px rounded corners */
+  font-family: inherit;
+  font-size: 0.875rem !important;
+  color: #1e293b !important;
+  outline: none !important;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.floating-input:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+.floating-input:disabled {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed !important;
+}
+
+/* Outlined Floating Label element */
+.floating-label {
+  position: absolute;
+  left: 2.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  padding: 0 6px;
+  color: #64748b;
+  font-size: 0.875rem;
+  pointer-events: none;
+  transition: all 0.15s ease-out;
+  transform-origin: left top;
+}
+
+/* Floating states triggered when focused or filled */
+.floating-input:focus ~ .floating-label,
+.floating-input:not(:placeholder-shown) ~ .floating-label {
+  top: 0;
+  transform: translateY(-50%) scale(0.85);
+  color: #2563eb;
+  left: 0.75rem;
+}
+
+/* Handle disabled background overlay for floated labels */
+.floating-input:disabled ~ .floating-label {
+  background-color: transparent;
+  color: #94a3b8;
+}
+
+/* Custom placeholder visibility helpers */
+.floating-input::placeholder {
+  color: transparent; /* Hide native placeholder while label sits inside */
+}
+
+.floating-input:focus::placeholder {
+  color: #94a3b8; /* Reveal helper text on focus */
+}
+
+/* Dark mode configurations */
+@media (prefers-color-scheme: dark) {
+  .floating-input {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+  }
+  .floating-input:focus {
+    background-color: #020617 !important;
+  }
+  .floating-input:disabled {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #64748b !important;
+  }
+  .floating-label {
+    background-color: #0b0f19;
+    color: #94a3b8;
+  }
+  .floating-input:focus ~ .floating-label,
+  .floating-input:not(:placeholder-shown) ~ .floating-label {
+    color: #3b82f6;
+  }
+}

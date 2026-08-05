@@ -1,0 +1,195 @@
+/*
+ * tailwind.css
+ * Retail ERP Enterprise — Tailwind CSS v4 Entry Point
+ *
+ * Configures the custom theme variables and exposes utilities
+ * derived from our Design Token System.
+ *
+ * Phase 2 — Step 6: Enterprise Animation System
+ */
+
+@import "tailwindcss";
+
+/* Import Token Custom Properties and Base Resets */
+@import "./variables.css";
+@import "./global.css";
+
+/* Component-level Stylesheet Modules */
+@import "../components/button/button.css";
+@import "../components/input/input.css";
+@import "../components/checkbox/checkbox.css";
+
+/* Configure Tailwind v4 Theme mappings */
+@theme {
+  /* Brand Theme Mappings */
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-300: var(--accent-300);
+  --color-accent-500: var(--accent-500);
+  --color-accent-700: var(--accent-700);
+  --color-accent-900: var(--accent-900);
+
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-850: var(--neutral-850);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
+
+  /* Functional color naming extensions */
+  --color-success-bg: var(--success-50);
+  --color-success-fg: var(--success-700);
+  --color-success-int: var(--success-500);
+
+  --color-warning-bg: var(--warning-50);
+  --color-warning-fg: var(--warning-700);
+  --color-warning-int: var(--warning-500);
+
+  --color-danger-bg: var(--danger-50);
+  --color-danger-fg: var(--danger-700);
+  --color-danger-int: var(--danger-500);
+
+  --color-info-bg: var(--info-50);
+  --color-info-fg: var(--info-700);
+  --color-info-int: var(--info-500);
+
+  /* Semantic Surface Mappings */
+  --color-bg-app: var(--bg-app);
+  --color-bg-card: var(--bg-card);
+  --color-bg-input: var(--bg-input);
+  --color-bg-sidebar: var(--bg-sidebar);
+  --color-bg-top-nav: var(--bg-top-nav);
+  --color-bg-footer: var(--bg-footer);
+  --color-bg-modal: var(--bg-modal);
+  --color-bg-overlay: var(--bg-overlay);
+
+  --color-text-main: var(--text-primary);
+  --color-text-sub: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inv: var(--text-inverse);
+
+  --color-border-light: var(--border-light);
+  --color-border-focus: var(--border-focus);
+  --color-border-err: var(--border-error);
+
+  /* Interactive States */
+  --color-bg-hover: var(--bg-hover);
+  --color-bg-active: var(--bg-active);
+  --color-bg-disabled: var(--bg-disabled);
+
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+
+  --color-text-disabled: var(--text-disabled);
+  --color-border-disabled: var(--border-disabled);
+
+  --color-badge-success-bg: var(--badge-success-bg);
+  --color-badge-success-text: var(--badge-success-text);
+
+  --color-badge-warning-bg: var(--badge-warning-bg);
+  --color-badge-warning-text: var(--badge-warning-text);
+
+  --color-badge-danger-bg: var(--badge-danger-bg);
+  --color-badge-danger-text: var(--badge-danger-text);
+
+  --color-badge-info-bg: var(--badge-info-bg);
+  --color-badge-info-text: var(--badge-info-text);
+
+  /* Chart palette mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Radius overrides */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+
+  /* Spacing Scale */
+  --spacing-0: var(--space-0);
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-5: var(--space-5);
+  --spacing-6: var(--space-6);
+  --spacing-8: var(--space-8);
+  --spacing-10: var(--space-10);
+  --spacing-12: var(--space-12);
+  --spacing-16: var(--space-16);
+
+  /* Transition speeds mapping */
+  --transition-duration-fast: var(--duration-fast);
+  --transition-duration-normal: var(--duration-normal);
+  --transition-duration-slow: var(--duration-slow);
+
+  /* Easing curves */
+  --transition-timing-function-ease-in: var(--ease-in);
+  --transition-timing-function-ease-out: var(--ease-out);
+  --transition-timing-function-ease-in-out: var(--ease-in-out);
+
+  --transition-timing-function-fast: var(--transition-fast);
+  --transition-timing-function-normal: var(--transition-normal);
+  --transition-timing-function-slow: var(--transition-slow);
+
+  /* Shadow layers */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-inner: var(--shadow-inner);
+  --shadow-focus: var(--shadow-focus);
+
+  /* Semantic Mapped Shadow Scale */
+  --shadow-card: var(--shadow-card);
+  --shadow-floating: var(--shadow-floating);
+  --shadow-modal: var(--shadow-modal);
+  --shadow-dropdown: var(--shadow-dropdown);
+  --shadow-popover: var(--shadow-popover);
+  --shadow-tooltip: var(--shadow-tooltip);
+  --shadow-button: var(--shadow-button);
+  --shadow-hover: var(--shadow-hover);
+
+  /* Typography Scale */
+  --font-sans: var(--font-sans);
+
+  --font-size-xs: var(--text-xs);
+  --font-size-sm: var(--text-sm);
+  --font-size-base: var(--text-base);
+  --font-size-lg: var(--text-lg);
+  --font-size-xl: var(--text-xl);
+  --font-size-2xl: var(--text-2xl);
+  --font-size-3xl: var(--text-3xl);
+  --font-size-4xl: var(--text-4xl);
+
+  /* Letter Spacing mapping */
+  --tracking-tighter: var(--tracking-tighter);
+  --tracking-tight: var(--tracking-tight);
+  --tracking-normal: var(--tracking-normal);
+  --tracking-wide: var(--tracking-wide);
+  --tracking-wider: var(--tracking-wider);
+  --tracking-widest: var(--tracking-widest);
+}

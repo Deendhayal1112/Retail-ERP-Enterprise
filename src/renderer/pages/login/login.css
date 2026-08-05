@@ -1,0 +1,297 @@
+/*
+ * login.css
+ * Retail ERP Enterprise — Login Page Style Overrides
+ *
+ * Custom adjustments to perfectly align input heights, preview mockups,
+ * and bottom status bars matching the reference design layout.
+ *
+ * Phase 6 — Step 4 (UI Adjustment): Login Page Spacing & Proportions
+ */
+
+/* Responsive scroll tweaks on small viewports */
+@media (max-width: 1023px) {
+  body {
+    overflow-y: auto;
+  }
+}
+
+/* Rounded image preview styles */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Custom card container overrides */
+.card-container-login {
+  padding: 4.5rem 2rem 2.5rem 2rem !important; /* Top: 72px (clear badge), Sides: 32px, Bottom: 40px */
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04) !important;
+  border-radius: 1.5rem !important; /* 24px rounded corners matching global design token */
+}
+
+/* Floating padlock badge container offset */
+.card-container-login > div:first-child {
+  top: -1.75rem !important; /* -28px (half of 56px height) for perfect center alignment on top border */
+}
+
+/* Spacer for welcome title to clear padlock badge */
+.welcome-header-container {
+  margin-top: 0.5rem !important;
+  margin-bottom: 2rem !important; /* 32px gap between header subtitle and first input field */
+}
+
+/* Welcome title and subtitle tweaks */
+.welcome-header-container h2 {
+  font-size: 1.5rem !important; /* 24px */
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.welcome-header-container p {
+  font-size: 0.75rem !important; /* 12px */
+  margin-top: 0.5rem !important; /* 8px gap between header title and subtitle */
+}
+
+/* Focus ring and focus visibility helper states */
+button:focus-visible,
+a:focus-visible,
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid #2563eb !important;
+  outline-offset: 2px !important;
+}
+
+/* Simulated spinner keyframes rotation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Ensure a clean 16px vertical gap between form fields */
+.floating-label-group {
+  margin-bottom: 1rem !important; /* 16px spacing */
+}
+
+/* Checkbox and Forgot Password container layout */
+.checkbox-forgot-row {
+  margin-top: 1.25rem !important; /* 20px gap from password input */
+  margin-bottom: 1.25rem !important; /* 20px gap to primary sign-in button */
+}
+
+/* Adjust checkbox layout spacing */
+.form-checkbox-container {
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem !important; /* 8px spacing */
+}
+
+/* Reusable Outlined Floating Inputs & Buttons specifications */
+.floating-input {
+  height: 56px !important; /* 56px height specification */
+  border-radius: 12px !important; /* 12px corner radius */
+  padding-left: 3rem !important; /* 48px spacing for leading icons */
+  padding-right: 3rem !important; /* 48px spacing for trailing icons */
+  font-size: 0.875rem !important;
+  color: #1e293b !important;
+  border: 1px solid #cbd5e1 !important;
+  background-color: #ffffff !important;
+}
+
+.floating-label {
+  left: 3rem !important;
+  font-size: 0.875rem !important;
+  color: #64748b !important;
+  background-color: #ffffff !important;
+  padding: 0 6px !important;
+}
+
+/* Float status active rules */
+.floating-input:focus ~ .floating-label,
+.floating-input:not(:placeholder-shown) ~ .floating-label {
+  top: 0 !important;
+  left: 12px !important; /* 12px float alignment offset */
+  transform: translateY(-50%) scale(0.85) !important;
+  color: #2563eb !important;
+}
+
+/* Precise Input Icon Positioning & Indexing */
+.input-icon-left {
+  position: absolute !important;
+  top: 50% !important;
+  left: 1rem !important; /* 16px from left border */
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #94a3b8 !important;
+  z-index: 10 !important;
+  height: 100% !important;
+}
+
+.input-icon-right {
+  position: absolute !important;
+  top: 50% !important;
+  right: 1rem !important; /* 16px from right border */
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #94a3b8 !important;
+  z-index: 10 !important;
+  height: 100% !important;
+}
+
+/* Primary and Secondary Action Buttons layout */
+.btn-login-primary,
+.btn-login-secondary {
+  height: 52px !important; /* 52px height specification */
+  border-radius: 12px !important; /* 12px corner radius */
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15) !important;
+}
+
+.btn-login-secondary {
+  box-shadow: none !important;
+}
+
+/* Divider vertical spacing */
+.divider-container {
+  margin-top: 1.5rem !important; /* 24px margin */
+  margin-bottom: 1.5rem !important; /* 24px margin */
+}
+
+/* Footer text link margin */
+.footer-links-container {
+  margin-top: 2rem !important; /* 32px margin */
+}
+
+/* Dark mode specific style overrides */
+@media (prefers-color-scheme: dark) {
+  .floating-input {
+    color: #f8fafc !important;
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+  }
+  .floating-input:focus {
+    background-color: #020617 !important;
+  }
+  .floating-label {
+    color: #94a3b8 !important;
+    background-color: #080c17 !important; /* Matches exactly dark:bg-neutral-950 */
+  }
+  .floating-input:focus ~ .floating-label,
+  .floating-input:not(:placeholder-shown) ~ .floating-label {
+    color: #3b82f6 !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+ * INLINE VALIDATION & ERROR STYLING
+ * ───────────────────────────────────────────── */
+
+.input-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ef4444; /* red-500 */
+  margin-top: 0.375rem;
+  padding-left: 0.75rem;
+  animation: slideDown var(--transition-fast) ease-out forwards;
+}
+
+/* Error slide-down animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-error-msg.hidden {
+  display: none !important;
+}
+
+/* Red border highlight for invalid fields */
+.floating-input.has-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+  animation: shake 0.25s ease-in-out !important;
+}
+
+.floating-input.has-error ~ .floating-label {
+  color: #ef4444 !important;
+}
+
+/* Green border highlight for valid inputs (Success Feedback) */
+.floating-input.has-success {
+  border-color: #10b981 !important; /* emerald-500 */
+}
+
+.floating-input.has-success ~ .floating-label {
+  color: #10b981 !important;
+}
+
+/* Premium input shaking animation keyframes */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+/* Smooth form transition layout */
+.animate-scale-in {
+  animation: scaleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ─────────────────────────────────────────────
+ * MOCK LOADING OVERLAY STYLES
+ * ───────────────────────────────────────────── */
+
+#loading-overlay {
+  transition:
+    opacity 0.25s ease-in-out,
+    visibility 0.25s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#loading-overlay.is-active {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

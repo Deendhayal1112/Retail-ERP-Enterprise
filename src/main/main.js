@@ -1,0 +1,217 @@
+"use strict";
+
+/**
+ * main.js
+ * Retail ERP Enterprise — Electron Main Process Entry Point
+ *
+ * Bootstraps the Electron application shell, validates centralized configurations,
+ * secures single-instance locks, and handles lifecycle events.
+ *
+ * Phase 1 — Step 4: Application Configuration Integration
+ */
+
+// Load environment configuration and secrets
+require("../config/secrets");
+
+const { app, ipcMain } = require("electron");
+const appConfig = require("../config/app.config");
+const logger = require("../shared/logger/logger");
+const errorHandler = require("../shared/errors/errorHandler");
+const windowManager = require("./managers/windowManager");
+
+// 1. Validate Centralized Application Configuration before boot
+try {
+  appConfig.validate();
+  logger.info("Centralized configurations validated successfully. ✅");
+} catch (err) {
+  // Config error is fatal, log it and shut down immediately
+  logger.error(`FATAL: Configuration validation failed: ${err.message}`);
+  process.exit(1);
+}
+
+// 2. Register Global Process Error Listeners
+errorHandler.registerProcessErrorHandlers();
+
+logger.info(
+  `Bootstrapping ${appConfig.app.name} v${appConfig.app.version} in [${appConfig.app.environment}] mode...`,
+);
+
+// 3. Enforce Single Instance Lock
+const gotSingleInstanceLock = app.requestSingleInstanceLock();
+if (!gotSingleInstanceLock) {
+  logger.warn("Another instance is already running. Exiting.");
+  app.quit();
+  process.exit(0);
+}
+
+// 4. Register Shutdown Hook for Graceful Exit
+process.on("graceful-shutdown", (exitCode = 0) => {
+  logger.info("Graceful shutdown initiated. Cleaning up resources...");
+
+  // Close all open windows
+  windowManager.closeAllWindows();
+
+  // Gracefully release SQLite connection and pragmas
+  try {
+    const database = require("../backend/database");
+    database.close();
+  } catch (err) {
+    logger.error(`Error closing database during shutdown: ${err.message}`);
+  }
+
+  logger.info("Shutdown complete. Goodbye.");
+  app.quit();
+  process.exit(exitCode);
+});
+
+// 5. Register Whitelisted IPC Event Handlers
+
+/**
+ * Validates the IPC sender to ensure it is a trusted local frame.
+ * @param {Electron.IpcMainInvokeEvent|Electron.IpcMainEvent} event Electron IPC event.
+ */
+const validateSender = (event) => {
+  if (!event || !event.sender) {
+    throw new Error("Invalid IPC event context.");
+  }
+  
+  // Use event.senderFrame if available (more secure), otherwise fallback to sender.getURL()
+  const url = event.senderFrame ? event.senderFrame.url : event.sender.getURL();
+  
+  if (!url) {
+    logger.warn("Security Alert: Blocked IPC message due to missing sender URL.");
+    throw new Error("Access Denied: Missing sender origin.");
+  }
+
+  const isLocalFile = url.startsWith("file://");
+  const isDevTools = url.startsWith("chrome-extension://") || url.startsWith("devtools://");
+
+  if (!isLocalFile && (!isDevTools || appConfig.isProduction)) {
+    logger.warn(`Security Alert: Blocked IPC message from unauthorized origin: ${url}`);
+    throw new Error("Access Denied: Unauthorized IPC origin.");
+  }
+};
+
+// Return read-only metadata to sandboxed renderer processes
+ipcMain.handle("app:get-info", (event) => {
+  validateSender(event);
+  return {
+    name: appConfig.app.name,
+    version: appConfig.app.version,
+    environment: appConfig.app.environment,
+  };
+});
+
+// Window minimizes handler
+ipcMain.on("window:minimize", (event) => {
+  validateSender(event);
+  const win = windowManager.getMainWindow();
+  if (win) {
+    win.minimize();
+  }
+});
+
+// Window maximizes/unmaximizes handler
+ipcMain.on("window:maximize", (event) => {
+  validateSender(event);
+  const win = windowManager.getMainWindow();
+  if (win) {
+    if (win.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win.maximize();
+    }
+  }
+});
+
+// Window close handler
+ipcMain.on("window:close", (event) => {
+  validateSender(event);
+  const win = windowManager.getMainWindow();
+  if (win) {
+    win.close();
+  }
+});
+
+// Return current maximized status
+ipcMain.handle("window:is-maximized", (event) => {
+  validateSender(event);
+  const win = windowManager.getMainWindow();
+  return win ? win.isMaximized() : false;
+});
+
+// Safe logging delegation handler
+ipcMain.on("log:write", (event, payload) => {
+  validateSender(event);
+  const { level, message, meta } = payload || {};
+  const cleanMeta = { source: "renderer", ...meta };
+
+  switch (level) {
+    case "debug":
+      logger.debug(message, cleanMeta);
+      break;
+    case "warn":
+      logger.warn(message, cleanMeta);
+      break;
+    case "error":
+      logger.error(message, cleanMeta);
+      break;
+    case "info":
+    default:
+      logger.info(message, cleanMeta);
+      break;
+  }
+});
+
+// 6. Electron App Lifecycle Listeners
+
+app.whenReady().then(() => {
+  logger.info("Electron app ready event fired.");
+  logger.info("Environment verification complete. Main process running.");
+
+  // Register authentication IPC handler bindings
+  const { registerAuthIpcHandlers } = require("./ipc/auth.ipc");
+  registerAuthIpcHandlers();
+
+  // Create primary application main window
+  windowManager.createMainWindow();
+
+  if (appConfig.electron.isDev) {
+    logger.info("Main window launched successfully.");
+  }
+});
+
+// Second instance triggered handler
+app.on("second-instance", (_event, _commandLine, _workingDirectory) => {
+  logger.warn("Second instance execution attempted. Focusing main window.");
+  // Restore and focus the existing main window
+  windowManager.createMainWindow();
+});
+
+// Quit when all windows are closed (standard Electron behavior)
+app.on("window-all-closed", () => {
+  logger.info("All application windows closed.");
+  if (process.platform !== "darwin") {
+    process.emit("graceful-shutdown", 0);
+  }
+});
+
+app.on("activate", () => {
+  logger.info("App activate event fired (macOS).");
+  // macOS dock icon clicked recreate window logic
+  windowManager.createMainWindow();
+});
+
+app.on("before-quit", () => {
+  logger.info("App before-quit event fired.");
+});
+
+app.on("will-quit", () => {
+  logger.info("App will-quit event fired.");
+  try {
+    const database = require("../backend/database");
+    database.close();
+  } catch (err) {
+    logger.error(`Error closing database on will-quit: ${err.message}`);
+  }
+});

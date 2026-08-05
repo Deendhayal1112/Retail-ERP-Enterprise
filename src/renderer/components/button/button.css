@@ -1,0 +1,119 @@
+/*
+ * button.css
+ * Retail ERP Enterprise — Reusable Button System
+ *
+ * Implements primary, outline, and disabled states alongside visual loading states
+ * and transition animations.
+ *
+ * Phase 3 — Step 2: Login Form Components
+ */
+
+/* Primary Button Styling */
+.btn-login-primary {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+  font-family: inherit;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  height: 2.75rem !important;
+  border-radius: 0.5rem !important; /* 8px rounded corners */
+  border: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--space-2) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15) !important;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast),
+    opacity var(--transition-fast);
+  user-select: none;
+}
+
+.btn-login-primary:hover {
+  background-color: #1d4ed8 !important;
+}
+
+.btn-login-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-login-primary:disabled {
+  background-color: #94a3b8 !important;
+  color: #f1f5f9 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.7 !important;
+}
+
+/* Secondary Button Styling - Lock it to the outline style */
+.btn-login-secondary {
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+  font-family: inherit;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  height: 2.75rem !important;
+  border-radius: 0.5rem !important; /* 8px rounded corners */
+  border: 1px solid #cbd5e1 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--space-2) !important;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+  user-select: none;
+}
+
+.btn-login-secondary:hover {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+.btn-login-secondary:active {
+  transform: scale(0.98);
+}
+
+.btn-login-secondary:disabled {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Loading state configuration */
+.btn-spinner {
+  display: none;
+}
+
+.btn-login-primary.is-loading .btn-spinner {
+  display: inline-block !important;
+}
+
+.btn-login-primary.is-loading .btn-text-icon {
+  display: none !important;
+}
+
+.btn-login-primary.is-loading {
+  pointer-events: none !important;
+  opacity: 0.8 !important;
+}
+
+/* Dark mode settings */
+@media (prefers-color-scheme: dark) {
+  .btn-login-secondary {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+    color: #cbd5e1 !important;
+  }
+  .btn-login-secondary:hover {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+  }
+}

@@ -30,6 +30,7 @@ import RecentActivities      from "../../components/RecentActivities/RecentActiv
 import Notifications         from "../../components/Notifications/Notifications.js";
 import QuickActions          from "../../components/QuickActions/QuickActions.js";
 import FavoritesManager      from "../../components/FavoritesManager/FavoritesManager.js";
+import ProductivityCenter    from "../../components/ProductivityCenter/ProductivityCenter.js";
 import BusinessHealth        from "../../components/BusinessHealth/BusinessHealth.js";
 
 // ─────────────────────────────────────────────────────
@@ -302,6 +303,12 @@ export default class DashboardHome {
     favCol.className = "dashboard-grid-col col-span-12";
     favCol.appendChild(new FavoritesManager().render());
     outerContainer.appendChild(favCol);
+
+    // ── Row 9c: Productivity Center (12) ──────────────────────────────────
+    const prodCol = document.createElement("div");
+    prodCol.className = "dashboard-grid-col col-span-12";
+    prodCol.appendChild(new ProductivityCenter().render());
+    outerContainer.appendChild(prodCol);
 
     // ── Row 10: Business Health Summary (12) ──────────────────────────────
     const healthCol = document.createElement("div");

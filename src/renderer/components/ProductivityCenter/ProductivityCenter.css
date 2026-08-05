@@ -1,0 +1,248 @@
+/* ProductivityCenter.css */
+
+.productivity-center-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 480px;
+}
+
+/* Header Row & Toolbar */
+.productivity-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.productivity-title-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.productivity-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.productivity-subtitle {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+/* Productivity Toolbar */
+.productivity-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.productivity-toolbar-btn {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.productivity-toolbar-btn:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* Three Column Productivity Layout */
+.productivity-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  flex: 1;
+}
+
+/* ─────────────────────────────────────────────
+ * COLUMN 1: PINNED QUICK ACTIONS
+ * ───────────────────────────────────────────── */
+.productivity-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.productivity-column-header {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.pinned-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.pinned-action-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.pinned-action-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--primary-300);
+}
+
+.pinned-action-icon {
+  font-size: 1.15rem;
+}
+
+.pinned-action-title {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * COLUMN 2: CONTINUE WORKING
+ * ───────────────────────────────────────────── */
+.continue-working-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.continue-item-row {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.continue-item-row:hover {
+  border-color: var(--primary-300);
+  background-color: var(--bg-hover);
+}
+
+.continue-item-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.continue-item-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary-500);
+  flex-shrink: 0;
+}
+
+.continue-item-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.continue-item-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.continue-item-sub {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.continue-item-age {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* ─────────────────────────────────────────────
+ * COLUMN 3: SMART SUGGESTIONS
+ * ───────────────────────────────────────────── */
+.smart-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.suggestion-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--primary-400);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: transform var(--duration-fast);
+}
+
+.suggestion-card:hover {
+  transform: translateX(2px);
+}
+
+.suggestion-card.pending-task { border-left-color: var(--primary-500); }
+.suggestion-card.stock-warning { border-left-color: var(--danger-500); }
+.suggestion-card.alert         { border-left-color: var(--warning-500); }
+.suggestion-card.summary       { border-left-color: var(--success-500); }
+
+.suggestion-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.suggestion-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: var(--lh-snug);
+}
+
+/* Responsive Overrides */
+@media (max-width: 1440px) {
+  .productivity-body-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

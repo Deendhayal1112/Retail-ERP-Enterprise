@@ -15,6 +15,7 @@
 "use strict";
 
 import CompanyProfile from "../../components/CompanyProfile/CompanyProfile.js";
+import UserManagement from "../../components/UserManagement/UserManagement.js";
 
 export class SettingsCard {
   /**
@@ -254,12 +255,8 @@ export class SettingsContent {
       wrap.appendChild(profile.render());
 
     } else if (this.section === "users") {
-      const p1 = new SettingsSection({ title: "User Configuration Defaults" });
-      const cards1 = [
-        new SettingsCard({ title: "Enable Registrations", description: "Allow guest registration and operators enrollments", control: this._createToggle(false, "user_registration") }).render(),
-        new SettingsCard({ title: "Default Operator Role", description: "Initial role tag mapped to fresh user credentials", control: this._createSelect(["Administrator", "Manager", "Cashier"], "Cashier") }).render()
-      ];
-      wrap.appendChild(p1.render(cards1));
+      const userMgmt = new UserManagement();
+      wrap.appendChild(userMgmt.render());
 
     } else if (this.section === "roles") {
       const p1 = new SettingsSection({ title: "Access Policies Enforcement" });

@@ -67,14 +67,14 @@ export default class UserGuidePanel {
     progressFill.style.width = "0%";
     progressWrap.style.display = "block";
 
-    const removeProgressListener = window.api.ipc.on("docs:download-progress", (event, data) => {
+    const removeProgressListener = window.api.ipc.on("docs:download-progress", (data) => {
       if (data.guideId === guideId) {
         progressPerc.textContent = `${data.progress}%`;
         progressFill.style.width = `${data.progress}%`;
       }
     });
 
-    const removeCompleteListener = window.api.ipc.on("docs:download-completed", (event, data) => {
+    const removeCompleteListener = window.api.ipc.on("docs:download-completed", (data) => {
       if (data.guideId === guideId) {
         progressPerc.textContent = "100%";
         progressFill.style.width = "100%";

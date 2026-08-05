@@ -71,12 +71,12 @@ export default class DeploymentStatusPanel {
     progressFill.style.width = "0%";
     progressWrap.style.display = "block";
 
-    const removeProgressListener = window.api.ipc.on("deploy:progress", (event, data) => {
+    const removeProgressListener = window.api.ipc.on("deploy:progress", (data) => {
       progressPerc.textContent = `${data.progress}%`;
       progressFill.style.width = `${data.progress}%`;
     });
 
-    const removeCompleteListener = window.api.ipc.on("deploy:completed", (event, data) => {
+    const removeCompleteListener = window.api.ipc.on("deploy:completed", (data) => {
       progressPerc.textContent = "100%";
       progressFill.style.width = "100%";
       

@@ -80,7 +80,7 @@ export default class SigningPanel {
     progressWrap.style.display = "block";
 
     // Bind listeners for IPC progress updates
-    const removeProgressListener = window.api.ipc.on("signing:progress", (event, data) => {
+    const removeProgressListener = window.api.ipc.on("signing:progress", (data) => {
       if (data.platform === platform) {
         progressPerc.textContent = `${data.progress}%`;
         progressFill.style.width = `${data.progress}%`;
@@ -88,7 +88,7 @@ export default class SigningPanel {
     });
 
     // Bind listeners for IPC complete updates
-    const removeCompleteListener = window.api.ipc.on("signing:completed", (event, data) => {
+    const removeCompleteListener = window.api.ipc.on("signing:completed", (data) => {
       if (data.platform === platform) {
         progressPerc.textContent = "100%";
         progressFill.style.width = "100%";

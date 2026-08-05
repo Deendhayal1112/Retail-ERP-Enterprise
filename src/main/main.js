@@ -425,6 +425,70 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize deployment subsystems: ${err.message}`);
   }
 
+  // Initialize QA and UAT Subsystem
+  try {
+    const UATManager = require("./qa/UATManager");
+    const ValidationManager = require("./qa/ValidationManager");
+    const DefectManager = require("./qa/DefectManager");
+    const ApprovalManager = require("./qa/ApprovalManager");
+    const ReleaseReadinessManager = require("./qa/ReleaseReadinessManager");
+    const QAEvents = require("./qa/QAEvents");
+
+    const uatMgr = new UATManager();
+    const valMgr = new ValidationManager(null);
+    const defectMgr = new DefectManager();
+    const approvalMgr = new ApprovalManager();
+    const readinessMgr = new ReleaseReadinessManager();
+
+    QAEvents.register({
+      "qa:get-validations": async (event) => {
+        validateSender(event);
+        return await valMgr.getValidations();
+      },
+      "qa:run-regression-test": async (event, testId) => {
+        validateSender(event);
+        valMgr.mainWindow = windowManager.getMainWindow();
+        return await valMgr.runRegressionTest(testId);
+      },
+      "qa:get-uat-checklist": async (event) => {
+        validateSender(event);
+        return await uatMgr.getChecklist();
+      },
+      "qa:toggle-uat-feature": async (event, featureId) => {
+        validateSender(event);
+        return await uatMgr.toggleCheck(featureId);
+      },
+      "qa:get-business-validations": async (event) => {
+        validateSender(event);
+        return await approvalMgr.getValidations();
+      },
+      "qa:toggle-business-validation": async (event, id) => {
+        validateSender(event);
+        return await approvalMgr.toggleApproval(id);
+      },
+      "qa:get-bugs": async (event) => {
+        validateSender(event);
+        return await defectMgr.getBugs();
+      },
+      "qa:resolve-bug": async (event, bugId) => {
+        validateSender(event);
+        return await defectMgr.resolveBug(bugId);
+      },
+      "qa:get-readiness": async (event) => {
+        validateSender(event);
+        return await readinessMgr.getReadiness();
+      },
+      "qa:toggle-readiness": async (event, role) => {
+        validateSender(event);
+        return await readinessMgr.toggleReadinessApproval(role);
+      }
+    });
+
+    logger.info("QA & User Acceptance Testing subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize QA subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

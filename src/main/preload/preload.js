@@ -79,7 +79,17 @@ const ALLOWED_SEND_CHANNELS = [
   "deploy:get-recovery-plan",
   "deploy:run-recovery-step",
   "deploy:get-golive-checklist",
-  "deploy:toggle-golive-step"
+  "deploy:toggle-golive-step",
+  "qa:get-validations",
+  "qa:run-regression-test",
+  "qa:get-uat-checklist",
+  "qa:toggle-uat-feature",
+  "qa:get-business-validations",
+  "qa:toggle-business-validation",
+  "qa:get-bugs",
+  "qa:resolve-bug",
+  "qa:get-readiness",
+  "qa:toggle-readiness"
 ];
 
 // Channels from Main to Renderer (Listeners)
@@ -96,7 +106,9 @@ const ALLOWED_RECEIVE_CHANNELS = [
   "docs:download-progress",
   "docs:download-completed",
   "deploy:progress",
-  "deploy:completed"
+  "deploy:completed",
+  "qa:test-progress",
+  "qa:test-completed"
 ];
 
 // ─────────────────────────────────────────────────────────────────────

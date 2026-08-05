@@ -24,7 +24,7 @@ import StartupPerformanceCenter from "../Performance/StartupPerformanceCenter.js
 import BundleOptimizationCenter from "../Performance/BundleOptimizationCenter.js";
 import BackgroundTaskCenter from "../Performance/BackgroundTaskCenter.js";
 import EnterpriseHealthCenter from "../Performance/EnterpriseHealthCenter.js";
-import EnterpriseQACenter from "../Performance/EnterpriseQACenter.js";
+import EnterpriseUATCenter from "../QA/EnterpriseUATCenter.js";
 import CICDDashboard from "../Performance/CICDDashboard.js";
 import SecurityCenter from "../Security/SecurityCenter.js";
 import DistributionCenter from "../Release/DistributionCenter.js";
@@ -253,12 +253,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else if (route === "enterprise-qa") {
           e.preventDefault();
           pageWrapper.innerHTML = "";
-          activePerformanceModule = new EnterpriseQACenter();
-          pageWrapper.appendChild(activePerformanceModule.render());
+          const uatCenter = new EnterpriseUATCenter();
+          uatCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
 
           // Update header module breadcrumb focus label
           const breadcrumbText = document.querySelector(".breadcrumb-current");
-          if (breadcrumbText) breadcrumbText.textContent = "Enterprise QA";
+          if (breadcrumbText) breadcrumbText.textContent = "Enterprise QA Center";
         } else if (route === "cicd-pipeline") {
           e.preventDefault();
           pageWrapper.innerHTML = "";

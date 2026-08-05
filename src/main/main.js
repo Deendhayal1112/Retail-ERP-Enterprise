@@ -193,6 +193,61 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize security subsystems: ${err.message}`);
   }
 
+  // Initialize Release and Distribution Managers
+  try {
+    const PackagingManager = require("./release/PackagingManager");
+    const DistributionManager = require("./release/DistributionManager");
+    const InstallerManager = require("./release/InstallerManager");
+    const ReleaseArtifactManager = require("./release/ReleaseArtifactManager");
+    const ReleaseEvents = require("./release/ReleaseEvents");
+
+    const packagingMgr = new PackagingManager(null);
+    const distributionMgr = new DistributionManager();
+    const installerMgr = new InstallerManager();
+    const releaseArtifactMgr = new ReleaseArtifactManager();
+
+    // Register handlers via ReleaseEvents helper
+    ReleaseEvents.register({
+      "release:start-package": async (event, format) => {
+        validateSender(event);
+        packagingMgr.mainWindow = windowManager.getMainWindow();
+        return await packagingMgr.runPackage(format);
+      },
+      "release:get-artifacts": async (event) => {
+        validateSender(event);
+        return await releaseArtifactMgr.getArtifacts();
+      },
+      "release:get-channels": async (event) => {
+        validateSender(event);
+        return await distributionMgr.getChannels();
+      },
+      "release:get-validations": async (event) => {
+        validateSender(event);
+        return await installerMgr.getValidations();
+      },
+      "release:get-manifest": async (event) => {
+        validateSender(event);
+        return await releaseArtifactMgr.getManifest();
+      },
+      "release:toggle-validation": async (event, id) => {
+        validateSender(event);
+        return await installerMgr.toggleValidation(id);
+      },
+      "release:toggle-channel": async (event, channel) => {
+        validateSender(event);
+        return await distributionMgr.toggleChannel(channel);
+      },
+      "release:compile-manifest": async (event, data) => {
+        validateSender(event);
+        return await releaseArtifactMgr.compileManifestReport(data);
+      }
+    });
+
+    logger.info("Release and Distribution subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize release subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

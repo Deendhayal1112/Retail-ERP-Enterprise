@@ -27,6 +27,7 @@ import EnterpriseHealthCenter from "../Performance/EnterpriseHealthCenter.js";
 import EnterpriseQACenter from "../Performance/EnterpriseQACenter.js";
 import CICDDashboard from "../Performance/CICDDashboard.js";
 import SecurityCenter from "../Security/SecurityCenter.js";
+import DistributionCenter from "../Release/DistributionCenter.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -113,6 +114,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           // Update header module breadcrumb focus label
           const breadcrumbText = document.querySelector(".breadcrumb-current");
           if (breadcrumbText) breadcrumbText.textContent = "Security & Compliance";
+        } else if (route === "release-center") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const distCenter = new DistributionCenter();
+          distCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Release & Distribution Center";
         } else if (route === "settings") {
           e.preventDefault();
           pageWrapper.innerHTML = "";

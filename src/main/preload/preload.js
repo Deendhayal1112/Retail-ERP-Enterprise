@@ -41,7 +41,15 @@ const ALLOWED_SEND_CHANNELS = [
   "compliance:toggle-rule",
   "security:get-audit-logs",
   "security:write-audit-log",
-  "security:download-report"
+  "security:download-report",
+  "release:start-package",
+  "release:get-artifacts",
+  "release:get-channels",
+  "release:get-validations",
+  "release:get-manifest",
+  "release:toggle-validation",
+  "release:toggle-channel",
+  "release:compile-manifest"
 ];
 
 // Channels from Main to Renderer (Listeners)
@@ -50,7 +58,9 @@ const ALLOWED_RECEIVE_CHANNELS = [
   "auth:session-expired",
   "bg-tasks:metrics-updated",
   "security:scan-progress",
-  "security:scan-completed"
+  "security:scan-completed",
+  "release:package-progress",
+  "release:package-completed"
 ];
 
 // ─────────────────────────────────────────────────────────────────────

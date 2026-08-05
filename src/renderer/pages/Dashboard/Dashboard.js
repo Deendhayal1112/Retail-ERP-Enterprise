@@ -29,6 +29,7 @@ import TopSellingProducts    from "../../components/TopSellingProducts/TopSellin
 import RecentActivities      from "../../components/RecentActivities/RecentActivities.js";
 import Notifications         from "../../components/Notifications/Notifications.js";
 import QuickActions          from "../../components/QuickActions/QuickActions.js";
+import FavoritesManager      from "../../components/FavoritesManager/FavoritesManager.js";
 import BusinessHealth        from "../../components/BusinessHealth/BusinessHealth.js";
 
 // ─────────────────────────────────────────────────────
@@ -295,6 +296,12 @@ export default class DashboardHome {
     quickCol.className = "dashboard-grid-col col-span-6";
     quickCol.appendChild(new QuickActions().render());
     outerContainer.appendChild(quickCol);
+
+    // ── Row 9b: Favorites & Recently Visited (12) ──────────────────────────
+    const favCol = document.createElement("div");
+    favCol.className = "dashboard-grid-col col-span-12";
+    favCol.appendChild(new FavoritesManager().render());
+    outerContainer.appendChild(favCol);
 
     // ── Row 10: Business Health Summary (12) ──────────────────────────────
     const healthCol = document.createElement("div");

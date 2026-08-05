@@ -1,0 +1,188 @@
+/* FavoritesManager.css */
+
+.favorites-manager-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 380px;
+}
+
+/* Header Row */
+.favorites-manager-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.favorites-manager-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.favorites-manager-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.favorites-manager-subtitle {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+/* Split Panel Body */
+.favorites-manager-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  flex: 1;
+}
+
+/* Individual Panel Shell */
+.favorites-panel-column,
+.recently-used-panel-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.favorites-panel-header,
+.recently-used-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.column-section-title {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Lists rows items */
+.favorites-list,
+.recently-used-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.favorite-item-row,
+.recent-item-row {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.favorite-item-row:hover,
+.recent-item-row:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.favorite-item-left,
+.recent-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.favorite-item-icon,
+.recent-item-icon {
+  font-size: 0.85rem;
+}
+
+/* Badge tags */
+.favorite-badge-tag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: rgba(99, 102, 241, 0.1);
+  color: var(--primary-600);
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+}
+
+.favorite-actions-box,
+.recent-actions-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Pin/Unpin buttons actions */
+.favorite-pin-btn {
+  background: none;
+  border: none;
+  color: var(--primary-500);
+  cursor: pointer;
+  padding: 2px;
+  font-size: 0.8rem;
+}
+
+.favorite-reorder-handle {
+  color: var(--text-muted);
+  cursor: grab;
+  font-size: 0.8rem;
+  user-select: none;
+}
+
+/* Timestamp labels */
+.recent-timestamp-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* Action button controls */
+.clear-history-action-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--duration-fast);
+}
+
+.clear-history-action-btn:hover {
+  color: var(--danger-500);
+}
+
+/* Responsive Stack */
+@media (max-width: 1366px) {
+  .favorites-manager-card {
+    padding: 16px;
+  }
+
+  .favorites-manager-body-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

@@ -31,6 +31,7 @@ import Notifications         from "../../components/Notifications/Notifications.
 import QuickActions          from "../../components/QuickActions/QuickActions.js";
 import FavoritesManager      from "../../components/FavoritesManager/FavoritesManager.js";
 import ProductivityCenter    from "../../components/ProductivityCenter/ProductivityCenter.js";
+import WorkflowCenter        from "../../components/WorkflowCenter/WorkflowCenter.js";
 import BusinessHealth        from "../../components/BusinessHealth/BusinessHealth.js";
 
 // ─────────────────────────────────────────────────────
@@ -309,6 +310,12 @@ export default class DashboardHome {
     prodCol.className = "dashboard-grid-col col-span-12";
     prodCol.appendChild(new ProductivityCenter().render());
     outerContainer.appendChild(prodCol);
+
+    // ── Row 9d: Workflow Center (12) ──────────────────────────────────────
+    const workCol = document.createElement("div");
+    workCol.className = "dashboard-grid-col col-span-12";
+    workCol.appendChild(new WorkflowCenter().render());
+    outerContainer.appendChild(workCol);
 
     // ── Row 10: Business Health Summary (12) ──────────────────────────────
     const healthCol = document.createElement("div");

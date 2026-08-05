@@ -1,29 +1,82 @@
+/* Footer.css */
+
 .footer-status-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
-  padding: 0 1.5rem;
-  background-color: var(--bg-footer || #0b0f19);
-  border-top: 1px solid var(--border-light || #1e293b);
-  font-size: 0.75rem;
-  color: var(--text-muted || #64748b);
+  width: 100%;
+  height: 40px; /* Fixed height 40px */
+  padding: 0 32px;
+  background-color: var(--bg-footer);
+  border-top: 1px solid var(--border-light);
+  box-sizing: border-box;
+  font-size: 0.725rem;
+  color: var(--text-secondary);
 }
-.footer-status-left, .footer-status-center, .footer-status-right {
+
+/* Three Sections Layout */
+.footer-left-section,
+.footer-center-section,
+.footer-right-section {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 16px;
+  height: 100%;
 }
-.status-indicator-dot {
+
+.footer-center-section {
+  justify-content: center;
+}
+
+.footer-right-section {
+  justify-content: flex-end;
+}
+
+/* Status Item Wrappers */
+.footer-status-item-element {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Footer Dividers vertical rules */
+.footer-vertical-divider {
+  width: 1px;
+  height: 14px;
+  background-color: var(--border-light);
+  opacity: 0.6;
+}
+
+/* Indicator dots */
+.status-dot-indicator {
   width: 6px;
   height: 6px;
   border-radius: 50%;
+  background-color: var(--success-500);
 }
-.status-indicator-dot.online {
-  background-color: var(--success-500 || #22c55e);
-  box-shadow: 0 0 8px var(--success-500 || #22c55e);
+
+.status-dot-indicator.ready {
+  background-color: var(--success-500);
+  box-shadow: 0 0 6px var(--success-500);
 }
-.footer-status-bar .accent {
-  color: var(--text-secondary || #cbd5e1);
+
+.status-dot-indicator.loading {
+  background-color: var(--warning-500);
+  box-shadow: 0 0 6px var(--warning-500);
+  animation: pulse-dot 1.2s infinite ease-in-out;
+}
+
+.status-dot-indicator.error {
+  background-color: var(--danger-500);
+  box-shadow: 0 0 6px var(--danger-500);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.footer-status-label-value {
+  color: var(--text-primary);
   font-weight: 600;
 }

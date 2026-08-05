@@ -14,6 +14,8 @@
 
 "use strict";
 
+import CompanyProfile from "../../components/CompanyProfile/CompanyProfile.js";
+
 export class SettingsCard {
   /**
    * @param {Object}      options
@@ -248,18 +250,8 @@ export class SettingsContent {
     wrap.className = "settings-scroll-body";
 
     if (this.section === "company") {
-      const p1 = new SettingsSection({ title: "Company Profile" });
-      const cards1 = [
-        new SettingsCard({ title: "Company Legal Name", description: "Registered entity name of primary company", control: this._createInput("Retail ERP Enterprise Inc.", "Legal Name") }).render(),
-        new SettingsCard({ title: "Business Registration Number", description: "Official business identifier digits", control: this._createInput("US-94285-CORP", "Registration Code") }).render()
-      ];
-      wrap.appendChild(p1.render(cards1));
-
-      const p2 = new SettingsSection({ title: "Branding Configuration" });
-      const cards2 = [
-        new SettingsCard({ title: "Corporate Colors Palette", description: "Configure client UI theme brand coloring", control: this._createSelect(["Deep Indigo", "Forest Green", "Charcoal Slate"], "Deep Indigo") }).render()
-      ];
-      wrap.appendChild(p2.render(cards2));
+      const profile = new CompanyProfile();
+      wrap.appendChild(profile.render());
 
     } else if (this.section === "users") {
       const p1 = new SettingsSection({ title: "User Configuration Defaults" });

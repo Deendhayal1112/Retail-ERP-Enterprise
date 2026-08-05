@@ -1,0 +1,261 @@
+/* CompanyProfile.css */
+
+.company-profile-container {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────────
+ * LEFT COLUMN: LOGO & BRANDING CARDS
+ * ───────────────────────────────────────────── */
+.company-profile-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Company Logo Card */
+.company-logo-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.logo-display-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  border: 2px dashed var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.logo-display-circle:hover {
+  border-color: var(--primary-400);
+  background-color: var(--bg-active);
+  color: var(--primary-500);
+}
+
+.logo-meta-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.logo-meta-desc {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* Branding Settings Section */
+.branding-settings-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.branding-section-header {
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+}
+
+.branding-section-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.branding-colors-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.branding-color-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.branding-color-label {
+  font-size: 0.675rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.color-input-picker-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  padding: 6px;
+  border-radius: var(--radius-md);
+}
+
+.color-hex-text {
+  font-size: 0.675rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: monospace;
+}
+
+/* Invoice Logo Placeholder box */
+.invoice-logo-uploader {
+  border: 1px dashed var(--border-light);
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color var(--duration-fast);
+}
+
+.invoice-logo-uploader:hover {
+  border-color: var(--primary-400);
+  color: var(--primary-500);
+}
+
+/* ─────────────────────────────────────────────
+ * RIGHT COLUMN: FORM SHEETS
+ * ───────────────────────────────────────────── */
+.company-profile-forms-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-form-section-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-sizing: border-box;
+}
+
+.form-section-header {
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 10px;
+}
+
+.form-section-title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 2-Column form controls layouts */
+.profile-form-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field-label {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.profile-form-input {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: var(--radius-md);
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.profile-form-input:focus {
+  border-color: var(--primary-400);
+}
+
+.profile-form-select {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 7px 10px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Save Form Bar */
+.profile-save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.profile-save-btn {
+  background-color: var(--primary-500);
+  border: none;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 8px 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--duration-fast);
+}
+
+.profile-save-btn:hover {
+  background-color: var(--primary-600);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1440px) {
+  .company-profile-container {
+    grid-template-columns: 1fr;
+  }
+}

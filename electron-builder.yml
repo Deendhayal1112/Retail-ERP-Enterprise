@@ -1,0 +1,148 @@
+# electron-builder.yml
+# Retail ERP Enterprise — Electron Builder Configuration
+#
+# Configure electron-builder for production packaging.
+# Prepares installers for Windows (Setup & Portable), macOS (DMG & Zip), and Linux (AppImage).
+#
+# Phase 7 — Step 1: Electron Builder Configuration
+
+appId: com.retailerp.enterprise
+productName: Retail ERP Enterprise
+copyright: Copyright © 2026 Retail ERP Enterprise Team
+compression: maximum
+asar: true
+
+# ─────────────────────────────────────────────────────
+# DIRECTORIES
+# ─────────────────────────────────────────────────────
+directories:
+  output: dist
+  buildResources: build
+
+# ─────────────────────────────────────────────────────
+# FILES TO PACKAGE (source code included in the app)
+# ─────────────────────────────────────────────────────
+files:
+  # Include all source code
+  - src/**/*
+  # Include static assets
+  - assets/**/*
+  # Include database scripts (NOT .db files — generated at runtime)
+  - database/migrations/**/*
+  - database/schema/**/*
+  - database/seed/**/*
+  # Include production node_modules (builder will filter out devDependencies)
+  - node_modules/**/*
+  # Exclude dev & git files
+  - "!tests/**/*"
+  - "!logs/**/*"
+  - "!.env"
+  - "!.env.example"
+  - "!.gitignore"
+  - "!README.md"
+  - "!LICENSE"
+
+# ─────────────────────────────────────────────────────
+# EXTRA RESOURCES (placed in app.getPath('userData'))
+# ─────────────────────────────────────────────────────
+extraResources:
+  - from: database/migrations
+    to: database/migrations
+    filter:
+      - "**/*.js"
+      - "**/*.sql"
+  - from: database/schema
+    to: database/schema
+    filter:
+      - "**/*.js"
+      - "**/*.sql"
+  - from: database/seed
+    to: database/seed
+    filter:
+      - "**/*.js"
+
+# ─────────────────────────────────────────────────────
+# WINDOWS — NSIS & Portable Setup
+# ─────────────────────────────────────────────────────
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+        - arm64
+    - target: portable
+      arch:
+        - x64
+  icon: build/icons/icon.ico
+  executableName: retail-erp-enterprise
+  requestedExecutionLevel: asInvoker
+  artifactName: "${productName}-Setup-${version}-${arch}.${ext}"
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  allowElevation: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: "Retail ERP Enterprise"
+  installerIcon: build/icons/icon.ico
+  uninstallerIcon: build/icons/icon.ico
+  installerHeaderIcon: build/icons/icon.ico
+  deleteAppDataOnUninstall: false
+  runAfterFinish: true
+
+portable:
+  artifactName: "${productName}-Portable-${version}-${arch}.${ext}"
+
+# ─────────────────────────────────────────────────────
+# macOS — DMG & App Bundle Target
+# ─────────────────────────────────────────────────────
+mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+    - target: zip
+      arch:
+        - x64
+        - arm64
+  icon: build/icons/icon.icns
+  category: public.app-category.business
+  darkModeSupport: true
+  artifactName: "${productName}-${version}-${arch}-mac.${ext}"
+
+dmg:
+  title: "Retail ERP Enterprise ${version}"
+  iconSize: 128
+  window:
+    width: 600
+    height: 400
+
+# ─────────────────────────────────────────────────────
+# LINUX — AppImage Target
+# ─────────────────────────────────────────────────────
+linux:
+  target:
+    - target: AppImage
+      arch:
+        - x64
+        - arm64
+  icon: build/icons/icon.png
+  category: Office
+  artifactName: "${productName}-${version}-${arch}.${ext}"
+
+# ─────────────────────────────────────────────────────
+# FILE ASSOCIATIONS (Future Ready)
+# ─────────────────────────────────────────────────────
+fileAssociations:
+  - ext: reep
+    name: Retail ERP Enterprise Project
+    description: Retail ERP Enterprise Workspace Configuration File
+    role: Editor
+
+# ─────────────────────────────────────────────────────
+# PUBLISHING (disabled for v0.2.0)
+# ─────────────────────────────────────────────────────
+publish: null

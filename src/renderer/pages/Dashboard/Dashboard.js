@@ -16,26 +16,25 @@
 
 "use strict";
 
-import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner.js";
-import { KPIGrid } from "../../components/KPICard/KPICard.js";
-import SalesTrend from "../../components/SalesTrend/SalesTrend.js";
-import RevenueTrend from "../../components/RevenueTrend/RevenueTrend.js";
+import WelcomeBanner         from "../../components/WelcomeBanner/WelcomeBanner.js";
+import { KPIGrid }           from "../../components/KPICard/KPICard.js";
+import SalesTrend            from "../../components/SalesTrend/SalesTrend.js";
+import RevenueTrend          from "../../components/RevenueTrend/RevenueTrend.js";
 import InventoryDistribution from "../../components/InventoryDistribution/InventoryDistribution.js";
-import CategorySales from "../../components/CategorySales/CategorySales.js";
-import TopSellingProducts from "../../components/TopSellingProducts/TopSellingProducts.js";
-import RecentActivities from "../../components/RecentActivities/RecentActivities.js";
-import Notifications from "../../components/Notifications/Notifications.js";
-import QuickActions from "../../components/QuickActions/QuickActions.js";
-import BusinessHealth from "../../components/BusinessHealth/BusinessHealth.js";
+import CategorySales         from "../../components/CategorySales/CategorySales.js";
+import BusinessComparison    from "../../components/BusinessComparison/BusinessComparison.js";
+import TopSellingProducts    from "../../components/TopSellingProducts/TopSellingProducts.js";
+import RecentActivities      from "../../components/RecentActivities/RecentActivities.js";
+import Notifications         from "../../components/Notifications/Notifications.js";
+import QuickActions          from "../../components/QuickActions/QuickActions.js";
+import BusinessHealth        from "../../components/BusinessHealth/BusinessHealth.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
 // ─────────────────────────────────────────────────────
 
 export class GridContainer {
-  constructor(options = {}) {
-    this.options = options;
-  }
+  constructor(options = {}) { this.options = options; }
   render(children = []) {
     const el = document.createElement("div");
     el.className = "dashboard-grid-container";
@@ -46,7 +45,7 @@ export class GridContainer {
 
 export class GridColumn {
   constructor(options = {}) {
-    this.span = options.span || 12;
+    this.span      = options.span      || 12;
     this.className = options.className || "";
   }
   render(children = []) {
@@ -83,22 +82,20 @@ export class BusinessStatus {
 }
 
 export class DashboardSection {
-  constructor(options = {}) {
-    this.className = options.className || "";
-  }
+  constructor(options = {}) { this.className = options.className || ""; }
 
   render(headerNode, bodyNode) {
     const section = document.createElement("section");
     section.className = `dashboard-section-card ${this.className}`;
     if (headerNode) section.appendChild(headerNode);
-    if (bodyNode) section.appendChild(bodyNode);
+    if (bodyNode)   section.appendChild(bodyNode);
     return section;
   }
 }
 
 export class SectionHeader {
   constructor(options = {}) {
-    this.title = options.title || "Section";
+    this.title    = options.title    || "Section";
     this.subtitle = options.subtitle || "";
   }
 
@@ -145,9 +142,7 @@ export class PlaceholderCard {
 }
 
 export class PlaceholderChart {
-  constructor(options = {}) {
-    this.height = options.height || 260;
-  }
+  constructor(options = {}) { this.height = options.height || 260; }
 
   render() {
     const container = document.createElement("div");
@@ -162,11 +157,7 @@ export class PlaceholderChart {
         <div class="placeholder-chart-bar" style="height: 70%"></div>
       </div>
       <div class="placeholder-chart-labels-row">
-        <span>Mon</span>
-        <span>Tue</span>
-        <span>Wed</span>
-        <span>Thu</span>
-        <span>Fri</span>
+        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
       </div>
     `;
     return container;
@@ -174,14 +165,11 @@ export class PlaceholderChart {
 }
 
 export class PlaceholderList {
-  constructor(options = {}) {
-    this.itemsCount = options.itemsCount || 3;
-  }
+  constructor(options = {}) { this.itemsCount = options.itemsCount || 3; }
 
   render() {
     const container = document.createElement("div");
     container.className = "widget-list-placeholder-body";
-
     let rowsHtml = "";
     for (let i = 0; i < this.itemsCount; i++) {
       rowsHtml += `
@@ -191,31 +179,25 @@ export class PlaceholderList {
             <div class="skeleton-line-item"></div>
             <div class="skeleton-line-item short"></div>
           </div>
-        </div>
-      `;
+        </div>`;
     }
-
     container.innerHTML = rowsHtml;
     return container;
   }
 }
 
 export class PlaceholderPanel {
-  constructor(options = {}) {
-    this.buttons = options.buttons || ["Action 1", "Action 2"];
-  }
+  constructor(options = {}) { this.buttons = options.buttons || ["Action 1", "Action 2"]; }
 
   render() {
     const container = document.createElement("div");
     container.className = "widget-panel-placeholder-body";
-
     this.buttons.forEach(btnLabel => {
       const btn = document.createElement("button");
       btn.className = "placeholder-panel-action-btn";
       btn.textContent = btnLabel;
       container.appendChild(btn);
     });
-
     return container;
   }
 }
@@ -238,73 +220,75 @@ export default class DashboardHome {
     const outerContainer = document.createElement("div");
     outerContainer.className = "dashboard-grid-container";
 
-    // A. Welcome Banner (12 columns)
+    // ── Row 1: Welcome Banner (12 cols) ───────────────────────────────────
     const welcomeCol = document.createElement("div");
     welcomeCol.className = "dashboard-grid-col col-span-12";
     welcomeCol.appendChild(new WelcomeBanner().render());
     outerContainer.appendChild(welcomeCol);
 
-    // B. Business Status Bar (12 columns)
+    // ── Row 2: Business Status Bar (12 cols) ──────────────────────────────
     const statusCol = document.createElement("div");
     statusCol.className = "dashboard-grid-col col-span-12";
     statusCol.appendChild(new BusinessStatus().render());
     outerContainer.appendChild(statusCol);
 
-    // C. KPI Scorecards Row (12 columns)
+    // ── Row 3: KPI Scorecards (12 cols) ───────────────────────────────────
     const kpiCol = document.createElement("div");
     kpiCol.className = "dashboard-grid-col col-span-12";
     kpiCol.appendChild(new KPIGrid().render());
     outerContainer.appendChild(kpiCol);
 
-    // D. Sales Trend (8 columns)
+    // ── Row 4: Sales Trend (8 cols) + Revenue Trend (4 cols) ──────────────
     const salesCol = document.createElement("div");
     salesCol.className = "dashboard-grid-col col-span-8";
     salesCol.appendChild(new SalesTrend().render());
     outerContainer.appendChild(salesCol);
 
-    // E. Revenue Trend (4 columns)
     const revenueCol = document.createElement("div");
     revenueCol.className = "dashboard-grid-col col-span-4";
     revenueCol.appendChild(new RevenueTrend().render());
     outerContainer.appendChild(revenueCol);
 
-    // F. Inventory Distribution (6 columns)
+    // ── Row 5: Inventory Distribution (6 cols) + Category Sales (6 cols) ──
     const inventoryCol = document.createElement("div");
     inventoryCol.className = "dashboard-grid-col col-span-6";
     inventoryCol.appendChild(new InventoryDistribution().render());
     outerContainer.appendChild(inventoryCol);
 
-    // G. Category-wise Sales (6 columns)
     const categoryCol = document.createElement("div");
     categoryCol.className = "dashboard-grid-col col-span-6";
     categoryCol.appendChild(new CategorySales().render());
     outerContainer.appendChild(categoryCol);
 
-    // H. Top Selling Products (6 columns)
+    // ── Row 6: Business Performance Comparison (12 cols) ──────────────────
+    const comparisonCol = document.createElement("div");
+    comparisonCol.className = "dashboard-grid-col col-span-12";
+    comparisonCol.appendChild(new BusinessComparison().render());
+    outerContainer.appendChild(comparisonCol);
+
+    // ── Row 7: Top Selling Products (6 cols) + Recent Activities (6 cols) ─
     const topSellingCol = document.createElement("div");
     topSellingCol.className = "dashboard-grid-col col-span-6";
     topSellingCol.appendChild(new TopSellingProducts().render());
     outerContainer.appendChild(topSellingCol);
 
-    // I. Recent Activities (6 columns)
     const recentActivitiesCol = document.createElement("div");
     recentActivitiesCol.className = "dashboard-grid-col col-span-6";
     recentActivitiesCol.appendChild(new RecentActivities().render());
     outerContainer.appendChild(recentActivitiesCol);
 
-    // J. Notifications & Alerts (6 columns)
+    // ── Row 8: Notifications (6 cols) + Quick Actions (6 cols) ────────────
     const notificationsCol = document.createElement("div");
     notificationsCol.className = "dashboard-grid-col col-span-6";
     notificationsCol.appendChild(new Notifications().render());
     outerContainer.appendChild(notificationsCol);
 
-    // K. Quick Actions Menu (12 columns)
     const quickCol = document.createElement("div");
-    quickCol.className = "dashboard-grid-col col-span-12";
+    quickCol.className = "dashboard-grid-col col-span-6";
     quickCol.appendChild(new QuickActions().render());
     outerContainer.appendChild(quickCol);
 
-    // L. Business Health Summary (12 columns)
+    // ── Row 9: Business Health Summary (12 cols) ──────────────────────────
     const healthCol = document.createElement("div");
     healthCol.className = "dashboard-grid-col col-span-12";
     healthCol.appendChild(new BusinessHealth().render());

@@ -1,0 +1,178 @@
+/* WelcomeBanner.css */
+
+.dashboard-welcome-banner-wrapper {
+  background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-900) 100%);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  color: #ffffff;
+  box-shadow: var(--shadow-md);
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background overlay highlights */
+.dashboard-welcome-banner-wrapper::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+ * LEFT COLUMN: GREETING & DETAILS
+ * ───────────────────────────────────────────── */
+.welcome-left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.welcome-greeting-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+}
+
+.welcome-user-accent {
+  color: #a5b4fc; /* Light indigo highlight */
+}
+
+.welcome-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.825rem;
+  opacity: 0.9;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.welcome-meta-bullet-separator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Extra prepare-for metadata fields */
+.welcome-expandable-targets-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.775rem;
+  opacity: 0.85;
+}
+
+.target-item-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.target-item-value {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────
+ * RIGHT COLUMN: STATS & ACTIONS
+ * ───────────────────────────────────────────── */
+.welcome-right-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.welcome-date-time-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.welcome-date-string {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.welcome-time-string {
+  font-size: 0.775rem;
+  opacity: 0.8;
+}
+
+.welcome-status-badge {
+  background-color: var(--success-500);
+  color: #ffffff;
+  font-size: 0.675rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.welcome-status-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 4px #ffffff;
+}
+
+.welcome-btn-new-sale {
+  background-color: #ffffff;
+  color: var(--primary-800);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.825rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.welcome-btn-new-sale:hover {
+  background-color: var(--neutral-100);
+  transform: translateY(-1px);
+}
+
+.welcome-btn-new-sale:active {
+  transform: translateY(1px);
+}
+
+/* Responsive adjust for laptops (1366px or below) */
+@media (max-width: 1366px) {
+  .dashboard-welcome-banner-wrapper {
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .welcome-greeting-title {
+    font-size: 1.5rem;
+  }
+}

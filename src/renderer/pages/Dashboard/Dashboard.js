@@ -4,7 +4,6 @@
  *
  * Implements the reusable page layout blocks:
  * - DashboardHome (Main page controller)
- * - WelcomeBanner (Greeting card)
  * - BusinessStatus (Operation status bar)
  * - DashboardSection (Section wrapper panel)
  * - SectionHeader (Header layout)
@@ -16,6 +15,8 @@
  */
 
 "use strict";
+
+import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -49,29 +50,6 @@ export class GridColumn {
 // ─────────────────────────────────────────────────────
 // 2. REUSABLE PLACEHOLDER COMPONENTS
 // ─────────────────────────────────────────────────────
-
-export class WelcomeBanner {
-  constructor(options = {}) {
-    this.title = options.title || "Welcome back, Admin";
-    this.message = options.message || "System operations are online. All local database threads verified.";
-  }
-
-  render() {
-    const el = document.createElement("div");
-    el.className = "dashboard-welcome-banner-strip";
-    el.innerHTML = `
-      <div class="welcome-banner-details">
-        <span class="welcome-tag">Enterprise Retail Console</span>
-        <h1 class="welcome-heading">${this.title}</h1>
-        <p class="welcome-subtext">${this.message}</p>
-      </div>
-      <div class="welcome-banner-actions">
-        <button class="welcome-btn-pos">Launch POS Register</button>
-      </div>
-    `;
-    return el;
-  }
-}
 
 export class BusinessStatus {
   constructor(options = {}) {
@@ -250,7 +228,7 @@ export default class DashboardHome {
     const outerContainer = document.createElement("div");
     outerContainer.className = "dashboard-grid-container";
 
-    // A. Welcome Banner (12 columns)
+    // A. Welcome Banner (12 columns) - Imported from external WelcomeBanner component
     const welcomeCol = document.createElement("div");
     welcomeCol.className = "dashboard-grid-col col-span-12";
     const banner = new WelcomeBanner();

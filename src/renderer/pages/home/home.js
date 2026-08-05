@@ -36,13 +36,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const layout = new DashboardLayout();
     const dashboardPage = new Dashboard();
 
-    // Render page content first
-    const contentNode = document.createElement("div");
-    contentNode.style.width = "100%";
-    contentNode.appendChild(dashboardPage.render());
-
-    // Render outer shell wrapping the page content node
-    const layoutNode = layout.render(contentNode);
+    // Render outer shell wrapping the page content node directly
+    const layoutNode = layout.render(dashboardPage.render());
 
     if (appRoot) {
       appRoot.innerHTML = "";

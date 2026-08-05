@@ -74,6 +74,10 @@
   box-sizing: border-box;
 }
 
+.page-wrapper-grid > * {
+  grid-column: span 12 / span 12;
+}
+
 /* Fixed status bar footer */
 .layout-footer-row {
   height: var(--footer-height);

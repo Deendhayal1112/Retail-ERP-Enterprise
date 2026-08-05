@@ -1,7 +1,40 @@
 /* Dashboard.css */
 
-/* Welcome Banner Component */
-.dashboard-welcome-banner {
+/* Reusable Grid Container definition */
+.dashboard-grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px; /* 24px grid spacing */
+  padding: 32px; /* 32px page padding */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.dashboard-grid-row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+/* Grid columns spans */
+.col-span-1 { grid-column: span 1 / span 1; }
+.col-span-2 { grid-column: span 2 / span 2; }
+.col-span-3 { grid-column: span 3 / span 3; }
+.col-span-4 { grid-column: span 4 / span 4; }
+.col-span-5 { grid-column: span 5 / span 5; }
+.col-span-6 { grid-column: span 6 / span 6; }
+.col-span-7 { grid-column: span 7 / span 7; }
+.col-span-8 { grid-column: span 8 / span 8; }
+.col-span-9 { grid-column: span 9 / span 9; }
+.col-span-10 { grid-column: span 10 / span 10; }
+.col-span-11 { grid-column: span 11 / span 11; }
+.col-span-12 { grid-column: span 12 / span 12; }
+
+/* ─────────────────────────────────────────────
+ * WELCOME BANNER STRIP
+ * ───────────────────────────────────────────── */
+.dashboard-welcome-banner-strip {
   background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
   border-radius: var(--radius-lg);
   padding: 32px;
@@ -11,78 +44,113 @@
   align-items: center;
   box-shadow: var(--shadow-md);
   box-sizing: border-box;
+  width: 100%;
 }
 
-.welcome-title {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
+.welcome-banner-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  opacity: 0.75;
+}
+
+.welcome-heading {
+  margin: 6px 0 0 0;
+  font-size: 1.625rem;
+  font-weight: 800;
   letter-spacing: var(--tracking-tight);
 }
 
-.welcome-text {
+.welcome-subtext {
   margin: 8px 0 0 0;
   font-size: 0.875rem;
   opacity: 0.9;
-  font-weight: 400;
+  font-weight: 500;
+  line-height: var(--lh-snug);
 }
 
-.welcome-banner-badge {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
+.welcome-btn-pos {
+  background-color: #ffffff;
+  color: var(--primary-700);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
   font-weight: 700;
-  letter-spacing: var(--tracking-wider);
+  font-size: 0.825rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-fast);
 }
 
-/* Master Dashboard Widget Cards */
-.dashboard-widget-card {
-  background-color: var(--bg-card);
+.welcome-btn-pos:hover {
+  background-color: var(--neutral-100);
+  transform: translateY(-1px);
+}
+
+/* ─────────────────────────────────────────────
+ * DASHBOARD SECTION CARD
+ * ───────────────────────────────────────────── */
+.dashboard-section-card {
+  background-color: var(--bg-card); /* Large white cards */
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg); /* Rounded corners */
   padding: 24px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm); /* Soft shadows */
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 
-.dashboard-widget-card:hover {
+.dashboard-section-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-.widget-card-header {
+.section-card-header {
   margin-bottom: 20px;
 }
 
-.widget-card-title {
+.section-card-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.925rem;
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
 }
 
-.widget-card-subtitle {
-  font-size: 0.75rem;
+.section-card-subtitle {
+  font-size: 0.725rem;
   color: var(--text-muted);
   display: block;
   margin-top: 4px;
 }
 
-/* Skeleton loader animations inside placeholders */
-.widget-card-body-placeholder {
+.section-card-body {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─────────────────────────────────────────────
+ * WIDGET SKELETON PLACEHOLDER
+ * ───────────────────────────────────────────── */
+.widget-skeleton-placeholder {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 12px;
+  width: 100%;
 }
 
-.placeholder-skeleton-bar {
+.skeleton-shimmer-bar {
   height: 12px;
   width: 100%;
   background-color: var(--border-light);
@@ -91,11 +159,11 @@
   overflow: hidden;
 }
 
-.placeholder-skeleton-bar.short {
+.skeleton-shimmer-bar.short {
   width: 60%;
 }
 
-.placeholder-skeleton-bar::after {
+.skeleton-shimmer-bar::after {
   content: "";
   position: absolute;
   top: 0;

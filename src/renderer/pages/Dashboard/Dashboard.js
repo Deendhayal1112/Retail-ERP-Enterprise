@@ -1,98 +1,187 @@
 /**
  * Dashboard.js
- * Retail ERP Enterprise — Main Dashboard Page component
+ * Retail ERP Enterprise — Reusable Grid System & Dashboard Page
  *
- * Renders placeholder content blocks representing:
- * - Welcome banner card
- * - KPI Scorecard grid blocks
- * - Sales and telemetry charts containers
- * - Database summaries and status reports
- * - Recent transaction activity feeds
- * - Quick action control cards
+ * Implements the reusable layout layout elements:
+ * - GridContainer (12-column template gap 24px)
+ * - GridRow (row grouping)
+ * - GridColumn (span configurations)
+ * - DashboardSection (master card panels with soft shadow & rounded corners)
+ * - SectionHeader (titlebar)
+ * - SectionBody (content wrapper)
+ * - WidgetPlaceholder (shimmer skeleton logs)
  */
 
 "use strict";
 
-class Dashboard {
+// ─────────────────────────────────────────────────────
+// 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
+// ─────────────────────────────────────────────────────
+
+export class GridContainer {
+  constructor(options = {}) {
+    this.options = options;
+  }
+  render(children = []) {
+    const el = document.createElement("div");
+    el.className = "dashboard-grid-container";
+    children.forEach(child => el.appendChild(child));
+    return el;
+  }
+}
+
+export class GridRow {
+  constructor(options = {}) {
+    this.options = options;
+  }
+  render(children = []) {
+    const el = document.createElement("div");
+    el.className = "dashboard-grid-row";
+    children.forEach(child => el.appendChild(child));
+    return el;
+  }
+}
+
+export class GridColumn {
+  constructor(options = {}) {
+    this.span = options.span || 12; // default spans all 12 cols
+    this.className = options.className || "";
+  }
+  render(children = []) {
+    const el = document.createElement("div");
+    el.className = `dashboard-grid-col col-span-${this.span} ${this.className}`;
+    children.forEach(child => el.appendChild(child));
+    return el;
+  }
+}
+
+export class DashboardSection {
+  constructor(options = {}) {
+    this.options = options;
+  }
+  render(headerNode, bodyNode) {
+    const card = document.createElement("section");
+    card.className = "dashboard-section-card";
+    if (headerNode) card.appendChild(headerNode);
+    if (bodyNode) card.appendChild(bodyNode);
+    return card;
+  }
+}
+
+export class SectionHeader {
+  constructor(options = {}) {
+    this.title = options.title || "Section Title";
+    this.subtitle = options.subtitle || "";
+  }
+  render() {
+    const header = document.createElement("header");
+    header.className = "section-card-header";
+    header.innerHTML = `
+      <h3 class="section-card-title">${this.title}</h3>
+      ${this.subtitle ? `<span class="section-card-subtitle">${this.subtitle}</span>` : ""}
+    `;
+    return header;
+  }
+}
+
+export class SectionBody {
+  constructor(options = {}) {
+    this.options = options;
+  }
+  render(contentNode) {
+    const body = document.createElement("div");
+    body.className = "section-card-body";
+    if (contentNode) body.appendChild(contentNode);
+    return body;
+  }
+}
+
+export class WidgetPlaceholder {
+  constructor(options = {}) {
+    this.height = options.height || 180;
+  }
+  render() {
+    const placeholder = document.createElement("div");
+    placeholder.className = "widget-skeleton-placeholder";
+    placeholder.style.minHeight = `${this.height}px`;
+    placeholder.innerHTML = `
+      <div class="skeleton-shimmer-bar"></div>
+      <div class="skeleton-shimmer-bar short"></div>
+    `;
+    return placeholder;
+  }
+}
+
+// ─────────────────────────────────────────────────────
+// 2. MAIN DASHBOARD PAGE CONTROLLER IMPLEMENTATION
+// ─────────────────────────────────────────────────────
+
+export default class Dashboard {
   constructor(options = {}) {
     this.options = options;
     this.element = null;
   }
 
   /**
-   * Generates the collection of dashboard page elements.
-   * Elements are aligned inside a grid.
-   * @returns {DocumentFragment} The fragment populated with placeholder items.
+   * Assembles the layout page components.
+   * @returns {HTMLElement} The complete populated grid.
    */
   render() {
-    const fragment = document.createDocumentFragment();
+    const container = new GridContainer();
+    const cols = [];
 
-    // Helper to generate standard layout dashboard card placeholders
-    const createPlaceholderCard = (title, subtitle, gridSpanClass, heightPx = 180) => {
-      const card = document.createElement("div");
-      card.className = `dashboard-widget-card ${gridSpanClass}`;
-      card.style.minHeight = `${heightPx}px`;
+    // Helper to generate section-card with placeholders inside column wrappers
+    const createSectionColumn = (title, subtitle, colSpan, height = 180) => {
+      const header = new SectionHeader({ title, subtitle });
+      const body = new SectionBody();
+      const placeholder = new WidgetPlaceholder({ height });
+      
+      const bodyNode = body.render(placeholder.render());
+      const section = new DashboardSection();
+      const sectionNode = section.render(header.render(), bodyNode);
 
-      card.innerHTML = `
-        <div class="widget-card-header">
-          <h3 class="widget-card-title">${title}</h3>
-          <span class="widget-card-subtitle">${subtitle}</span>
-        </div>
-        <div class="widget-card-body-placeholder">
-          <div class="placeholder-skeleton-bar"></div>
-          <div class="placeholder-skeleton-bar short"></div>
-        </div>
-      `;
-      return card;
+      return new GridColumn({ span: colSpan }).render([sectionNode]);
     };
 
-    // 1. Welcome Section (12 columns)
-    const welcomeSection = document.createElement("div");
-    welcomeSection.className = "dashboard-welcome-banner col-span-12";
-    welcomeSection.innerHTML = `
-      <div class="welcome-banner-content">
-        <h1 class="welcome-title">System Status: Operations Active</h1>
-        <p class="welcome-text">Retail ERP Enterprise v0.2.0 is initialized. All offline-first database sync threads verified.</p>
+    // A. Welcome Banner Section (12 Columns)
+    const welcomeCol = new GridColumn({ span: 12 });
+    const welcomeBanner = document.createElement("div");
+    welcomeBanner.className = "dashboard-welcome-banner-strip";
+    welcomeBanner.innerHTML = `
+      <div class="welcome-banner-details">
+        <span class="welcome-tag">Enterprise Retail Console</span>
+        <h1 class="welcome-heading">Welcome to Retail ERP</h1>
+        <p class="welcome-subtext">All database transactional instances and security credentials verified. Operational log status: 🟢 Active</p>
       </div>
-      <div class="welcome-banner-badge">🟢 Online</div>
+      <div class="welcome-banner-actions">
+        <button class="welcome-btn-pos" onclick="console.log('POS Billing shortcut clicked')">Launch POS Register</button>
+      </div>
     `;
-    fragment.appendChild(welcomeSection);
+    cols.push(welcomeCol.render([welcomeBanner]));
 
-    // 2. KPI Section (4 cards spanning 3 columns each)
-    const kpi1 = createPlaceholderCard("Today's Sales", "Transactions value sum", "col-span-3", 140);
-    const kpi2 = createPlaceholderCard("Today's Profit", "Net margin calculation", "col-span-3", 140);
-    const kpi3 = createPlaceholderCard("Active Registers", "POS checkout lanes", "col-span-3", 140);
-    const kpi4 = createPlaceholderCard("Low Stock Alerts", "Restock inventory trigger", "col-span-3", 140);
-    
-    fragment.appendChild(kpi1);
-    fragment.appendChild(kpi2);
-    fragment.appendChild(kpi3);
-    fragment.appendChild(kpi4);
+    // B. KPI Section (4 widgets x 3 columns each)
+    cols.push(createSectionColumn("Today's Sales", "Transactions value sum", 3, 100));
+    cols.push(createSectionColumn("Today's Profit", "Net margin calculation", 3, 100));
+    cols.push(createSectionColumn("Active Registers", "POS checkout lanes", 3, 100));
+    cols.push(createSectionColumn("Low Stock Alerts", "Restock inventory trigger", 3, 100));
 
-    // 3. Charts Section (2 cards: 8 columns and 4 columns)
-    const trendChart = createPlaceholderCard("Sales & Revenue Trend", "Weekly transaction aggregation", "col-span-8", 320);
-    const productChart = createPlaceholderCard("Top Selling Products", "Category performance summaries", "col-span-4", 320);
-    
-    fragment.appendChild(trendChart);
-    fragment.appendChild(productChart);
+    // C. Charts Section (8 columns and 4 columns)
+    cols.push(createSectionColumn("Sales Overview", "Weekly transaction aggregation", 8, 300));
+    cols.push(createSectionColumn("Revenue Chart", "Category performance summaries", 4, 300));
 
-    // 4. Summary / Tables Section (6 columns each)
-    const transactionSummary = createPlaceholderCard("Recent POS Invoices", "Latest billing transactions logs", "col-span-6", 260);
-    const inventorySummary = createPlaceholderCard("Inventory Stock Status", "Warehouse catalogs summaries", "col-span-6", 260);
-    
-    fragment.appendChild(transactionSummary);
-    fragment.appendChild(inventorySummary);
+    // D. Summaries Section (6 columns each)
+    cols.push(createSectionColumn("Business Summary", "Profit and loss analytics", 6, 220));
+    cols.push(createSectionColumn("Inventory Summary", "Warehouse stock tracking", 6, 220));
 
-    // 5. Recent Activity & Quick Actions (6 columns each)
-    const activityFeed = createPlaceholderCard("System Activity Log", "Operator actions security audit", "col-span-6", 260);
-    const quickActions = createPlaceholderCard("Quick Actions Panel", "Launch billing and settings utilities", "col-span-6", 260);
-    
-    fragment.appendChild(activityFeed);
-    fragment.appendChild(quickActions);
+    // E. Details Section (6 columns each)
+    cols.push(createSectionColumn("Recent Activity", "Operator actions security audit", 6, 220));
+    cols.push(createSectionColumn("Quick Actions", "Launch billing and settings utilities", 6, 220));
 
-    this.element = fragment;
-    return fragment;
+    // F. Notification Area (12 Columns)
+    cols.push(createSectionColumn("Notification Area", "Recent system notifications & database alerts", 12, 120));
+
+    const gridNode = container.render(cols);
+    this.element = gridNode;
+    return gridNode;
   }
 }
-
-module.exports = Dashboard;

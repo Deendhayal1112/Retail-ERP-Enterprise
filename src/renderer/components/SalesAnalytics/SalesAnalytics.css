@@ -1,0 +1,211 @@
+/* SalesAnalytics.css */
+
+.sales-analytics-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 400px;
+}
+
+/* ─────────────────────────────────────────────
+ * CHART HEADER & TIME FILTERS
+ * ───────────────────────────────────────────── */
+.chart-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.chart-header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chart-title-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.chart-subtitle-text {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.chart-controls-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Time range dropdown selector */
+.time-filter-dropdown-select {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--duration-fast);
+}
+
+.time-filter-dropdown-select:focus {
+  border-color: var(--primary-400);
+}
+
+/* ─────────────────────────────────────────────
+ * CHART VISUALIZATION CANVAS AREA
+ * ───────────────────────────────────────────── */
+.chart-visualization-canvas-area {
+  flex: 1;
+  position: relative;
+  background-color: var(--bg-hover);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.chart-legend-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.legend-item-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-color-dot.sales-line { background-color: var(--primary-500); }
+.legend-color-dot.target-line { background-color: var(--accent-500); }
+
+/* Mock visual graphic placeholder */
+.mock-chart-graphics-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 140px;
+  width: 100%;
+  margin-top: 12px;
+  position: relative;
+}
+
+/* Horizontal gridlines background helper */
+.mock-chart-graphics-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 24%,
+    var(--border-light) 25%,
+    transparent 26%,
+    transparent 49%,
+    var(--border-light) 50%,
+    transparent 51%,
+    transparent 74%,
+    var(--border-light) 75%,
+    transparent 76%
+  );
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.mock-chart-bar-pillar {
+  width: 24px;
+  background: linear-gradient(180deg, var(--primary-400) 0%, var(--primary-600) 100%);
+  border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+  position: relative;
+  transition: all var(--duration-fast);
+}
+
+.mock-chart-bar-pillar:hover {
+  filter: brightness(1.1);
+  transform: scaleY(1.02);
+}
+
+.chart-bar-pillar-label {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────
+ * SUMMARY FOOTER SECTION
+ * ───────────────────────────────────────────── */
+.chart-summary-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.summary-footer-item-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-item-label {
+  font-size: 0.675rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  font-weight: 600;
+}
+
+.summary-item-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Responsive Overrides (Laptop layout) */
+@media (max-width: 1366px) {
+  .sales-analytics-card {
+    padding: 16px;
+  }
+
+  .chart-summary-footer-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid stack on small laptops */
+    gap: 12px;
+  }
+}

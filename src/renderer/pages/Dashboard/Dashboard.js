@@ -23,6 +23,7 @@ import RevenueAnalytics from "../../components/RevenueAnalytics/RevenueAnalytics
 import InventorySummary from "../../components/InventorySummary/InventorySummary.js";
 import TopSellingProducts from "../../components/TopSellingProducts/TopSellingProducts.js";
 import RecentActivities from "../../components/RecentActivities/RecentActivities.js";
+import Notifications from "../../components/Notifications/Notifications.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -290,20 +291,24 @@ export default class DashboardHome {
     recentActivitiesCol.appendChild(recentActivities.render());
     outerContainer.appendChild(recentActivitiesCol);
 
-    // I. Quick Actions, Notifications, & Tasks Row (3 columns x 4-span layout)
-    const assembleSection = (title, subtitle, span, bodyNode) => {
-      const sectionCol = document.createElement("div");
-      sectionCol.className = `dashboard-grid-col col-span-${span}`;
+    // I. Notifications & Alerts (6 columns) - Imported from external Notifications component
+    const notificationsCol = document.createElement("div");
+    notificationsCol.className = "dashboard-grid-col col-span-6";
+    const notifications = new Notifications();
+    notificationsCol.appendChild(notifications.render());
+    outerContainer.appendChild(notificationsCol);
 
-      const header = new SectionHeader({ title, subtitle });
-      const body = new SectionBody();
-      const section = new DashboardSection();
-
-      sectionCol.appendChild(section.render(header.render(), body.render(bodyNode)));
-      return sectionCol;
-    };
-
-    outerContainer.appendChild(assembleSection("Quick Operations Menu", "POS billing shortcuts & register tools", 6, new PlaceholderPanel({ buttons: ["⚡ New Invoice", "🏷️ Add Product", "📊 Run Report"] }).render()));
+    // J. Quick Actions Menu (12 columns)
+    const quickCol = document.createElement("div");
+    quickCol.className = "dashboard-grid-col col-span-12";
+    
+    const header = new SectionHeader({ title: "Quick Operations Menu", subtitle: "POS billing shortcuts & register tools" });
+    const body = new SectionBody();
+    const actionsPanel = new PlaceholderPanel({ buttons: ["⚡ New POS Checkout Invoice", "🏷️ Add Product Catalog Entry", "📊 Run Daily sales Report"] });
+    
+    const section = new DashboardSection();
+    quickCol.appendChild(section.render(header.render(), body.render(actionsPanel.render())));
+    outerContainer.appendChild(quickCol);
 
     this.element = outerContainer;
     return outerContainer;

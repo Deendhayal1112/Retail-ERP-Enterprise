@@ -1,0 +1,179 @@
+/* Notifications.css */
+
+.notifications-alert-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 320px;
+}
+
+/* ─────────────────────────────────────────────
+ * HEADER ROW
+ * ───────────────────────────────────────────── */
+.notifications-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.notifications-header-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notifications-title-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.notifications-count-badge {
+  background-color: var(--danger-500);
+  color: #ffffff;
+  font-size: 0.675rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.notifications-btn-view-all {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.notifications-btn-view-all:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * ALERTS LIST & ITEMS
+ * ───────────────────────────────────────────── */
+.notifications-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.notification-item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  transition: background-color var(--duration-fast), transform var(--duration-fast);
+  cursor: pointer;
+  position: relative;
+}
+
+.notification-item-row:hover {
+  background-color: var(--bg-active);
+  transform: translateY(-1px);
+}
+
+/* Unread indicator dot */
+.notification-item-row.unread::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary-500);
+}
+
+/* Icon box styling based on priority/type */
+.notification-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.notification-icon-box.critical { background-color: var(--badge-danger-bg); color: var(--badge-danger-text); }
+.notification-icon-box.warning { background-color: var(--badge-warning-bg); color: var(--badge-warning-text); }
+.notification-icon-box.info { background-color: var(--badge-info-bg); color: var(--badge-info-text); }
+.notification-icon-box.success { background-color: var(--badge-success-bg); color: var(--badge-success-text); }
+
+/* Details text block */
+.notification-details-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.notification-title-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.notification-item-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.notification-item-timestamp {
+  font-size: 0.675rem;
+  color: var(--text-muted);
+}
+
+.notification-item-description {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  line-height: var(--lh-snug);
+}
+
+/* Priority status pills */
+.notification-priority-badge {
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+}
+
+.notification-priority-badge.critical { background-color: var(--danger-500); color: #ffffff; }
+.notification-priority-badge.warning { background-color: var(--warning-500); color: #ffffff; }
+.notification-priority-badge.info { background-color: var(--info-500); color: #ffffff; }
+.notification-priority-badge.success { background-color: var(--success-500); color: #ffffff; }
+
+/* Footer Row */
+.notifications-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 16px;
+}

@@ -49,7 +49,18 @@ const ALLOWED_SEND_CHANNELS = [
   "release:get-manifest",
   "release:toggle-validation",
   "release:toggle-channel",
-  "release:compile-manifest"
+  "release:compile-manifest",
+  "version:get-info",
+  "version:get-history",
+  "version:promote",
+  "signing:get-signatures",
+  "signing:start",
+  "rollback:get-archives",
+  "rollback:trigger-rollback",
+  "release:get-changelogs",
+  "release:compile-metadata",
+  "release:get-lifecycle-state",
+  "release:promote-lifecycle-state"
 ];
 
 // Channels from Main to Renderer (Listeners)
@@ -60,7 +71,9 @@ const ALLOWED_RECEIVE_CHANNELS = [
   "security:scan-progress",
   "security:scan-completed",
   "release:package-progress",
-  "release:package-completed"
+  "release:package-completed",
+  "signing:progress",
+  "signing:completed"
 ];
 
 // ─────────────────────────────────────────────────────────────────────

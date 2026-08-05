@@ -199,12 +199,22 @@ app.whenReady().then(() => {
     const DistributionManager = require("./release/DistributionManager");
     const InstallerManager = require("./release/InstallerManager");
     const ReleaseArtifactManager = require("./release/ReleaseArtifactManager");
+    const VersionManager = require("./release/VersionManager");
+    const SigningManager = require("./release/SigningManager");
+    const RollbackManager = require("./release/RollbackManager");
+    const ReleaseMetadataManager = require("./release/ReleaseMetadataManager");
+    const ReleaseManager = require("./release/ReleaseManager");
     const ReleaseEvents = require("./release/ReleaseEvents");
 
     const packagingMgr = new PackagingManager(null);
     const distributionMgr = new DistributionManager();
     const installerMgr = new InstallerManager();
     const releaseArtifactMgr = new ReleaseArtifactManager();
+    const versionMgr = new VersionManager();
+    const signingMgr = new SigningManager(null);
+    const rollbackMgr = new RollbackManager();
+    const releaseMetadataMgr = new ReleaseMetadataManager();
+    const releaseMgr = new ReleaseManager();
 
     // Register handlers via ReleaseEvents helper
     ReleaseEvents.register({
@@ -240,10 +250,55 @@ app.whenReady().then(() => {
       "release:compile-manifest": async (event, data) => {
         validateSender(event);
         return await releaseArtifactMgr.compileManifestReport(data);
+      },
+      "version:get-info": async (event) => {
+        validateSender(event);
+        return await versionMgr.getVersionInfo();
+      },
+      "version:get-history": async (event) => {
+        validateSender(event);
+        return await versionMgr.getVersionHistory();
+      },
+      "version:promote": async (event, targetSemVer) => {
+        validateSender(event);
+        return await versionMgr.promoteBuild(targetSemVer);
+      },
+      "signing:get-signatures": async (event) => {
+        validateSender(event);
+        return await signingMgr.getSignatures();
+      },
+      "signing:start": async (event, platform) => {
+        validateSender(event);
+        signingMgr.mainWindow = windowManager.getMainWindow();
+        return await signingMgr.runSigning(platform);
+      },
+      "rollback:get-archives": async (event) => {
+        validateSender(event);
+        return await rollbackMgr.getArchives();
+      },
+      "rollback:trigger-rollback": async (event, version) => {
+        validateSender(event);
+        return await rollbackMgr.triggerRollback(version);
+      },
+      "release:get-changelogs": async (event) => {
+        validateSender(event);
+        return await releaseMetadataMgr.getChangelogs();
+      },
+      "release:compile-metadata": async (event, data) => {
+        validateSender(event);
+        return await releaseMetadataMgr.compileReleaseMetadata(data);
+      },
+      "release:get-lifecycle-state": async (event) => {
+        validateSender(event);
+        return await releaseMgr.getReleaseState();
+      },
+      "release:promote-lifecycle-state": async (event, newState) => {
+        validateSender(event);
+        return await releaseMgr.promoteLifecycleState(newState);
       }
     });
 
-    logger.info("Release and Distribution subsystems successfully initialized. ✅");
+    logger.info("Release and Versioning subsystems successfully initialized. ✅");
   } catch (err) {
     logger.error(`Failed to initialize release subsystems: ${err.message}`);
   }

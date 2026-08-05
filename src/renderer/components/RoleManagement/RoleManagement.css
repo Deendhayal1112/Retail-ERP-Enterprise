@@ -1,0 +1,300 @@
+/* RoleManagement.css */
+
+.role-management-container {
+  display: grid;
+  grid-template-columns: 200px 1.8fr 240px;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────────
+ * LEFT COLUMN: ROLE LIST & TOOLBAR
+ * ───────────────────────────────────────────── */
+.role-list-column {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 16px 0;
+  height: 100%;
+}
+
+.role-list-header {
+  padding: 0 16px 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.role-list-scroll {
+  overflow-y: auto;
+  flex: 1;
+  padding: 10px 0;
+}
+
+.role-item-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.role-item-link:hover {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.role-item-link.active {
+  background-color: var(--primary-500);
+  color: #ffffff;
+}
+
+.role-user-count-badge {
+  font-size: 0.6rem;
+  background-color: rgba(99, 102, 241, 0.15);
+  color: var(--primary-600);
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+}
+
+.role-item-link.active .role-user-count-badge {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────
+ * CENTER COLUMN: PERMISSION MATRIX
+ * ───────────────────────────────────────────── */
+.permission-matrix-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.permission-toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+}
+
+.permission-toolbar-left {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.permission-toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.role-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.role-btn:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+.role-btn.primary {
+  background-color: var(--primary-500);
+  color: #ffffff;
+  border: none;
+}
+
+.role-btn.primary:hover {
+  background-color: var(--primary-600);
+}
+
+/* Matrix Table Card */
+.permission-matrix-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.permission-category-block {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 12px;
+}
+
+.permission-category-block:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.permission-category-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.permission-toggles-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.permission-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.permission-checkbox-input {
+  cursor: pointer;
+  accent-color: var(--primary-500);
+}
+
+/* ─────────────────────────────────────────────
+ * RIGHT COLUMN: ROLE DETAILS SIDEBAR PANEL
+ * ───────────────────────────────────────────── */
+.role-details-sidebar {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.role-details-title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.role-details-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: var(--lh-snug);
+}
+
+.role-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.role-action-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.675rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.role-action-btn:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* Modal Popup frames */
+.role-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.role-modal-dialog {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  width: 440px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.role-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.role-modal-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.role-modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.role-modal-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Responsive grid overrides */
+@media (max-width: 1440px) {
+  .role-management-container {
+    grid-template-columns: 1fr;
+  }
+}

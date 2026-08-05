@@ -16,6 +16,7 @@
 
 import CompanyProfile from "../../components/CompanyProfile/CompanyProfile.js";
 import UserManagement from "../../components/UserManagement/UserManagement.js";
+import RoleManagement from "../../components/RoleManagement/RoleManagement.js";
 
 export class SettingsCard {
   /**
@@ -259,12 +260,8 @@ export class SettingsContent {
       wrap.appendChild(userMgmt.render());
 
     } else if (this.section === "roles") {
-      const p1 = new SettingsSection({ title: "Access Policies Enforcement" });
-      const cards1 = [
-        new SettingsCard({ title: "Enable Role-based Access", description: "Enforce permissions checking constraints in routes", control: this._createToggle(true, "rbac_policy") }).render(),
-        new SettingsCard({ title: "Default Deny Mode", description: "Deny API calls by default when roles overlap", control: this._createToggle(false, "default_deny") }).render()
-      ];
-      wrap.appendChild(p1.render(cards1));
+      const roleMgmt = new RoleManagement();
+      wrap.appendChild(roleMgmt.render());
 
     } else if (this.section === "appearance") {
       const p1 = new SettingsSection({ title: "Workspace Themes Styles" });

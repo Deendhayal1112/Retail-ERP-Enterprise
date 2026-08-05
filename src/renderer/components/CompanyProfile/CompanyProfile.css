@@ -47,9 +47,14 @@
 }
 
 .logo-display-circle:hover {
-  border-color: var(--primary-400);
+  border-color: var(--primary-500);
   background-color: var(--bg-active);
   color: var(--primary-500);
+}
+
+.logo-display-circle:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
 }
 
 .logo-meta-title {
@@ -142,8 +147,13 @@
 }
 
 .invoice-logo-uploader:hover {
-  border-color: var(--primary-400);
+  border-color: var(--primary-500);
   color: var(--primary-500);
+}
+
+.invoice-logo-uploader:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
 }
 
 /* ─────────────────────────────────────────────
@@ -210,10 +220,17 @@
   outline: none;
   font-family: inherit;
   box-sizing: border-box;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
 }
 
 .profile-form-input:focus {
-  border-color: var(--primary-400);
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.profile-form-input:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
 }
 
 .profile-form-select {
@@ -227,6 +244,17 @@
   outline: none;
   cursor: pointer;
   font-family: inherit;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.profile-form-select:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.profile-form-select:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
 }
 
 /* Save Form Bar */
@@ -251,6 +279,11 @@
 
 .profile-save-btn:hover {
   background-color: var(--primary-600);
+}
+
+.profile-save-btn:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
 }
 
 /* Responsive adjustments */

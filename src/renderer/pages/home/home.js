@@ -15,7 +15,7 @@ import GlobalSearch from "../../components/GlobalSearch/GlobalSearch.js";
 import CommandPalette from "../../components/CommandPalette/CommandPalette.js";
 import KeyboardManager from "../../components/KeyboardManager/KeyboardManager.js";
 import DashboardCustomizer from "../../components/DashboardCustomizer/DashboardCustomizer.js";
-import UserPreferences from "../../components/UserPreferences/UserPreferences.js";
+import SettingsLayout from "../Settings/Settings.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -92,8 +92,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (route === "settings") {
           e.preventDefault();
           pageWrapper.innerHTML = "";
-          const prefs = new UserPreferences();
-          pageWrapper.appendChild(prefs.render());
+          const settingsModule = new SettingsLayout();
+          pageWrapper.appendChild(settingsModule.render());
 
           // Update header module breadcrumb focus label
           const breadcrumbText = document.querySelector(".breadcrumb-active-label");

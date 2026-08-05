@@ -28,12 +28,29 @@ const ALLOWED_SEND_CHANNELS = [
   "auth:login",
   "auth:logout",
   "auth:get-session",
+  "bg-tasks:get-metrics",
+  "bg-tasks:get-tasks",
+  "bg-tasks:trigger-task",
+  "bg-tasks:cancel-task",
+  "bg-tasks:start-telemetry",
+  "bg-tasks:stop-telemetry",
+  "security:run-scan",
+  "security:get-findings",
+  "security:get-electron-status",
+  "compliance:get-checklists",
+  "compliance:toggle-rule",
+  "security:get-audit-logs",
+  "security:write-audit-log",
+  "security:download-report"
 ];
 
 // Channels from Main to Renderer (Listeners)
 const ALLOWED_RECEIVE_CHANNELS = [
   "window:maximized-changed",
   "auth:session-expired",
+  "bg-tasks:metrics-updated",
+  "security:scan-progress",
+  "security:scan-completed"
 ];
 
 // ─────────────────────────────────────────────────────────────────────

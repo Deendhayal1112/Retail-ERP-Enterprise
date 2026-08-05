@@ -1,0 +1,122 @@
+/* QuickActions.css */
+
+.quick-actions-center-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* ─────────────────────────────────────────────
+ * HEADER ROW
+ * ───────────────────────────────────────────── */
+.quick-actions-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.quick-actions-title-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.quick-actions-subtitle-text {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+/* ─────────────────────────────────────────────
+ * ACTIONS GRID & CARD TILES
+ * ───────────────────────────────────────────── */
+.quick-actions-grid-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.quick-action-card-tile {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform var(--duration-fast), border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.quick-action-card-tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-400);
+  box-shadow: var(--shadow-sm);
+  background-color: var(--bg-active);
+}
+
+/* Icon Box inside individual action card */
+.quick-action-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+
+.quick-action-card-tile:hover .quick-action-icon-box {
+  background-color: var(--primary-50);
+  border-color: var(--primary-200);
+}
+
+/* Title & Description */
+.quick-action-title-text {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.quick-action-desc-text {
+  font-size: 0.725rem;
+  color: var(--text-secondary);
+  line-height: var(--lh-snug);
+}
+
+/* Shortcut badge positioning */
+.quick-action-shortcut-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+}
+
+/* Responsive Overrides (Laptop layout) */
+@media (max-width: 1366px) {
+  .quick-actions-grid-box {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns stack on small laptops */
+    gap: 12px;
+  }
+}

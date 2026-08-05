@@ -24,6 +24,7 @@ import InventorySummary from "../../components/InventorySummary/InventorySummary
 import TopSellingProducts from "../../components/TopSellingProducts/TopSellingProducts.js";
 import RecentActivities from "../../components/RecentActivities/RecentActivities.js";
 import Notifications from "../../components/Notifications/Notifications.js";
+import QuickActions from "../../components/QuickActions/QuickActions.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -298,16 +299,11 @@ export default class DashboardHome {
     notificationsCol.appendChild(notifications.render());
     outerContainer.appendChild(notificationsCol);
 
-    // J. Quick Actions Menu (12 columns)
+    // J. Quick Actions Menu (12 columns) - Imported from external QuickActions component
     const quickCol = document.createElement("div");
     quickCol.className = "dashboard-grid-col col-span-12";
-    
-    const header = new SectionHeader({ title: "Quick Operations Menu", subtitle: "POS billing shortcuts & register tools" });
-    const body = new SectionBody();
-    const actionsPanel = new PlaceholderPanel({ buttons: ["⚡ New POS Checkout Invoice", "🏷️ Add Product Catalog Entry", "📊 Run Daily sales Report"] });
-    
-    const section = new DashboardSection();
-    quickCol.appendChild(section.render(header.render(), body.render(actionsPanel.render())));
+    const quickActions = new QuickActions();
+    quickCol.appendChild(quickActions.render());
     outerContainer.appendChild(quickCol);
 
     this.element = outerContainer;

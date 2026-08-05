@@ -19,6 +19,7 @@ import UserManagement from "../../components/UserManagement/UserManagement.js";
 import RoleManagement from "../../components/RoleManagement/RoleManagement.js";
 import AppearanceSettings from "../../components/AppearanceSettings/AppearanceSettings.js";
 import LocalizationSettings from "../../components/LocalizationSettings/LocalizationSettings.js";
+import NotificationSettings from "../../components/NotificationSettings/NotificationSettings.js";
 
 export class SettingsCard {
   /**
@@ -270,12 +271,8 @@ export class SettingsContent {
       wrap.appendChild(appSettings.render());
 
     } else if (this.section === "notifications") {
-      const p1 = new SettingsSection({ title: "Dispatch Preferences" });
-      const cards1 = [
-        new SettingsCard({ title: "Enable Desktop Alerts Popup", description: "Broadcast system alerts notifications boxes", control: this._createToggle(true, "desktop_notif") }).render(),
-        new SettingsCard({ title: "Sound Indicators On Error", description: "Trigger audio sound alerting alerts on fail logs", control: this._createToggle(false, "sound_notif") }).render()
-      ];
-      wrap.appendChild(p1.render(cards1));
+      const notifySettings = new NotificationSettings();
+      wrap.appendChild(notifySettings.render());
 
     } else if (this.section === "localization") {
       const locSettings = new LocalizationSettings();

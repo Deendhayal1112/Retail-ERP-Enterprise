@@ -1,0 +1,236 @@
+/* NotificationSettings.css */
+
+.notification-settings-container {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────────
+ * LEFT COLUMN: FORMS & CONFIGS
+ * ───────────────────────────────────────────── */
+.notification-forms-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notification-section-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.notification-section-header {
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+}
+
+.notification-section-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Form Options Grid */
+.notification-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.notification-option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.notification-option-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.notification-option-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.notification-option-desc {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.notification-select {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  min-width: 140px;
+}
+
+.notification-input {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  outline: none;
+  font-family: inherit;
+  width: 140px;
+  box-sizing: border-box;
+}
+
+.notification-input:focus {
+  border-color: var(--primary-400);
+}
+
+/* Toggle switches */
+.notification-toggle {
+  width: 36px;
+  height: 18px;
+  background-color: var(--primary-500);
+  border-radius: var(--radius-full);
+  position: relative;
+  cursor: pointer;
+  transition: background-color var(--duration-fast);
+  flex-shrink: 0;
+}
+
+.notification-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: right var(--duration-fast);
+}
+
+.notification-toggle.off {
+  background-color: var(--border-light);
+}
+
+.notification-toggle.off::after {
+  right: auto;
+  left: 2px;
+}
+
+/* ─────────────────────────────────────────────
+ * RIGHT COLUMN: LIVE ALERTS PREVIEW PANEL
+ * ───────────────────────────────────────────── */
+.notification-preview-column {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.preview-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+}
+
+/* Mock Alert Toast UI box */
+.mock-alert-toast-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.mock-alert-toast {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--primary-500);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: opacity var(--duration-fast);
+}
+
+.mock-alert-toast.muted-toast {
+  opacity: 0.6;
+}
+
+.mock-toast-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mock-toast-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mock-toast-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.mock-toast-badge.high { background-color: rgba(239, 68, 68, 0.12); color: var(--danger-600); }
+.mock-toast-badge.medium { background-color: rgba(245, 158, 11, 0.12); color: #d97706; }
+.mock-toast-badge.low { background-color: rgba(99, 102, 241, 0.12); color: var(--primary-600); }
+
+.mock-toast-desc {
+  font-size: 0.675rem;
+  color: var(--text-secondary);
+  line-height: var(--lh-snug);
+}
+
+.mock-toast-time {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 2px;
+}
+
+/* Responsive grid overrides */
+@media (max-width: 1440px) {
+  .notification-settings-container {
+    grid-template-columns: 1fr;
+  }
+}

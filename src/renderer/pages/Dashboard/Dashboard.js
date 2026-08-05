@@ -17,6 +17,7 @@
 "use strict";
 
 import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner.js";
+import { KPIGrid } from "../../components/KPICard/KPICard.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -242,6 +243,13 @@ export default class DashboardHome {
     statusCol.appendChild(status.render());
     outerContainer.appendChild(statusCol);
 
+    // C. KPI Scorecards Row (12 columns) - Imported from KPIGrid component
+    const kpiCol = document.createElement("div");
+    kpiCol.className = "dashboard-grid-col col-span-12";
+    const kpiGrid = new KPIGrid();
+    kpiCol.appendChild(kpiGrid.render());
+    outerContainer.appendChild(kpiCol);
+
     // Helper to generate custom section nodes
     const assembleSection = (title, subtitle, span, bodyNode) => {
       const sectionCol = document.createElement("div");
@@ -254,12 +262,6 @@ export default class DashboardHome {
       sectionCol.appendChild(section.render(header.render(), body.render(bodyNode)));
       return sectionCol;
     };
-
-    // C. KPI Cards Section (4 cards x 3 columns each)
-    outerContainer.appendChild(assembleSection("Sales Performance", "Total gross sales", 3, new PlaceholderCard({ value: "$14,250.00", trend: "+12%" }).render()));
-    outerContainer.appendChild(assembleSection("Margin & Profit", "Net transaction profits", 3, new PlaceholderCard({ value: "$4,120.50", trend: "+8%" }).render()));
-    outerContainer.appendChild(assembleSection("Lanes Status", "Active checkout POS points", 3, new PlaceholderCard({ value: "4 Lanes", trend: "Normal" }).render()));
-    outerContainer.appendChild(assembleSection("Low Stock Alerts", "Catalog trigger warning threshold", 3, new PlaceholderCard({ value: "12 Items", trend: "Restock" }).render()));
 
     // D. Sales Analytics & Revenue Overviews (8 columns and 4 columns)
     outerContainer.appendChild(assembleSection("Sales Analytics Overview", "Weekly transaction reports analytics", 8, new PlaceholderChart({ height: 200 }).render()));

@@ -1,0 +1,138 @@
+/* KPICard.css */
+
+/* Grid container for KPI cards row */
+.kpi-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Individual KPI Card */
+.kpi-card-panel {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+  box-sizing: border-box;
+  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Card Header row (label + icon) */
+.kpi-card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.kpi-card-label {
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Color-coded Icon wrappers */
+.kpi-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+}
+
+/* Context styling states */
+.kpi-icon-box.sales {
+  background-color: var(--badge-info-bg);
+  color: var(--badge-info-text);
+}
+
+.kpi-icon-box.orders {
+  background-color: var(--primary-50);
+  color: var(--primary-600);
+}
+
+.kpi-icon-box.revenue {
+  background-color: var(--badge-success-bg);
+  color: var(--badge-success-text);
+}
+
+.kpi-icon-box.stock {
+  background-color: var(--badge-danger-bg);
+  color: var(--badge-danger-text);
+}
+
+/* Card Body elements (Value + trend badge) */
+.kpi-card-body-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.kpi-card-value {
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Trend indicators (green / red badges) */
+.kpi-trend-badge-pill {
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kpi-trend-badge-pill.up {
+  background-color: var(--badge-success-bg);
+  color: var(--badge-success-text);
+}
+
+.kpi-trend-badge-pill.down {
+  background-color: var(--badge-danger-bg);
+  color: var(--badge-danger-text);
+}
+
+.kpi-trend-badge-pill.stable {
+  background-color: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+/* Responsive grid overrides (Small laptop layout) */
+@media (max-width: 1366px) {
+  .kpi-grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid spacing */
+    gap: 16px;
+  }
+
+  .kpi-card-panel {
+    padding: 16px;
+    min-height: 120px;
+  }
+
+  .kpi-card-value {
+    font-size: 1.375rem;
+  }
+}

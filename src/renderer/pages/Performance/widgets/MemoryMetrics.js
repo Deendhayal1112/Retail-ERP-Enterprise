@@ -60,14 +60,19 @@ export default class MemoryMetrics {
 
     const heapMb = (m.heapUsageBytes / (1024 * 1024)).toFixed(1);
     const ramMb = (m.ramUsageBytes / (1024 * 1024)).toFixed(1);
-    const cacheMb = (m.cacheUsageBytes / (1024 * 1024)).toFixed(1);
+    
+    const cacheBytes = m.cacheUsageBytes || 0;
+    const cacheMb = (cacheBytes / (1024 * 1024)).toFixed(1);
+    const objectCount = m.objectCount || 0;
+    const gcCount = m.garbageCollectionCount || 0;
+    const trend = m.memoryTrend || "Stable";
 
     this.element.querySelector(".val-heap").textContent = `${heapMb} MB`;
     this.element.querySelector(".val-ram").textContent = `${ramMb} MB`;
     this.element.querySelector(".val-cache").textContent = `${cacheMb} MB`;
-    this.element.querySelector(".val-objects").textContent = m.objectCount.toLocaleString();
-    this.element.querySelector(".val-gc").textContent = m.garbageCollectionCount;
-    this.element.querySelector(".val-trend").textContent = m.memoryTrend;
+    this.element.querySelector(".val-objects").textContent = objectCount.toLocaleString();
+    this.element.querySelector(".val-gc").textContent = gcCount;
+    this.element.querySelector(".val-trend").textContent = trend;
 
     const badge = this.element.querySelector(".status-badge");
     if (m.heapUsageBytes > 150 * 1024 * 1024) {

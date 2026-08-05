@@ -55,7 +55,7 @@ export default class DatabaseMetrics {
   }
 
   update(metrics) {
-    if (!this.element) return;
+    if (!this.element || !metrics || !metrics.database) return;
     const d = metrics.database;
 
     const sizeMb = (d.dbSizeBytes / (1024 * 1024)).toFixed(2);

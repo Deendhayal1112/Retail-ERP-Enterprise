@@ -55,7 +55,7 @@ export default class RendererMetrics {
   }
 
   update(metrics) {
-    if (!this.element) return;
+    if (!this.element || !metrics || !metrics.renderer) return;
     const r = metrics.renderer;
 
     this.element.querySelector(".val-fps").textContent = `${r.fps} FPS`;

@@ -552,6 +552,61 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize release candidate subsystems: ${err.message}`);
   }
 
+  // Initialize AI Assistant Subsystem
+  try {
+    const AIManager = require("./ai/AIManager");
+    const AIContextManager = require("./ai/AIContextManager");
+    const PromptManager = require("./ai/PromptManager");
+    const CommandManager = require("./ai/CommandManager");
+    const AIProviderRegistry = require("./ai/AIProviderRegistry");
+    const AIEvents = require("./ai/AIEvents");
+
+    const aiMgr = new AIManager();
+    const contextMgr = new AIContextManager();
+    const promptMgr = new PromptManager();
+    const commandMgr = new CommandManager();
+    const providerRegistry = new AIProviderRegistry();
+
+    AIEvents.register({
+      "ai:get-chat-history": async (event) => {
+        validateSender(event);
+        return await aiMgr.getHistory();
+      },
+      "ai:query-chat": async (event, prompt) => {
+        validateSender(event);
+        return await aiMgr.queryChat(prompt);
+      },
+      "ai:get-prompt-library": async (event) => {
+        validateSender(event);
+        return await promptMgr.getLibrary();
+      },
+      "ai:get-commands": async (event) => {
+        validateSender(event);
+        return await commandMgr.getCommands();
+      },
+      "ai:run-command": async (event, trigger, args) => {
+        validateSender(event);
+        return await commandMgr.runCommand(trigger, args);
+      },
+      "ai:get-context": async (event) => {
+        validateSender(event);
+        return await contextMgr.getContext();
+      },
+      "ai:get-providers": async (event) => {
+        validateSender(event);
+        return await providerRegistry.getProviders();
+      },
+      "ai:toggle-provider": async (event, id) => {
+        validateSender(event);
+        return await providerRegistry.toggleProvider(id);
+      }
+    });
+
+    logger.info("Enterprise AI Platform & Assistant subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize AI subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

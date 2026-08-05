@@ -1,0 +1,173 @@
+/* EnterpriseAICenter.css */
+
+.ai-center-layout {
+  display: flex;
+  flex-direction: column;
+  background-color: #F8FAFC;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 32px;
+  gap: 24px;
+}
+
+.ai-center-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-center-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+}
+
+.ai-center-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #6B7280;
+}
+
+/* Tabs toolbar */
+.ai-center-tabs-toolbar {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid #E9EDF5;
+  padding-bottom: 8px;
+}
+
+.ai-center-tab-btn {
+  height: 40px;
+  padding: 0 20px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.ai-center-tab-btn:hover {
+  background-color: #EEF2FF;
+  color: #5B3DF5;
+}
+
+.ai-center-tab-btn.active {
+  background-color: #5B3DF5;
+  color: #FFFFFF;
+}
+
+/* Workspace Content Grid */
+.ai-center-content-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+/* Metrics rating block */
+.ai-center-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.ai-center-metric-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E9EDF5;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Cards layout base */
+.ai-center-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E9EDF5;
+  border-radius: 16px;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  min-height: 200px;
+}
+
+.ai-center-card-title {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Chat bubble styling */
+.chat-messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 12px;
+  border: 1px solid #E9EDF5;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+}
+
+.chat-bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 75%;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.chat-bubble.assistant {
+  background-color: #F1F5F9;
+  color: #1F2937;
+  align-self: flex-start;
+  border-top-left-radius: 0;
+}
+
+.chat-bubble.user {
+  background-color: #5B3DF5;
+  color: #FFFFFF;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+}
+
+/* Suggested chip triggers */
+.suggested-prompt-chip {
+  padding: 6px 12px;
+  background-color: #EEF2FF;
+  border: 1px solid #E0E7FF;
+  color: #5B3DF5;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.suggested-prompt-chip:hover {
+  background-color: #5B3DF5;
+  color: #FFFFFF;
+}
+
+/* Validation status badges */
+.ai-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.ai-badge.active { background-color: #D1FAE5; color: #065F46; }
+.ai-badge.inactive { background-color: #F3F4F6; color: #4B5563; }
+.ai-badge.local { background-color: #E0F2FE; color: #0369A1; }
+.ai-badge.cloud { background-color: #F3E8FF; color: #6B21A8; }

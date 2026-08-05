@@ -26,6 +26,7 @@ import BackgroundTaskCenter from "../Performance/BackgroundTaskCenter.js";
 import EnterpriseHealthCenter from "../Performance/EnterpriseHealthCenter.js";
 import EnterpriseUATCenter from "../QA/EnterpriseUATCenter.js";
 import ReleaseCandidateCenter from "../RC/ReleaseCandidateCenter.js";
+import EnterpriseAICenter from "../AI/EnterpriseAICenter.js";
 import CICDDashboard from "../Performance/CICDDashboard.js";
 import SecurityCenter from "../Security/SecurityCenter.js";
 import DistributionCenter from "../Release/DistributionCenter.js";
@@ -273,6 +274,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           // Update header module breadcrumb focus label
           const breadcrumbText = document.querySelector(".breadcrumb-current");
           if (breadcrumbText) breadcrumbText.textContent = "Release Candidate Review";
+        } else if (route === "ai-center") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const aiCenter = new EnterpriseAICenter();
+          aiCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Enterprise AI Center";
         } else if (route === "cicd-pipeline") {
           e.preventDefault();
           pageWrapper.innerHTML = "";

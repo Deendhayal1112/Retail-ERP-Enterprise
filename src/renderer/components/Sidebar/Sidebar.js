@@ -62,6 +62,7 @@ export default class Sidebar {
               { key: "diagnostics-health", label: "Diagnostics & Health" },
               { key: "enterprise-qa", label: "Enterprise QA" },
               { key: "rc-center", label: "Release Candidate" },
+              { key: "ai-center", label: "Enterprise AI" },
               { key: "cicd-pipeline", label: "CI/CD Pipeline" }
             ]
           },

@@ -99,7 +99,15 @@ const ALLOWED_SEND_CHANNELS = [
   "rc:get-approvals",
   "rc:toggle-approval",
   "rc:get-risks",
-  "rc:toggle-risk-mitigation"
+  "rc:toggle-risk-mitigation",
+  "ai:get-chat-history",
+  "ai:query-chat",
+  "ai:get-prompt-library",
+  "ai:get-commands",
+  "ai:run-command",
+  "ai:get-context",
+  "ai:get-providers",
+  "ai:toggle-provider"
 ];
 
 // Channels from Main to Renderer (Listeners)

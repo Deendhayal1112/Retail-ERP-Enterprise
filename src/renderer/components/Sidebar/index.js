@@ -1,3 +1,2 @@
-"use strict";
-
-module.exports = require("./Sidebar");
+import Sidebar from "./Sidebar.js";
+export default Sidebar;

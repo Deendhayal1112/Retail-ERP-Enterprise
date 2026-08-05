@@ -1,49 +1,39 @@
 /**
  * Dashboard.js
- * Retail ERP Enterprise — Reusable Main Dashboard Page Component
+ * Retail ERP Enterprise — Main Dashboard Rebuilt Component
  *
- * Implements the layout component orchestrating child panels and cards.
- * Strict limits: Layout-only, under 150 lines total.
+ * Serves solely as the layout mounting entrypoint.
+ * Under 150 lines total.
  */
 
 "use strict";
 
-import DashboardLayout   from "./DashboardLayout.js";
-import DashboardHeader   from "./DashboardHeader.js";
-import DashboardToolbar  from "./DashboardToolbar.js";
-import DashboardHero     from "./DashboardHero.js";
-import KPIGrid           from "./KPIGrid.js";
-import SalesOverview     from "./SalesOverview.js";
-import RevenueAnalytics  from "./RevenueAnalytics.js";
+import DashboardLayout    from "./DashboardLayout.js";
+import DashboardHeader    from "./DashboardHeader.js";
+import KPIGrid            from "./KPIGrid.js";
+import SalesOverview      from "./SalesOverview.js";
+import TopProducts        from "./TopProducts.js";
+import BusinessSummary    from "./BusinessSummary.js";
 import InventoryAnalytics from "./InventoryAnalytics.js";
-import BusinessHealth    from "./BusinessHealth.js";
-import TopProducts       from "./TopProducts.js";
-import QuickActions      from "./QuickActions.js";
-import Notifications     from "./Notifications.js";
-import RecentActivity    from "./RecentActivity.js";
-import Favorites         from "./Favorites.js";
-import FooterStatus      from "./FooterStatus.js";
+import RecentActivity     from "./RecentActivity.js";
+import Notifications      from "./Notifications.js";
+import FooterStatus       from "./FooterStatus.js";
 
 export default class DashboardHome {
   constructor(options = {}) {
     this.options = options;
     this.element = null;
 
-    // Instantiate modular child components
+    // Instantiate modular child components matching the screenshot
     this.layout             = new DashboardLayout();
     this.header             = new DashboardHeader();
-    this.toolbar            = new DashboardToolbar();
-    this.hero               = new DashboardHero();
     this.kpiGrid            = new KPIGrid();
     this.salesOverview      = new SalesOverview();
-    this.revenueAnalytics   = new RevenueAnalytics();
-    this.inventoryAnalytics = new InventoryAnalytics();
-    this.businessHealth     = new BusinessHealth();
     this.topProducts        = new TopProducts();
-    this.quickActions       = new QuickActions();
-    this.notifications      = new Notifications();
+    this.businessSummary    = new BusinessSummary();
+    this.inventoryAnalytics = new InventoryAnalytics();
     this.recentActivity     = new RecentActivity();
-    this.favorites          = new Favorites();
+    this.notifications      = new Notifications();
     this.footerStatus       = new FooterStatus();
   }
 
@@ -55,18 +45,13 @@ export default class DashboardHome {
     // Compile child widgets inside layout mapping
     const elements = {
       header:             this.header.render(),
-      toolbar:            this.toolbar.render(),
-      hero:               this.hero.render(),
       kpiGrid:            this.kpiGrid.render(),
       salesOverview:      this.salesOverview.render(),
-      revenueAnalytics:   this.revenueAnalytics.render(),
-      inventoryAnalytics: this.inventoryAnalytics.render(),
-      businessHealth:     this.businessHealth.render(),
       topProducts:        this.topProducts.render(),
-      quickActions:       this.quickActions.render(),
-      notifications:      this.notifications.render(),
+      businessSummary:    this.businessSummary.render(),
+      inventoryAnalytics: this.inventoryAnalytics.render(),
       recentActivity:     this.recentActivity.render(),
-      favorites:          this.favorites.render(),
+      notifications:      this.notifications.render(),
       footerStatus:       this.footerStatus.render()
     };
 

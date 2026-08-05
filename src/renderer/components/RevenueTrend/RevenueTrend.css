@@ -1,0 +1,203 @@
+/* RevenueTrend.css */
+
+.revenue-trend-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 420px;
+}
+
+/* ─────────────────────────────────────────────
+ * HEADER ROW & TOOLBARS
+ * ───────────────────────────────────────────── */
+.revenue-trend-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.revenue-trend-header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.revenue-trend-title-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.revenue-trend-subtitle-text {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.revenue-trend-toolbar-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Time range dropdown selector */
+.revenue-trend-filter-select {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--duration-fast);
+}
+
+.revenue-trend-filter-select:focus {
+  border-color: var(--primary-400);
+}
+
+/* Buttons actions */
+.revenue-trend-action-btn {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--duration-fast);
+}
+
+.revenue-trend-action-btn:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * VISUAL COMBO CHART CANVAS AREA
+ * ───────────────────────────────────────────── */
+.revenue-trend-canvas-area {
+  flex: 1;
+  position: relative;
+  background-color: var(--bg-hover);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.revenue-trend-legend-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.revenue-trend-legend-item-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.revenue-trend-legend-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.revenue-trend-legend-color-dot.revenue-line { background-color: var(--accent-500); }
+.revenue-trend-legend-color-dot.profit-line { background-color: var(--success-500); }
+
+/* Mock area graphic element */
+.revenue-trend-mock-graphics {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 140px;
+  width: 100%;
+  margin-top: 12px;
+  position: relative;
+}
+
+/* Diagonal area chart lines */
+.revenue-trend-mock-graphics::before {
+  content: "";
+  position: absolute;
+  top: 35%;
+  left: 5%;
+  width: 90%;
+  height: 40%;
+  border-top: 2px solid var(--accent-400);
+  background-color: rgba(99, 102, 241, 0.05);
+  transform: skewY(-2deg);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.revenue-trend-mock-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-600);
+  border-radius: 50%;
+  position: relative;
+  z-index: 5;
+}
+
+/* ─────────────────────────────────────────────
+ * SUMMARY FOOTER ROW SECTION
+ * ───────────────────────────────────────────── */
+.revenue-trend-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.revenue-trend-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.revenue-trend-summary-label {
+  font-size: 0.675rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  font-weight: 600;
+}
+
+.revenue-trend-summary-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Responsive Overrides (Laptop layout) */
+@media (max-width: 1366px) {
+  .revenue-trend-card {
+    padding: 16px;
+  }
+}

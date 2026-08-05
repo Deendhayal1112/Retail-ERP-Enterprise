@@ -20,6 +20,7 @@ import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner.js";
 import { KPIGrid } from "../../components/KPICard/KPICard.js";
 import SalesAnalytics from "../../components/SalesAnalytics/SalesAnalytics.js";
 import RevenueAnalytics from "../../components/RevenueAnalytics/RevenueAnalytics.js";
+import InventorySummary from "../../components/InventorySummary/InventorySummary.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -266,7 +267,14 @@ export default class DashboardHome {
     revenueCol.appendChild(revenueAnalytics.render());
     outerContainer.appendChild(revenueCol);
 
-    // F. Inventory Summaries & Recent Activity (6 columns each)
+    // F. Inventory Summary (6 columns) - Imported from external InventorySummary component
+    const inventoryCol = document.createElement("div");
+    inventoryCol.className = "dashboard-grid-col col-span-6";
+    const inventorySummary = new InventorySummary();
+    inventoryCol.appendChild(inventorySummary.render());
+    outerContainer.appendChild(inventoryCol);
+
+    // G. Recent Operator Activity (6 columns)
     const assembleSection = (title, subtitle, span, bodyNode) => {
       const sectionCol = document.createElement("div");
       sectionCol.className = `dashboard-grid-col col-span-${span}`;
@@ -279,10 +287,9 @@ export default class DashboardHome {
       return sectionCol;
     };
 
-    outerContainer.appendChild(assembleSection("Inventory Summary Overview", "Warehouse stock tracking summaries", 6, new PlaceholderList({ itemsCount: 3 }).render()));
     outerContainer.appendChild(assembleSection("Recent Operator Activity", "Audit records transactions feeds", 6, new PlaceholderList({ itemsCount: 3 }).render()));
 
-    // G. Quick Actions, Notifications, & Upcoming Tasks (4 columns each)
+    // H. Quick Actions, Notifications, & Upcoming Tasks (4 columns each)
     outerContainer.appendChild(assembleSection("Quick Operations Menu", "POS billing shortcuts & register tools", 4, new PlaceholderPanel({ buttons: ["⚡ New Invoice", "🏷️ Add Product", "📊 Run Report"] }).render()));
     outerContainer.appendChild(assembleSection("System Alerts & Notifications", "Active database logs warnings", 4, new PlaceholderList({ itemsCount: 2 }).render()));
     outerContainer.appendChild(assembleSection("Upcoming Schedule Tasks", "Store checklist milestones", 4, new PlaceholderList({ itemsCount: 2 }).render()));

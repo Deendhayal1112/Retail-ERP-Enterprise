@@ -1,0 +1,177 @@
+/* InventorySummary.css */
+
+.inventory-summary-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 320px;
+}
+
+/* ─────────────────────────────────────────────
+ * INVENTORY HEADER
+ * ───────────────────────────────────────────── */
+.inventory-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.inventory-header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inventory-title-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.inventory-subtitle-text {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.inventory-btn-view-all {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.inventory-btn-view-all:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * INVENTORY METRICS SECTION
+ * ───────────────────────────────────────────── */
+.inventory-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.inventory-metric-item-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.inventory-metric-label {
+  font-size: 0.675rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.inventory-metric-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Color indicator dots for metrics */
+.inventory-metric-item-card::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.metric-in-stock::before { background-color: var(--success-500); }
+.metric-low-stock::before { background-color: var(--warning-500); }
+.metric-out-stock::before { background-color: var(--danger-500); }
+
+/* ─────────────────────────────────────────────
+ * STOCK HEALTH INDICATOR PROGRESS BAR
+ * ───────────────────────────────────────────── */
+.inventory-health-progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.health-bar-labels-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.health-bar-percentage-value {
+  color: var(--success-600);
+}
+
+.health-progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--border-light);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.health-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success-400) 0%, var(--success-600) 100%);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-slow) var(--ease-in-out);
+}
+
+/* ─────────────────────────────────────────────
+ * FOOTER DETAILS
+ * ───────────────────────────────────────────── */
+.inventory-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.footer-valuation-accent {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Responsive Overrides (Laptop layout) */
+@media (max-width: 1366px) {
+  .inventory-summary-card {
+    padding: 16px;
+  }
+
+  .inventory-metrics-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns stack on small laptops */
+    gap: 12px;
+  }
+}

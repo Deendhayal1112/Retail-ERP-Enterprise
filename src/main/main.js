@@ -303,6 +303,64 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize release subsystems: ${err.message}`);
   }
 
+  // Initialize Documentation and Training Subsystem
+  try {
+    const DocumentationManager = require("./docs/DocumentationManager");
+    const HelpCenterManager = require("./docs/HelpCenterManager");
+    const KnowledgeBaseManager = require("./docs/KnowledgeBaseManager");
+    const TrainingManager = require("./docs/TrainingManager");
+    const DocumentationEvents = require("./docs/DocumentationEvents");
+
+    const docsMgr = new DocumentationManager(null);
+    const helpMgr = new HelpCenterManager();
+    const kbMgr = new KnowledgeBaseManager();
+    const trainingMgr = new TrainingManager();
+
+    DocumentationEvents.register({
+      "docs:get-user-guides": async (event) => {
+        validateSender(event);
+        return await docsMgr.getUserGuides();
+      },
+      "docs:get-admin-guides": async (event) => {
+        validateSender(event);
+        return await docsMgr.getAdminGuides();
+      },
+      "docs:get-dev-guides": async (event) => {
+        validateSender(event);
+        return await docsMgr.getDevGuides();
+      },
+      "docs:run-download": async (event, guideId) => {
+        validateSender(event);
+        docsMgr.mainWindow = windowManager.getMainWindow();
+        return await docsMgr.runDownload(guideId);
+      },
+      "help:ask-ai": async (event, query) => {
+        validateSender(event);
+        return await helpMgr.askAIAssistant(query);
+      },
+      "training:get-courses": async (event) => {
+        validateSender(event);
+        return await trainingMgr.getCourses();
+      },
+      "training:start-tour": async (event) => {
+        validateSender(event);
+        return await trainingMgr.startInteractiveTour();
+      },
+      "training:enroll": async (event, courseId) => {
+        validateSender(event);
+        return await trainingMgr.enrollCourse(courseId);
+      },
+      "training:update-progress": async (event, courseId, increment) => {
+        validateSender(event);
+        return await trainingMgr.updateCourseProgress(courseId, increment);
+      }
+    });
+
+    logger.info("Documentation & User Training subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize documentation subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

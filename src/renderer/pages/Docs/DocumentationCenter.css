@@ -1,0 +1,163 @@
+/* DocumentationCenter.css */
+
+.docs-center-layout {
+  display: flex;
+  flex-direction: column;
+  background-color: #F8FAFC;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 32px;
+  gap: 24px;
+}
+
+.docs-center-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.docs-center-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+}
+
+.docs-center-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #6B7280;
+}
+
+/* Tabs toolbar */
+.docs-center-tabs-toolbar {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid #E9EDF5;
+  padding-bottom: 8px;
+}
+
+.docs-center-tab-btn {
+  height: 40px;
+  padding: 0 20px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.docs-center-tab-btn:hover {
+  background-color: #EEF2FF;
+  color: #5B3DF5;
+}
+
+.docs-center-tab-btn.active {
+  background-color: #5B3DF5;
+  color: #FFFFFF;
+}
+
+/* Workspace Content Grid */
+.docs-center-content-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+/* Metrics rating block */
+.docs-center-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.docs-center-metric-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E9EDF5;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Cards layout base */
+.docs-center-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E9EDF5;
+  border-radius: 16px;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  min-height: 200px;
+}
+
+.docs-center-card-title {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Guides list items */
+.docs-guide-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #F1F5F9;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.docs-guide-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* Search bar styling */
+.docs-search-bar-container {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.docs-search-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid #E9EDF5;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #FFFFFF;
+  color: #1F2937;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.docs-search-input:focus {
+  border-color: #5B3DF5;
+}
+
+.docs-search-btn {
+  height: 40px;
+  padding: 0 20px;
+  background-color: #5B3DF5;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.docs-search-btn:hover {
+  opacity: 0.9;
+}

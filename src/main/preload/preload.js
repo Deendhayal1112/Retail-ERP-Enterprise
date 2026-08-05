@@ -60,7 +60,16 @@ const ALLOWED_SEND_CHANNELS = [
   "release:get-changelogs",
   "release:compile-metadata",
   "release:get-lifecycle-state",
-  "release:promote-lifecycle-state"
+  "release:promote-lifecycle-state",
+  "docs:get-user-guides",
+  "docs:get-admin-guides",
+  "docs:get-dev-guides",
+  "docs:run-download",
+  "help:ask-ai",
+  "training:get-courses",
+  "training:start-tour",
+  "training:enroll",
+  "training:update-progress"
 ];
 
 // Channels from Main to Renderer (Listeners)
@@ -73,7 +82,9 @@ const ALLOWED_RECEIVE_CHANNELS = [
   "release:package-progress",
   "release:package-completed",
   "signing:progress",
-  "signing:completed"
+  "signing:completed",
+  "docs:download-progress",
+  "docs:download-completed"
 ];
 
 // ─────────────────────────────────────────────────────────────────────

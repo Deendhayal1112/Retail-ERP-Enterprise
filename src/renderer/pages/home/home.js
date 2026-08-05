@@ -29,6 +29,7 @@ import CICDDashboard from "../Performance/CICDDashboard.js";
 import SecurityCenter from "../Security/SecurityCenter.js";
 import DistributionCenter from "../Release/DistributionCenter.js";
 import ReleaseManagementCenter from "../ReleaseManagement/ReleaseManagementCenter.js";
+import DocumentationCenter from "../Docs/DocumentationCenter.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -137,6 +138,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           // Update header module breadcrumb focus label
           const breadcrumbText = document.querySelector(".breadcrumb-current");
           if (breadcrumbText) breadcrumbText.textContent = "Release Management Center";
+        } else if (route === "docs-center") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const docsCenter = new DocumentationCenter();
+          docsCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Documentation Center";
         } else if (route === "settings") {
           e.preventDefault();
           pageWrapper.innerHTML = "";

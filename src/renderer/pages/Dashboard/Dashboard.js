@@ -25,6 +25,7 @@ import TopSellingProducts from "../../components/TopSellingProducts/TopSellingPr
 import RecentActivities from "../../components/RecentActivities/RecentActivities.js";
 import Notifications from "../../components/Notifications/Notifications.js";
 import QuickActions from "../../components/QuickActions/QuickActions.js";
+import BusinessHealth from "../../components/BusinessHealth/BusinessHealth.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -305,6 +306,13 @@ export default class DashboardHome {
     const quickActions = new QuickActions();
     quickCol.appendChild(quickActions.render());
     outerContainer.appendChild(quickCol);
+
+    // K. Business Health Summary (12 columns) - Imported from external BusinessHealth component
+    const healthCol = document.createElement("div");
+    healthCol.className = "dashboard-grid-col col-span-12";
+    const businessHealth = new BusinessHealth();
+    healthCol.appendChild(businessHealth.render());
+    outerContainer.appendChild(healthCol);
 
     this.element = outerContainer;
     return outerContainer;

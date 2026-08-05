@@ -21,6 +21,7 @@ import { KPIGrid } from "../../components/KPICard/KPICard.js";
 import SalesTrend from "../../components/SalesTrend/SalesTrend.js";
 import RevenueTrend from "../../components/RevenueTrend/RevenueTrend.js";
 import InventoryDistribution from "../../components/InventoryDistribution/InventoryDistribution.js";
+import CategorySales from "../../components/CategorySales/CategorySales.js";
 import TopSellingProducts from "../../components/TopSellingProducts/TopSellingProducts.js";
 import RecentActivities from "../../components/RecentActivities/RecentActivities.js";
 import Notifications from "../../components/Notifications/Notifications.js";
@@ -45,7 +46,7 @@ export class GridContainer {
 
 export class GridColumn {
   constructor(options = {}) {
-    this.span = options.span || 12; // default spans all 12 cols
+    this.span = options.span || 12;
     this.className = options.className || "";
   }
   render(children = []) {
@@ -180,7 +181,7 @@ export class PlaceholderList {
   render() {
     const container = document.createElement("div");
     container.className = "widget-list-placeholder-body";
-    
+
     let rowsHtml = "";
     for (let i = 0; i < this.itemsCount; i++) {
       rowsHtml += `
@@ -207,7 +208,7 @@ export class PlaceholderPanel {
   render() {
     const container = document.createElement("div");
     container.className = "widget-panel-placeholder-body";
-    
+
     this.buttons.forEach(btnLabel => {
       const btn = document.createElement("button");
       btn.className = "placeholder-panel-action-btn";
@@ -237,81 +238,76 @@ export default class DashboardHome {
     const outerContainer = document.createElement("div");
     outerContainer.className = "dashboard-grid-container";
 
-    // A. Welcome Banner (12 columns) - Imported from external WelcomeBanner component
+    // A. Welcome Banner (12 columns)
     const welcomeCol = document.createElement("div");
     welcomeCol.className = "dashboard-grid-col col-span-12";
-    const banner = new WelcomeBanner();
-    welcomeCol.appendChild(banner.render());
+    welcomeCol.appendChild(new WelcomeBanner().render());
     outerContainer.appendChild(welcomeCol);
 
     // B. Business Status Bar (12 columns)
     const statusCol = document.createElement("div");
     statusCol.className = "dashboard-grid-col col-span-12";
-    const status = new BusinessStatus();
-    statusCol.appendChild(status.render());
+    statusCol.appendChild(new BusinessStatus().render());
     outerContainer.appendChild(statusCol);
 
-    // C. KPI Scorecards Row (12 columns) - Imported from KPIGrid component
+    // C. KPI Scorecards Row (12 columns)
     const kpiCol = document.createElement("div");
     kpiCol.className = "dashboard-grid-col col-span-12";
-    const kpiGrid = new KPIGrid();
-    kpiCol.appendChild(kpiGrid.render());
+    kpiCol.appendChild(new KPIGrid().render());
     outerContainer.appendChild(kpiCol);
 
-    // D. Sales Trend (8 columns) - Imported from external SalesTrend component
+    // D. Sales Trend (8 columns)
     const salesCol = document.createElement("div");
     salesCol.className = "dashboard-grid-col col-span-8";
-    const salesTrend = new SalesTrend();
-    salesCol.appendChild(salesTrend.render());
+    salesCol.appendChild(new SalesTrend().render());
     outerContainer.appendChild(salesCol);
 
-    // E. Revenue Trend (4 columns) - Imported from external RevenueTrend component
+    // E. Revenue Trend (4 columns)
     const revenueCol = document.createElement("div");
     revenueCol.className = "dashboard-grid-col col-span-4";
-    const revenueTrend = new RevenueTrend();
-    revenueCol.appendChild(revenueTrend.render());
+    revenueCol.appendChild(new RevenueTrend().render());
     outerContainer.appendChild(revenueCol);
 
-    // F. Inventory Distribution (6 columns) - Imported from external InventoryDistribution component
+    // F. Inventory Distribution (6 columns)
     const inventoryCol = document.createElement("div");
     inventoryCol.className = "dashboard-grid-col col-span-6";
-    const inventoryDistribution = new InventoryDistribution();
-    inventoryCol.appendChild(inventoryDistribution.render());
+    inventoryCol.appendChild(new InventoryDistribution().render());
     outerContainer.appendChild(inventoryCol);
 
-    // G. Top Selling Products (6 columns) - Imported from external TopSellingProducts component
+    // G. Category-wise Sales (6 columns)
+    const categoryCol = document.createElement("div");
+    categoryCol.className = "dashboard-grid-col col-span-6";
+    categoryCol.appendChild(new CategorySales().render());
+    outerContainer.appendChild(categoryCol);
+
+    // H. Top Selling Products (6 columns)
     const topSellingCol = document.createElement("div");
     topSellingCol.className = "dashboard-grid-col col-span-6";
-    const topSelling = new TopSellingProducts();
-    topSellingCol.appendChild(topSelling.render());
+    topSellingCol.appendChild(new TopSellingProducts().render());
     outerContainer.appendChild(topSellingCol);
 
-    // H. Recent Activities (6 columns) - Imported from external RecentActivities component
+    // I. Recent Activities (6 columns)
     const recentActivitiesCol = document.createElement("div");
     recentActivitiesCol.className = "dashboard-grid-col col-span-6";
-    const recentActivities = new RecentActivities();
-    recentActivitiesCol.appendChild(recentActivities.render());
+    recentActivitiesCol.appendChild(new RecentActivities().render());
     outerContainer.appendChild(recentActivitiesCol);
 
-    // I. Notifications & Alerts (6 columns) - Imported from external Notifications component
+    // J. Notifications & Alerts (6 columns)
     const notificationsCol = document.createElement("div");
     notificationsCol.className = "dashboard-grid-col col-span-6";
-    const notifications = new Notifications();
-    notificationsCol.appendChild(notifications.render());
+    notificationsCol.appendChild(new Notifications().render());
     outerContainer.appendChild(notificationsCol);
 
-    // J. Quick Actions Menu (12 columns) - Imported from external QuickActions component
+    // K. Quick Actions Menu (12 columns)
     const quickCol = document.createElement("div");
     quickCol.className = "dashboard-grid-col col-span-12";
-    const quickActions = new QuickActions();
-    quickCol.appendChild(quickActions.render());
+    quickCol.appendChild(new QuickActions().render());
     outerContainer.appendChild(quickCol);
 
-    // K. Business Health Summary (12 columns) - Imported from external BusinessHealth component
+    // L. Business Health Summary (12 columns)
     const healthCol = document.createElement("div");
     healthCol.className = "dashboard-grid-col col-span-12";
-    const businessHealth = new BusinessHealth();
-    healthCol.appendChild(businessHealth.render());
+    healthCol.appendChild(new BusinessHealth().render());
     outerContainer.appendChild(healthCol);
 
     this.element = outerContainer;

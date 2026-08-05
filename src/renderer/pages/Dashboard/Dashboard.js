@@ -22,6 +22,7 @@ import SalesAnalytics from "../../components/SalesAnalytics/SalesAnalytics.js";
 import RevenueAnalytics from "../../components/RevenueAnalytics/RevenueAnalytics.js";
 import InventorySummary from "../../components/InventorySummary/InventorySummary.js";
 import TopSellingProducts from "../../components/TopSellingProducts/TopSellingProducts.js";
+import RecentActivities from "../../components/RecentActivities/RecentActivities.js";
 
 // ─────────────────────────────────────────────────────
 // 1. REUSABLE GRID SYSTEM LAYOUT COMPONENTS
@@ -282,7 +283,14 @@ export default class DashboardHome {
     topSellingCol.appendChild(topSelling.render());
     outerContainer.appendChild(topSellingCol);
 
-    // H. Quick Actions, Notifications, & Upcoming Tasks (4 columns each)
+    // H. Recent Activities (6 columns) - Imported from external RecentActivities component
+    const recentActivitiesCol = document.createElement("div");
+    recentActivitiesCol.className = "dashboard-grid-col col-span-6";
+    const recentActivities = new RecentActivities();
+    recentActivitiesCol.appendChild(recentActivities.render());
+    outerContainer.appendChild(recentActivitiesCol);
+
+    // I. Quick Actions, Notifications, & Tasks Row (3 columns x 4-span layout)
     const assembleSection = (title, subtitle, span, bodyNode) => {
       const sectionCol = document.createElement("div");
       sectionCol.className = `dashboard-grid-col col-span-${span}`;
@@ -295,9 +303,7 @@ export default class DashboardHome {
       return sectionCol;
     };
 
-    outerContainer.appendChild(assembleSection("Quick Operations Menu", "POS billing shortcuts & register tools", 4, new PlaceholderPanel({ buttons: ["⚡ New Invoice", "🏷️ Add Product", "📊 Run Report"] }).render()));
-    outerContainer.appendChild(assembleSection("System Alerts & Notifications", "Active database logs warnings", 4, new PlaceholderList({ itemsCount: 2 }).render()));
-    outerContainer.appendChild(assembleSection("Upcoming Schedule Tasks", "Store checklist milestones", 4, new PlaceholderList({ itemsCount: 2 }).render()));
+    outerContainer.appendChild(assembleSection("Quick Operations Menu", "POS billing shortcuts & register tools", 6, new PlaceholderPanel({ buttons: ["⚡ New Invoice", "🏷️ Add Product", "📊 Run Report"] }).render()));
 
     this.element = outerContainer;
     return outerContainer;

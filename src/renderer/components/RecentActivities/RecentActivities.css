@@ -1,0 +1,172 @@
+/* RecentActivities.css */
+
+.recent-activities-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 320px;
+}
+
+/* ─────────────────────────────────────────────
+ * HEADER ROW
+ * ───────────────────────────────────────────── */
+.activities-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.activities-header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.activities-title-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.activities-subtitle-text {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.activities-btn-view-all {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.activities-btn-view-all:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * TIMELINE CONSTRUCTS
+ * ───────────────────────────────────────────── */
+.activities-timeline-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 20px;
+  margin-left: 8px;
+  border-left: 2px solid var(--border-light);
+  gap: 20px;
+  flex: 1;
+}
+
+/* Timeline Item Block */
+.timeline-item-block {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  transition: transform var(--duration-fast);
+}
+
+.timeline-item-block:hover {
+  transform: translateX(2px);
+}
+
+/* Timeline point indicator badge */
+.timeline-item-bullet-point {
+  position: absolute;
+  left: -29px; /* Align precisely over vertical border track line */
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-item-bullet-point.sales { background-color: var(--badge-success-bg); color: var(--badge-success-text); }
+.timeline-item-bullet-point.inventory { background-color: var(--badge-warning-bg); color: var(--badge-warning-text); }
+.timeline-item-bullet-point.payment { background-color: var(--badge-info-bg); color: var(--badge-info-text); }
+.timeline-item-bullet-point.system { background-color: var(--badge-danger-bg); color: var(--badge-danger-text); }
+
+/* Item Details Content */
+.timeline-item-details-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.timeline-item-header-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.timeline-item-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.timeline-item-timestamp {
+  font-size: 0.675rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.timeline-item-description {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  line-height: var(--lh-snug);
+}
+
+.timeline-item-operator-badge {
+  font-size: 0.675rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Activity status labels badge */
+.activity-status-badge-pill {
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+}
+
+.activity-status-badge-pill.success { background-color: var(--badge-success-bg); color: var(--badge-success-text); }
+.activity-status-badge-pill.warning { background-color: var(--badge-warning-bg); color: var(--badge-warning-text); }
+.activity-status-badge-pill.danger { background-color: var(--badge-danger-bg); color: var(--badge-danger-text); }
+
+/* Footer Section */
+.activities-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 16px;
+}

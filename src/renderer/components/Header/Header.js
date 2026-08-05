@@ -2,64 +2,123 @@
  * Header.js
  * Retail ERP Enterprise — Top Header Navigation Component
  *
- * Implements toolbar placeholders for:
- * - Search bar search input field
- * - Notification bell and messages indicator
- * - Calendar / date log indicators
- * - Quick action Pos launches buttons
- * - Logged-in user metadata summaries
+ * Implements toolbar sections:
+ * - Left: Sidebar toggle, Breadcrumb current module indicator
+ * - Center: SearchBar input component
+ * - Right: Action buttons (Notifications, Messages, Theme, Date/Time logs, Quick POS Sale, Profile)
  */
 
 import SearchBar from "../SearchBar/SearchBar.js";
 import UserMenu from "../UserMenu/UserMenu.js";
 import NotificationPanel from "../NotificationPanel/NotificationPanel.js";
+import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
 
 export default class Header {
   constructor(options = {}) {
-    this.options = options;
+    this.options = {
+      currentModule: "Dashboard",
+      ...options
+    };
     this.element = null;
 
+    // Sub-components
     this.searchBar = new SearchBar();
     this.userMenu = new UserMenu();
     this.notificationPanel = new NotificationPanel();
+    this.breadcrumb = new Breadcrumb({ currentModule: this.options.currentModule });
   }
 
+  /**
+   * Renders the header row.
+   * @returns {HTMLElement} Complete Header row element.
+   */
   render() {
     const container = document.createElement("div");
     container.className = "header-navigation-row";
 
-    // 1. Left Section (Search Bar Placeholder)
-    const leftSec = document.createElement("div");
-    leftSec.className = "header-left-section";
-    leftSec.appendChild(this.searchBar.render());
-    container.appendChild(leftSec);
+    // 1. LEFT SECTION (Sidebar Toggle, Breadcrumbs)
+    const leftSection = document.createElement("div");
+    leftSection.className = "header-left-section";
 
-    // 2. Right Section (Notifications, Calendar, Quick Actions, User Menu)
-    const rightSec = document.createElement("div");
-    rightSec.className = "header-right-section";
-
-    // Quick Action button
-    const quickPosBtn = document.createElement("button");
-    quickPosBtn.className = "header-btn-quick-pos";
-    quickPosBtn.textContent = "⚡ Quick POS";
-    quickPosBtn.addEventListener("click", () => {
-      console.log("[Quick Action] Launching Quick POS instance Billing screen.");
+    // Toggle button
+    const toggleBtn = document.createElement("button");
+    toggleBtn.className = "header-sidebar-toggle-btn";
+    toggleBtn.setAttribute("aria-label", "Toggle sidebar expansion");
+    toggleBtn.innerHTML = "☰";
+    
+    toggleBtn.addEventListener("click", () => {
+      const sidebar = document.querySelector(".sidebar-navigation-panel");
+      if (sidebar) {
+        const isCollapsed = sidebar.classList.toggle("collapsed");
+        const collapseToggle = document.querySelector(".sidebar-collapse-toggle");
+        if (collapseToggle) {
+          collapseToggle.innerHTML = isCollapsed ? "▶" : "◀";
+        }
+      }
     });
-    rightSec.appendChild(quickPosBtn);
 
-    // Notifications indicator
-    rightSec.appendChild(this.notificationPanel.render());
+    leftSection.appendChild(toggleBtn);
+    leftSection.appendChild(this.breadcrumb.render());
+    container.appendChild(leftSection);
 
-    // Calendar date/time placeholders
-    const dateBadge = document.createElement("div");
-    dateBadge.className = "header-date-badge";
-    dateBadge.innerHTML = `<span class="date-icon">📅</span> <span class="date-text">Aug 5, 2026</span>`;
-    rightSec.appendChild(dateBadge);
+    // 2. CENTER SECTION (Search bar)
+    const centerSection = document.createElement("div");
+    centerSection.className = "header-center-section";
+    centerSection.appendChild(this.searchBar.render());
+    container.appendChild(centerSection);
 
-    // User Menu / Profile summaries
-    rightSec.appendChild(this.userMenu.render());
+    // 3. RIGHT SECTION (Messages, Notifications, Theme, Date/Time, Quick Sale, User Menu)
+    const rightSection = document.createElement("div");
+    rightSection.className = "header-right-section";
 
-    container.appendChild(rightSec);
+    // Message Center button
+    const msgBtn = document.createElement("button");
+    msgBtn.className = "header-action-button-item button-messages";
+    msgBtn.setAttribute("aria-label", "Open Message Center");
+    msgBtn.innerHTML = `
+      <span>✉️</span>
+      <span class="action-item-badge-count">2</span>
+    `;
+    msgBtn.addEventListener("click", () => {
+      console.log("[Header Action] Message Center drawer triggered.");
+    });
+    rightSection.appendChild(msgBtn);
+
+    // Notification Panel
+    rightSection.appendChild(this.notificationPanel.render());
+
+    // Theme Toggle button
+    const themeBtn = document.createElement("button");
+    themeBtn.className = "header-action-button-item button-theme-toggle";
+    themeBtn.setAttribute("aria-label", "Toggle Dark/Light Mode");
+    themeBtn.innerHTML = "🌙";
+    themeBtn.addEventListener("click", () => {
+      console.log("[Header Action] Theme toggle clicked.");
+    });
+    rightSection.appendChild(themeBtn);
+
+    // Current Date/Time Log
+    const dateTimeLog = document.createElement("div");
+    dateTimeLog.className = "header-date-time-log";
+    dateTimeLog.innerHTML = `
+      <span class="date-log-label">Aug 5, 2026</span>
+      <span class="time-accent">13:00 PM</span>
+    `;
+    rightSection.appendChild(dateTimeLog);
+
+    // Quick POS Action Button
+    const newSaleBtn = document.createElement("button");
+    newSaleBtn.className = "header-btn-quick-new-sale";
+    newSaleBtn.innerHTML = `<span>⚡</span> <span>New Sale</span>`;
+    newSaleBtn.addEventListener("click", () => {
+      console.log("[Quick POS] Launching new POS sale transaction invoice.");
+    });
+    rightSection.appendChild(newSaleBtn);
+
+    // User Profile dropdown menu
+    rightSection.appendChild(this.userMenu.render());
+
+    container.appendChild(rightSection);
     this.element = container;
     return container;
   }

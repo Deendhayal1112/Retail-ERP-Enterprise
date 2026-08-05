@@ -1,9 +1,89 @@
 /* SearchBar.css */
-.searchbar-placeholder {
-  padding: 1rem;
-  border: 1px dashed var(--border-light || #ccc);
-  border-radius: var(--radius-md || 4px);
-  background-color: var(--bg-card || #fafafa);
-  text-align: center;
-  color: var(--text-muted || #666);
+
+.header-search-bar-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-input-field-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.search-input-field-group:focus-within {
+  border-color: var(--primary-400);
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-focus);
+}
+
+.search-icon-lens {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.search-input-element {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 0.825rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.search-input-element::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* Suggestions dropdown card */
+.search-suggestions-dropdown-card {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-dropdown);
+  padding: 8px 0;
+  box-sizing: border-box;
+  display: none;
+  z-index: var(--z-dropdown);
+}
+
+.search-suggestions-dropdown-card.active {
+  display: block;
+}
+
+.suggestion-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.suggestion-item-row:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.suggestion-item-badge {
+  background-color: var(--bg-hover);
+  color: var(--text-muted);
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
 }

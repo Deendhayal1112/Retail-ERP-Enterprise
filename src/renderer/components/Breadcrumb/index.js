@@ -1,3 +1,2 @@
-"use strict";
-
-module.exports = require("./Breadcrumb");
+import Breadcrumb from "./Breadcrumb.js";
+export default Breadcrumb;

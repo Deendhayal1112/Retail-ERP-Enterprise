@@ -1,38 +1,159 @@
+/* Header.css */
+
+/* Top Navigation Bar wrapper */
 .header-navigation-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
-  padding: 0 1.5rem;
-  background-color: var(--bg-top-nav || #0f172a);
+  height: 72px; /* Fixed height */
+  padding: 0 32px;
+  background-color: var(--bg-top-nav);
+  border-bottom: 1px solid var(--border-light);
+  box-sizing: border-box;
 }
+
+/* ─────────────────────────────────────────────
+ * LEFT SECTION: TOGGLE & BREADCRUMB
+ * ───────────────────────────────────────────── */
 .header-left-section {
   display: flex;
   align-items: center;
+  gap: 16px;
 }
+
+.header-sidebar-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.header-sidebar-toggle-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* Breadcrumb indicator styling */
+.header-breadcrumb-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.breadcrumb-separator {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.breadcrumb-current {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* ─────────────────────────────────────────────
+ * CENTER SECTION: SEARCH
+ * ───────────────────────────────────────────── */
+.header-center-section {
+  flex: 1;
+  max-width: 420px;
+  margin: 0 24px;
+}
+
+/* ─────────────────────────────────────────────
+ * RIGHT SECTION: ACTIONS & PROFILE
+ * ───────────────────────────────────────────── */
 .header-right-section {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 16px;
 }
-.header-btn-quick-pos {
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md || 6px);
-  background-color: var(--primary-600 || #2563eb);
-  color: #fff;
+
+.header-action-button-item {
+  background: none;
   border: none;
-  font-size: 0.825rem;
-  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
   cursor: pointer;
-  transition: opacity 150ms ease;
-}
-.header-btn-quick-pos:hover {
-  opacity: 0.9;
-}
-.header-date-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.header-action-button-item:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* Red counter badges for actions notifications */
+.action-item-badge-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: var(--danger-500);
+  color: #ffffff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 2px var(--bg-top-nav);
+}
+
+/* Date and Time logs indicators */
+.header-date-time-log {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.725rem;
+  color: var(--text-secondary);
+  line-height: var(--lh-tight);
+}
+
+.time-accent {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.775rem;
+  margin-top: 2px;
+}
+
+/* Quick Action POS Button */
+.header-btn-quick-new-sale {
+  background-color: var(--primary-600);
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
   font-size: 0.825rem;
-  color: var(--text-secondary || #cbd5e1);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.header-btn-quick-new-sale:hover {
+  background-color: var(--primary-hover);
+}
+
+.header-btn-quick-new-sale:active {
+  transform: scale(0.98);
 }

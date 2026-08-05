@@ -1,9 +1,90 @@
 /* UserMenu.css */
-.usermenu-placeholder {
-  padding: 1rem;
-  border: 1px dashed var(--border-light || #ccc);
-  border-radius: var(--radius-md || 4px);
-  background-color: var(--bg-card || #fafafa);
-  text-align: center;
-  color: var(--text-muted || #666);
+
+.header-usermenu-panel-wrapper {
+  position: relative;
+}
+
+.usermenu-profile-anchor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-md);
+  transition: background-color var(--duration-fast);
+}
+
+.usermenu-profile-anchor:hover {
+  background-color: var(--bg-hover);
+}
+
+.usermenu-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--primary-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 0.825rem;
+}
+
+.usermenu-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.usermenu-name {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.usermenu-role {
+  font-size: 0.675rem;
+  color: var(--text-muted);
+}
+
+/* User Menu Dropdown Drawer Card */
+.usermenu-dropdown-drawer-card {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 220px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-dropdown);
+  padding: 8px 0;
+  box-sizing: border-box;
+  display: none;
+  z-index: var(--z-dropdown);
+}
+
+.usermenu-dropdown-drawer-card.active {
+  display: block;
+}
+
+.usermenu-dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all var(--duration-fast);
+}
+
+.usermenu-dropdown-link:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.usermenu-dropdown-divider {
+  height: 1px;
+  background-color: var(--border-light);
+  margin: 6px 0;
 }

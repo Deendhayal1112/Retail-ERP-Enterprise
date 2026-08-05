@@ -1,0 +1,363 @@
+/* AnalyticsToolbar.css */
+
+/* ─────────────────────────────────────────────
+ * TOOLBAR SHELL
+ * ───────────────────────────────────────────── */
+.analytics-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  padding: 8px 12px;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.analytics-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Toolbar divider */
+.toolbar-divider {
+  width: 1px;
+  height: 20px;
+  background-color: var(--border-light);
+  flex-shrink: 0;
+  margin: 0 4px;
+}
+
+/* Right-side spacer pushes actions to far right */
+.toolbar-spacer {
+  flex: 1;
+}
+
+/* ─────────────────────────────────────────────
+ * TIME RANGE SELECTOR — PILL TABS
+ * ───────────────────────────────────────────── */
+.toolbar-time-range-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.toolbar-time-tab {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.675rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: calc(var(--radius-md) - 2px);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--duration-fast);
+  font-family: inherit;
+}
+
+.toolbar-time-tab:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-hover);
+}
+
+.toolbar-time-tab.active {
+  background-color: var(--primary-500);
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(99, 102, 241, 0.3);
+}
+
+/* ─────────────────────────────────────────────
+ * FILTER DROPDOWNS
+ * ───────────────────────────────────────────── */
+.toolbar-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.toolbar-filter-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.toolbar-filter-select {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color var(--duration-fast);
+  max-width: 120px;
+}
+
+.toolbar-filter-select:focus {
+  border-color: var(--primary-400);
+}
+
+/* ─────────────────────────────────────────────
+ * ACTION BUTTONS (icon + text)
+ * ───────────────────────────────────────────── */
+.toolbar-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: all var(--duration-fast);
+  flex-shrink: 0;
+}
+
+.toolbar-action-btn:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.toolbar-action-btn.active {
+  background-color: var(--primary-500);
+  color: #fff;
+  border-color: var(--primary-500);
+}
+
+.toolbar-action-btn.danger:hover {
+  background-color: rgba(239, 68, 68, 0.08);
+  color: var(--danger-500);
+  border-color: var(--danger-500);
+}
+
+.toolbar-btn-icon {
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+/* ─────────────────────────────────────────────
+ * EXPORT MENU DROPDOWN POPUP
+ * ───────────────────────────────────────────── */
+.toolbar-export-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.toolbar-export-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  min-width: 150px;
+  overflow: hidden;
+  display: none;
+}
+
+.toolbar-export-menu.open {
+  display: block;
+}
+
+.toolbar-export-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color var(--duration-fast), color var(--duration-fast);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.toolbar-export-menu-item:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.toolbar-export-menu-divider {
+  height: 1px;
+  background-color: var(--border-light);
+  margin: 4px 0;
+}
+
+/* ─────────────────────────────────────────────
+ * CHART SETTINGS PANEL (slide-down)
+ * ───────────────────────────────────────────── */
+.toolbar-settings-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.toolbar-settings-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  min-width: 220px;
+  padding: 14px 16px;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolbar-settings-panel.open {
+  display: flex;
+}
+
+.toolbar-settings-section-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.toolbar-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Toggle switch placeholder */
+.toolbar-toggle-switch {
+  width: 32px;
+  height: 18px;
+  background-color: var(--primary-500);
+  border-radius: var(--radius-full);
+  position: relative;
+  cursor: pointer;
+  transition: background-color var(--duration-fast);
+  flex-shrink: 0;
+}
+
+.toolbar-toggle-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: right var(--duration-fast);
+}
+
+.toolbar-toggle-switch.off {
+  background-color: var(--border-light);
+}
+
+.toolbar-toggle-switch.off::after {
+  right: auto;
+  left: 2px;
+}
+
+/* ─────────────────────────────────────────────
+ * MORE ACTIONS DROPDOWN
+ * ───────────────────────────────────────────── */
+.toolbar-more-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.toolbar-more-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  min-width: 180px;
+  overflow: hidden;
+  display: none;
+}
+
+.toolbar-more-menu.open {
+  display: block;
+}
+
+.toolbar-more-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color var(--duration-fast), color var(--duration-fast);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.toolbar-more-menu-item:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * REFRESH BUTTON — SPIN ANIMATION STATE
+ * ───────────────────────────────────────────── */
+@keyframes toolbar-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.toolbar-action-btn.refreshing .toolbar-btn-icon {
+  display: inline-block;
+  animation: toolbar-spin 0.8s linear infinite;
+}
+
+/* Responsive Overrides (Laptop layout) */
+@media (max-width: 1366px) {
+  .toolbar-time-tab {
+    padding: 4px 8px;
+    font-size: 0.625rem;
+  }
+
+  .toolbar-filter-group {
+    display: none; /* collapsed — future popover fallback */
+  }
+}

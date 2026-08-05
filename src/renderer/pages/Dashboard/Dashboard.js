@@ -19,6 +19,7 @@
 import WelcomeBanner         from "../../components/WelcomeBanner/WelcomeBanner.js";
 import { KPIGrid }           from "../../components/KPICard/KPICard.js";
 import MiniKPIGrid           from "../../components/MiniKPI/MiniKPI.js";
+import AnalyticsToolbar      from "../../components/AnalyticsToolbar/AnalyticsToolbar.js";
 import SalesTrend            from "../../components/SalesTrend/SalesTrend.js";
 import RevenueTrend          from "../../components/RevenueTrend/RevenueTrend.js";
 import InventoryDistribution from "../../components/InventoryDistribution/InventoryDistribution.js";
@@ -238,6 +239,12 @@ export default class DashboardHome {
     miniKpiCol.className = "dashboard-grid-col col-span-12";
     miniKpiCol.appendChild(new MiniKPIGrid().render());
     outerContainer.appendChild(miniKpiCol);
+
+    // ── Row 4b: Central Interactive Analytics Toolbar (12) ────────────────
+    const toolbarCol = document.createElement("div");
+    toolbarCol.className = "dashboard-grid-col col-span-12";
+    toolbarCol.appendChild(new AnalyticsToolbar().render());
+    outerContainer.appendChild(toolbarCol);
 
     // ── Row 5: Sales Trend (8) + Revenue Trend (4) ────────────────────────
     const salesCol = document.createElement("div");

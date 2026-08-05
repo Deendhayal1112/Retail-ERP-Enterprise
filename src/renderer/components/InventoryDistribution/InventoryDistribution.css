@@ -1,0 +1,238 @@
+/* InventoryDistribution.css */
+
+.inventory-dist-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 440px;
+}
+
+/* ─────────────────────────────────────────────
+ * HEADER ROW & TOOLBARS
+ * ───────────────────────────────────────────── */
+.inventory-dist-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.inventory-dist-header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inventory-dist-title-text {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.inventory-dist-subtitle-text {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.inventory-dist-toolbar-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Range filter select option */
+.inventory-dist-filter-select {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--duration-fast);
+}
+
+.inventory-dist-filter-select:focus {
+  border-color: var(--primary-400);
+}
+
+/* Action button buttons */
+.inventory-dist-action-btn {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--duration-fast);
+}
+
+.inventory-dist-action-btn:hover {
+  background-color: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+ * SPLIT LAYOUT CHART AREA & SIDE PANEL
+ * ───────────────────────────────────────────── */
+.inventory-dist-body-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  flex: 1;
+}
+
+.inventory-dist-canvas-area {
+  position: relative;
+  background-color: var(--bg-hover);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.inventory-dist-legend-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  font-size: 0.675rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.inventory-dist-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inventory-dist-legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.inventory-dist-legend-dot.in-stock { background-color: var(--success-500); }
+.inventory-dist-legend-dot.low-stock { background-color: var(--warning-500); }
+.inventory-dist-legend-dot.out-stock { background-color: var(--danger-500); }
+
+/* Circular Donut mock graphic */
+.inventory-donut-mock-graphics {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+}
+
+.inventory-donut-circle-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 12px solid var(--border-light);
+  border-top-color: var(--success-500);
+  border-right-color: var(--warning-500);
+  border-bottom-color: var(--danger-500);
+  transform: rotate(45deg);
+}
+
+/* Right Column (Side Panel Checklist) */
+.inventory-side-panel-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inventory-side-panel-header {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.inventory-side-panel-row-card {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.775rem;
+}
+
+.inventory-side-panel-row-card.danger-alert {
+  border-left: 3px solid var(--danger-500);
+}
+
+.inventory-side-panel-row-card.warning-alert {
+  border-left: 3px solid var(--warning-500);
+}
+
+/* ─────────────────────────────────────────────
+ * SUMMARY FOOTER ROW SECTION
+ * ───────────────────────────────────────────── */
+.inventory-dist-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.inventory-dist-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inventory-dist-summary-label {
+  font-size: 0.625rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  font-weight: 600;
+}
+
+.inventory-dist-summary-value {
+  font-size: 0.925rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Responsive Overrides (Laptop layout) */
+@media (max-width: 1366px) {
+  .inventory-dist-card {
+    padding: 16px;
+  }
+
+  .inventory-dist-body-grid {
+    grid-template-columns: 1fr; /* Single column stack */
+    gap: 16px;
+  }
+
+  .inventory-dist-summary-grid {
+    grid-template-columns: repeat(3, 1fr); /* Squeeze grid layout on small laptops */
+    gap: 12px;
+  }
+}

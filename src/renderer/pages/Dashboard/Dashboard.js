@@ -20,7 +20,7 @@ import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner.js";
 import { KPIGrid } from "../../components/KPICard/KPICard.js";
 import SalesTrend from "../../components/SalesTrend/SalesTrend.js";
 import RevenueTrend from "../../components/RevenueTrend/RevenueTrend.js";
-import InventorySummary from "../../components/InventorySummary/InventorySummary.js";
+import InventoryDistribution from "../../components/InventoryDistribution/InventoryDistribution.js";
 import TopSellingProducts from "../../components/TopSellingProducts/TopSellingProducts.js";
 import RecentActivities from "../../components/RecentActivities/RecentActivities.js";
 import Notifications from "../../components/Notifications/Notifications.js";
@@ -272,11 +272,11 @@ export default class DashboardHome {
     revenueCol.appendChild(revenueTrend.render());
     outerContainer.appendChild(revenueCol);
 
-    // F. Inventory Summary (6 columns) - Imported from external InventorySummary component
+    // F. Inventory Distribution (6 columns) - Imported from external InventoryDistribution component
     const inventoryCol = document.createElement("div");
     inventoryCol.className = "dashboard-grid-col col-span-6";
-    const inventorySummary = new InventorySummary();
-    inventoryCol.appendChild(inventorySummary.render());
+    const inventoryDistribution = new InventoryDistribution();
+    inventoryCol.appendChild(inventoryDistribution.render());
     outerContainer.appendChild(inventoryCol);
 
     // G. Top Selling Products (6 columns) - Imported from external TopSellingProducts component

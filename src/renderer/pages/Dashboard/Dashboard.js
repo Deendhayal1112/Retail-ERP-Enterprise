@@ -1,15 +1,18 @@
 /**
  * Dashboard.js
- * Retail ERP Enterprise — Reusable Grid System & Dashboard Page
+ * Retail ERP Enterprise — Dashboard Home Page & Content Components
  *
- * Implements the reusable layout layout elements:
- * - GridContainer (12-column template gap 24px)
- * - GridRow (row grouping)
- * - GridColumn (span configurations)
- * - DashboardSection (master card panels with soft shadow & rounded corners)
- * - SectionHeader (titlebar)
- * - SectionBody (content wrapper)
- * - WidgetPlaceholder (shimmer skeleton logs)
+ * Implements the reusable page layout blocks:
+ * - DashboardHome (Main page controller)
+ * - WelcomeBanner (Greeting card)
+ * - BusinessStatus (Operation status bar)
+ * - DashboardSection (Section wrapper panel)
+ * - SectionHeader (Header layout)
+ * - SectionBody (Body layout)
+ * - PlaceholderCard (Metric scorecard placeholder)
+ * - PlaceholderChart (Chart container placeholder)
+ * - PlaceholderList (Feed lists placeholder)
+ * - PlaceholderPanel (Custom controls placeholder)
  */
 
 "use strict";
@@ -30,18 +33,6 @@ export class GridContainer {
   }
 }
 
-export class GridRow {
-  constructor(options = {}) {
-    this.options = options;
-  }
-  render(children = []) {
-    const el = document.createElement("div");
-    el.className = "dashboard-grid-row";
-    children.forEach(child => el.appendChild(child));
-    return el;
-  }
-}
-
 export class GridColumn {
   constructor(options = {}) {
     this.span = options.span || 12; // default spans all 12 cols
@@ -55,24 +46,74 @@ export class GridColumn {
   }
 }
 
+// ─────────────────────────────────────────────────────
+// 2. REUSABLE PLACEHOLDER COMPONENTS
+// ─────────────────────────────────────────────────────
+
+export class WelcomeBanner {
+  constructor(options = {}) {
+    this.title = options.title || "Welcome back, Admin";
+    this.message = options.message || "System operations are online. All local database threads verified.";
+  }
+
+  render() {
+    const el = document.createElement("div");
+    el.className = "dashboard-welcome-banner-strip";
+    el.innerHTML = `
+      <div class="welcome-banner-details">
+        <span class="welcome-tag">Enterprise Retail Console</span>
+        <h1 class="welcome-heading">${this.title}</h1>
+        <p class="welcome-subtext">${this.message}</p>
+      </div>
+      <div class="welcome-banner-actions">
+        <button class="welcome-btn-pos">Launch POS Register</button>
+      </div>
+    `;
+    return el;
+  }
+}
+
+export class BusinessStatus {
+  constructor(options = {}) {
+    this.status = options.status || "Operational";
+  }
+
+  render() {
+    const el = document.createElement("div");
+    el.className = "dashboard-business-status-bar";
+    el.innerHTML = `
+      <div class="business-status-left">
+        <span class="status-badge-indicator active"></span>
+        <span class="status-label">System Health: <strong>${this.status}</strong></span>
+      </div>
+      <div class="business-status-right">
+        <span class="status-timestamp">Last Sync: Just now</span>
+      </div>
+    `;
+    return el;
+  }
+}
+
 export class DashboardSection {
   constructor(options = {}) {
-    this.options = options;
+    this.className = options.className || "";
   }
+
   render(headerNode, bodyNode) {
-    const card = document.createElement("section");
-    card.className = "dashboard-section-card";
-    if (headerNode) card.appendChild(headerNode);
-    if (bodyNode) card.appendChild(bodyNode);
-    return card;
+    const section = document.createElement("section");
+    section.className = `dashboard-section-card ${this.className}`;
+    if (headerNode) section.appendChild(headerNode);
+    if (bodyNode) section.appendChild(bodyNode);
+    return section;
   }
 }
 
 export class SectionHeader {
   constructor(options = {}) {
-    this.title = options.title || "Section Title";
+    this.title = options.title || "Section";
     this.subtitle = options.subtitle || "";
   }
+
   render() {
     const header = document.createElement("header");
     header.className = "section-card-header";
@@ -85,9 +126,6 @@ export class SectionHeader {
 }
 
 export class SectionBody {
-  constructor(options = {}) {
-    this.options = options;
-  }
   render(contentNode) {
     const body = document.createElement("div");
     body.className = "section-card-body";
@@ -96,92 +134,169 @@ export class SectionBody {
   }
 }
 
-export class WidgetPlaceholder {
+export class PlaceholderCard {
   constructor(options = {}) {
-    this.height = options.height || 180;
+    this.value = options.value || "--";
+    this.trend = options.trend || "";
   }
+
   render() {
-    const placeholder = document.createElement("div");
-    placeholder.className = "widget-skeleton-placeholder";
-    placeholder.style.minHeight = `${this.height}px`;
-    placeholder.innerHTML = `
-      <div class="skeleton-shimmer-bar"></div>
-      <div class="skeleton-shimmer-bar short"></div>
+    const container = document.createElement("div");
+    container.className = "widget-card-placeholder-body";
+    container.innerHTML = `
+      <div class="placeholder-card-value-row">
+        <span class="placeholder-numeric-value">${this.value}</span>
+        ${this.trend ? `<span class="placeholder-trend-badge">${this.trend}</span>` : ""}
+      </div>
+      <div class="placeholder-skeleton-lines">
+        <div class="skeleton-line-item"></div>
+      </div>
     `;
-    return placeholder;
+    return container;
+  }
+}
+
+export class PlaceholderChart {
+  constructor(options = {}) {
+    this.height = options.height || 260;
+  }
+
+  render() {
+    const container = document.createElement("div");
+    container.className = "widget-chart-placeholder-body";
+    container.style.minHeight = `${this.height}px`;
+    container.innerHTML = `
+      <div class="placeholder-chart-bar-grid">
+        <div class="placeholder-chart-bar" style="height: 40%"></div>
+        <div class="placeholder-chart-bar" style="height: 60%"></div>
+        <div class="placeholder-chart-bar" style="height: 85%"></div>
+        <div class="placeholder-chart-bar" style="height: 50%"></div>
+        <div class="placeholder-chart-bar" style="height: 70%"></div>
+      </div>
+      <div class="placeholder-chart-labels-row">
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+      </div>
+    `;
+    return container;
+  }
+}
+
+export class PlaceholderList {
+  constructor(options = {}) {
+    this.itemsCount = options.itemsCount || 3;
+  }
+
+  render() {
+    const container = document.createElement("div");
+    container.className = "widget-list-placeholder-body";
+    
+    let rowsHtml = "";
+    for (let i = 0; i < this.itemsCount; i++) {
+      rowsHtml += `
+        <div class="placeholder-list-row-item">
+          <div class="list-row-bullet"></div>
+          <div class="list-row-texts">
+            <div class="skeleton-line-item"></div>
+            <div class="skeleton-line-item short"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML = rowsHtml;
+    return container;
+  }
+}
+
+export class PlaceholderPanel {
+  constructor(options = {}) {
+    this.buttons = options.buttons || ["Action 1", "Action 2"];
+  }
+
+  render() {
+    const container = document.createElement("div");
+    container.className = "widget-panel-placeholder-body";
+    
+    this.buttons.forEach(btnLabel => {
+      const btn = document.createElement("button");
+      btn.className = "placeholder-panel-action-btn";
+      btn.textContent = btnLabel;
+      container.appendChild(btn);
+    });
+
+    return container;
   }
 }
 
 // ─────────────────────────────────────────────────────
-// 2. MAIN DASHBOARD PAGE CONTROLLER IMPLEMENTATION
+// 3. MAIN DASHBOARD HOME VIEW CONTROLLER
 // ─────────────────────────────────────────────────────
 
-export default class Dashboard {
+export default class DashboardHome {
   constructor(options = {}) {
     this.options = options;
     this.element = null;
   }
 
   /**
-   * Assembles the layout page components.
-   * @returns {HTMLElement} The complete populated grid.
+   * Renders the complete dashboard home interface.
+   * @returns {HTMLElement} Mountable grid element.
    */
   render() {
-    const container = new GridContainer();
-    const cols = [];
+    const outerContainer = document.createElement("div");
+    outerContainer.className = "dashboard-grid-container";
 
-    // Helper to generate section-card with placeholders inside column wrappers
-    const createSectionColumn = (title, subtitle, colSpan, height = 180) => {
+    // A. Welcome Banner (12 columns)
+    const welcomeCol = document.createElement("div");
+    welcomeCol.className = "dashboard-grid-col col-span-12";
+    const banner = new WelcomeBanner();
+    welcomeCol.appendChild(banner.render());
+    outerContainer.appendChild(welcomeCol);
+
+    // B. Business Status Bar (12 columns)
+    const statusCol = document.createElement("div");
+    statusCol.className = "dashboard-grid-col col-span-12";
+    const status = new BusinessStatus();
+    statusCol.appendChild(status.render());
+    outerContainer.appendChild(statusCol);
+
+    // Helper to generate custom section nodes
+    const assembleSection = (title, subtitle, span, bodyNode) => {
+      const sectionCol = document.createElement("div");
+      sectionCol.className = `dashboard-grid-col col-span-${span}`;
+
       const header = new SectionHeader({ title, subtitle });
       const body = new SectionBody();
-      const placeholder = new WidgetPlaceholder({ height });
-      
-      const bodyNode = body.render(placeholder.render());
       const section = new DashboardSection();
-      const sectionNode = section.render(header.render(), bodyNode);
 
-      return new GridColumn({ span: colSpan }).render([sectionNode]);
+      sectionCol.appendChild(section.render(header.render(), body.render(bodyNode)));
+      return sectionCol;
     };
 
-    // A. Welcome Banner Section (12 Columns)
-    const welcomeCol = new GridColumn({ span: 12 });
-    const welcomeBanner = document.createElement("div");
-    welcomeBanner.className = "dashboard-welcome-banner-strip";
-    welcomeBanner.innerHTML = `
-      <div class="welcome-banner-details">
-        <span class="welcome-tag">Enterprise Retail Console</span>
-        <h1 class="welcome-heading">Welcome to Retail ERP</h1>
-        <p class="welcome-subtext">All database transactional instances and security credentials verified. Operational log status: 🟢 Active</p>
-      </div>
-      <div class="welcome-banner-actions">
-        <button class="welcome-btn-pos" onclick="console.log('POS Billing shortcut clicked')">Launch POS Register</button>
-      </div>
-    `;
-    cols.push(welcomeCol.render([welcomeBanner]));
+    // C. KPI Cards Section (4 cards x 3 columns each)
+    outerContainer.appendChild(assembleSection("Sales Performance", "Total gross sales", 3, new PlaceholderCard({ value: "$14,250.00", trend: "+12%" }).render()));
+    outerContainer.appendChild(assembleSection("Margin & Profit", "Net transaction profits", 3, new PlaceholderCard({ value: "$4,120.50", trend: "+8%" }).render()));
+    outerContainer.appendChild(assembleSection("Lanes Status", "Active checkout POS points", 3, new PlaceholderCard({ value: "4 Lanes", trend: "Normal" }).render()));
+    outerContainer.appendChild(assembleSection("Low Stock Alerts", "Catalog trigger warning threshold", 3, new PlaceholderCard({ value: "12 Items", trend: "Restock" }).render()));
 
-    // B. KPI Section (4 widgets x 3 columns each)
-    cols.push(createSectionColumn("Today's Sales", "Transactions value sum", 3, 100));
-    cols.push(createSectionColumn("Today's Profit", "Net margin calculation", 3, 100));
-    cols.push(createSectionColumn("Active Registers", "POS checkout lanes", 3, 100));
-    cols.push(createSectionColumn("Low Stock Alerts", "Restock inventory trigger", 3, 100));
+    // D. Sales Analytics & Revenue Overviews (8 columns and 4 columns)
+    outerContainer.appendChild(assembleSection("Sales Analytics Overview", "Weekly transaction reports analytics", 8, new PlaceholderChart({ height: 200 }).render()));
+    outerContainer.appendChild(assembleSection("Revenue Channel Overview", "Category performance summaries", 4, new PlaceholderChart({ height: 200 }).render()));
 
-    // C. Charts Section (8 columns and 4 columns)
-    cols.push(createSectionColumn("Sales Overview", "Weekly transaction aggregation", 8, 300));
-    cols.push(createSectionColumn("Revenue Chart", "Category performance summaries", 4, 300));
+    // E. Inventory Summaries & Recent Activity (6 columns each)
+    outerContainer.appendChild(assembleSection("Inventory Summary Overview", "Warehouse stock tracking summaries", 6, new PlaceholderList({ itemsCount: 3 }).render()));
+    outerContainer.appendChild(assembleSection("Recent Operator Activity", "Audit records transactions feeds", 6, new PlaceholderList({ itemsCount: 3 }).render()));
 
-    // D. Summaries Section (6 columns each)
-    cols.push(createSectionColumn("Business Summary", "Profit and loss analytics", 6, 220));
-    cols.push(createSectionColumn("Inventory Summary", "Warehouse stock tracking", 6, 220));
+    // F. Quick Actions, Notifications, & Upcoming Tasks (4 columns each)
+    outerContainer.appendChild(assembleSection("Quick Operations Menu", "POS billing shortcuts & register tools", 4, new PlaceholderPanel({ buttons: ["⚡ New Invoice", "🏷️ Add Product", "📊 Run Report"] }).render()));
+    outerContainer.appendChild(assembleSection("System Alerts & Notifications", "Active database logs warnings", 4, new PlaceholderList({ itemsCount: 2 }).render()));
+    outerContainer.appendChild(assembleSection("Upcoming Schedule Tasks", "Store checklist milestones", 4, new PlaceholderList({ itemsCount: 2 }).render()));
 
-    // E. Details Section (6 columns each)
-    cols.push(createSectionColumn("Recent Activity", "Operator actions security audit", 6, 220));
-    cols.push(createSectionColumn("Quick Actions", "Launch billing and settings utilities", 6, 220));
-
-    // F. Notification Area (12 Columns)
-    cols.push(createSectionColumn("Notification Area", "Recent system notifications & database alerts", 12, 120));
-
-    const gridNode = container.render(cols);
-    this.element = gridNode;
-    return gridNode;
+    this.element = outerContainer;
+    return outerContainer;
   }
 }

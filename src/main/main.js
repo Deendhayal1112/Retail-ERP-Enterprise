@@ -489,6 +489,69 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize QA subsystems: ${err.message}`);
   }
 
+  // Initialize Release Candidate Review Subsystem
+  try {
+    const ReleaseCandidateManager = require("./rc/ReleaseCandidateManager");
+    const RCValidationManager = require("./rc/ValidationManager");
+    const ApprovalWorkflowManager = require("./rc/ApprovalWorkflowManager");
+    const RiskAssessmentManager = require("./rc/RiskAssessmentManager");
+    const GoLiveManager = require("./rc/GoLiveManager");
+    const RCEvents = require("./rc/RCEvents");
+
+    const rcMgr = new ReleaseCandidateManager();
+    const rcValMgr = new RCValidationManager();
+    const workflowMgr = new ApprovalWorkflowManager();
+    const riskMgr = new RiskAssessmentManager();
+    const goliveMgr = new GoLiveManager();
+
+    RCEvents.register({
+      "rc:get-info": async (event) => {
+        validateSender(event);
+        return await rcMgr.getInfo();
+      },
+      "rc:update-notes": async (event, notes) => {
+        validateSender(event);
+        return await rcMgr.updateNotes(notes);
+      },
+      "rc:get-validations": async (event) => {
+        validateSender(event);
+        return await rcValMgr.getValidations();
+      },
+      "rc:toggle-validation": async (event, id) => {
+        validateSender(event);
+        return await rcValMgr.toggleValidation(id);
+      },
+      "rc:get-checklist": async (event) => {
+        validateSender(event);
+        return await goliveMgr.getChecklist();
+      },
+      "rc:toggle-checklist": async (event, id) => {
+        validateSender(event);
+        return await goliveMgr.toggleCheck(id);
+      },
+      "rc:get-approvals": async (event) => {
+        validateSender(event);
+        return await workflowMgr.getApprovals();
+      },
+      "rc:toggle-approval": async (event, id) => {
+        validateSender(event);
+        return await workflowMgr.toggleApproval(id);
+      },
+      "rc:get-risks": async (event) => {
+        validateSender(event);
+        return await riskMgr.getRisks();
+      },
+      "rc:toggle-risk-mitigation": async (event, id) => {
+        validateSender(event);
+        return await riskMgr.toggleMitigation(id);
+      }
+    });
+
+    logger.info("Release Candidate Review & Go-Live Readiness subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize release candidate subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

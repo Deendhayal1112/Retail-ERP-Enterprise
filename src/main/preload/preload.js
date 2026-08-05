@@ -89,7 +89,17 @@ const ALLOWED_SEND_CHANNELS = [
   "qa:get-bugs",
   "qa:resolve-bug",
   "qa:get-readiness",
-  "qa:toggle-readiness"
+  "qa:toggle-readiness",
+  "rc:get-info",
+  "rc:update-notes",
+  "rc:get-validations",
+  "rc:toggle-validation",
+  "rc:get-checklist",
+  "rc:toggle-checklist",
+  "rc:get-approvals",
+  "rc:toggle-approval",
+  "rc:get-risks",
+  "rc:toggle-risk-mitigation"
 ];
 
 // Channels from Main to Renderer (Listeners)

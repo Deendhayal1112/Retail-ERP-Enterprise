@@ -10,13 +10,11 @@
  * - Logged-in user metadata summaries
  */
 
-"use strict";
+import SearchBar from "../SearchBar/SearchBar.js";
+import UserMenu from "../UserMenu/UserMenu.js";
+import NotificationPanel from "../NotificationPanel/NotificationPanel.js";
 
-const SearchBar = require("../SearchBar");
-const UserMenu = require("../UserMenu");
-const NotificationPanel = require("../NotificationPanel");
-
-class Header {
+export default class Header {
   constructor(options = {}) {
     this.options = options;
     this.element = null;
@@ -66,5 +64,3 @@ class Header {
     return container;
   }
 }
-
-module.exports = Header;

@@ -6,9 +6,7 @@
  * active terminal workspace details, and application version info.
  */
 
-"use strict";
-
-class Footer {
+export default class Footer {
   constructor(options = {}) {
     this.options = options;
     this.element = null;
@@ -35,5 +33,3 @@ class Footer {
     return container;
   }
 }
-
-module.exports = Footer;

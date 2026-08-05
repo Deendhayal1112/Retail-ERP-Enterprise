@@ -1,82 +1,80 @@
 /**
  * DashboardLayout.js
- * Retail ERP Enterprise — Main UI Page Shell Wrapper
+ * Retail ERP Enterprise — Reusable Master Workspace layout component
  *
- * Implements the core multi-pane workspace layout consisting of:
- * - Left sidebar navigation menu placeholder
- * - Top header controls toolbar placeholder
- * - Central content viewport area
- * - Bottom status information bar placeholder
+ * Implements a structured container that encapsulates the fixed 280px left sidebar,
+ * the 72px sticky top nav, the 12-column page wrapper grid, and the 40px fixed footer.
  */
 
-"use strict";
+import Sidebar from "../../components/Sidebar/Sidebar.js";
+import Header from "../../components/Header/Header.js";
+import Footer from "../../components/Footer/Footer.js";
 
-const Sidebar = require("../../components/Sidebar");
-const Header = require("../../components/Header");
-const Footer = require("../../components/Footer");
-
-class DashboardLayout {
+export default class DashboardLayout {
   constructor(options = {}) {
     this.options = options;
     this.element = null;
-    
-    // Instantiate sub-components
+
+    // Instantiate layout sections placeholders
     this.sidebar = new Sidebar();
     this.header = new Header();
     this.footer = new Footer();
   }
 
   /**
-   * Renders the layout grid wrapping sub-components.
-   * @param {HTMLElement} contentNode The main workspace content element.
-   * @returns {HTMLElement} The populated dashboard layout node.
+   * Renders the layout node.
+   * @param {HTMLElement} contentNode Page content element to place inside the viewport grid.
+   * @returns {HTMLElement} The complete layout structure element.
    */
   render(contentNode) {
+    // 1. Create Layout Container
     const layoutContainer = document.createElement("div");
-    layoutContainer.className = "dashboard-layout-container";
+    layoutContainer.className = "layout-container";
 
-    // 1. Sidebar Column Section
-    const sidebarWrapper = document.createElement("aside");
-    sidebarWrapper.className = "layout-sidebar-column";
-    sidebarWrapper.appendChild(this.sidebar.render());
+    // 2. Left Sidebar fixed column
+    const sidebarColumn = document.createElement("aside");
+    sidebarColumn.className = "layout-sidebar-column";
+    sidebarColumn.appendChild(this.sidebar.render());
+    layoutContainer.appendChild(sidebarColumn);
 
-    // 2. Right Pane (Header + Content + Footer)
+    // 3. Right side pane (Header, content scroll viewport, Footer status bar)
     const rightPane = document.createElement("div");
     rightPane.className = "layout-right-pane";
 
-    // Header Row
-    const headerWrapper = document.createElement("header");
-    headerWrapper.className = "layout-header-row";
-    headerWrapper.appendChild(this.header.render());
+    // Sticky Header row
+    const headerRow = document.createElement("header");
+    headerRow.className = "layout-header-row";
+    headerRow.appendChild(this.header.render());
+    rightPane.appendChild(headerRow);
 
-    // Main Content Row
-    const mainContentWrapper = document.createElement("main");
-    mainContentWrapper.className = "layout-content-viewport";
+    // Main viewport area containing the flexible scroll view
+    const contentViewport = document.createElement("section");
+    contentViewport.className = "layout-content-viewport";
+
+    // 12-column Page wrapper layout grid
+    const pageWrapperGrid = document.createElement("div");
+    pageWrapperGrid.className = "page-wrapper-grid";
+
     if (contentNode) {
-      mainContentWrapper.appendChild(contentNode);
+      pageWrapperGrid.appendChild(contentNode);
     } else {
-      const placeholder = document.createElement("div");
-      placeholder.textContent = "No content loaded.";
-      mainContentWrapper.appendChild(placeholder);
+      const emptyPlaceholder = document.createElement("div");
+      emptyPlaceholder.textContent = "No page content loaded.";
+      pageWrapperGrid.appendChild(emptyPlaceholder);
     }
 
-    // Footer Row
-    const footerWrapper = document.createElement("footer");
-    footerWrapper.className = "layout-footer-row";
-    footerWrapper.appendChild(this.footer.render());
+    contentViewport.appendChild(pageWrapperGrid);
+    rightPane.appendChild(contentViewport);
 
-    // Assemble right pane
-    rightPane.appendChild(headerWrapper);
-    rightPane.appendChild(mainContentWrapper);
-    rightPane.appendChild(footerWrapper);
+    // Fixed Footer row
+    const footerRow = document.createElement("footer");
+    footerRow.className = "layout-footer-row";
+    footerRow.appendChild(this.footer.render());
+    rightPane.appendChild(footerRow);
 
-    // Assemble outer layout grid
-    layoutContainer.appendChild(sidebarWrapper);
     layoutContainer.appendChild(rightPane);
 
     this.element = layoutContainer;
     return layoutContainer;
   }
 }
-
-module.exports = DashboardLayout;

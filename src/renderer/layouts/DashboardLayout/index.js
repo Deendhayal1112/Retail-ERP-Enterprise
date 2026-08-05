@@ -1,3 +1,2 @@
-"use strict";
-
-module.exports = require("./DashboardLayout");
+import DashboardLayout from "./DashboardLayout.js";
+export default DashboardLayout;

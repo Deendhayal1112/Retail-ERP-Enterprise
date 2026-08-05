@@ -2,96 +2,76 @@
  * home.js
  * Retail ERP Enterprise — Home Screen Controller
  *
- * Verifies active session context on load, displays current user parameters,
+ * Verifies active session context on load, instantiates the master
+ * DashboardLayout shell, embeds the Dashboard page placeholder widgets grid,
  * and links titlebar controls and session end actions.
- *
- * Phase 5 — Step 3: Session Management & Login Integration
  */
 
 "use strict";
 
+import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout.js";
+import Dashboard from "../Dashboard/Dashboard.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
-  const welcomeMessage = document.getElementById("welcome-message");
-  const metaUsername = document.getElementById("meta-username");
-  const metaRole = document.getElementById("meta-role");
-  const metaUuid = document.getElementById("meta-uuid");
-  const logoutBtn = document.getElementById("logout-btn");
+  const appRoot = document.getElementById("app-root");
 
-  // Title Bar Control Nodes
-  const minBtn = document.getElementById("win-min");
-  const maxBtn = document.getElementById("win-max");
-  const closeBtn = document.getElementById("win-close");
-
-  /**
-   * Helper to retrieve active role translation name.
-   * @param {number} roleId Role identification index.
-   * @returns {string} Human readable name.
-   */
-  const getRoleName = (roleId) => {
-    switch (roleId) {
-      case 1:
-        return "Administrator";
-      case 2:
-        return "Manager";
-      case 3:
-        return "Cashier";
-      case 4:
-        return "Viewer";
-      default:
-        return "Operator";
-    }
-  };
-
-  // 1. Session Verification Check
+  // 1. Session Verification Check (Maintain existing login validation logic)
   try {
     const result = await window.api.auth.getSession();
     if (!result || !result.success) {
-      console.warn(
-        "Unauthorized access: No active session found. Redirecting to login.",
-      );
+      console.warn("Unauthorized access: No active session found. Redirecting to login.");
       window.location.href = "../login/login.html";
       return;
     }
 
     const { user } = result;
+    console.log(`Session verified for user: ${user.username} (${user.full_name})`);
 
-    // Populate welcome messages and meta fields
-    if (welcomeMessage)
-      welcomeMessage.innerText = `Welcome, ${user.full_name}!`;
-    if (metaUsername) metaUsername.innerText = user.username;
-    if (metaRole) metaRole.innerText = getRoleName(user.role_id);
-    if (metaUuid) metaUuid.innerText = user.uuid;
+    // 2. Instantiate and Render Reusable Dashboard Layout Shell
+    const layout = new DashboardLayout();
+    const dashboardPage = new Dashboard();
+
+    // Render page content first
+    const contentNode = document.createElement("div");
+    contentNode.style.width = "100%";
+    contentNode.appendChild(dashboardPage.render());
+
+    // Render outer shell wrapping the page content node
+    const layoutNode = layout.render(contentNode);
+
+    if (appRoot) {
+      appRoot.innerHTML = "";
+      appRoot.appendChild(layoutNode);
+    }
+
+    // 3. Dynamic custom event bindings for Sidebar Navigation Actions
+    const logoutLink = document.querySelector(".item-logout a");
+    if (logoutLink) {
+      logoutLink.addEventListener("click", async (e) => {
+        e.preventDefault();
+        try {
+          console.log("Securely ending active operator session...");
+          await window.api.auth.logout();
+          window.location.href = "../login/login.html";
+        } catch (error) {
+          console.error("Logout error occurred:", error);
+        }
+      });
+    }
+
+    // Re-bind user profile tags dynamically inside header or sidebar
+    const profileLabel = document.querySelector(".usermenu-placeholder span");
+    if (profileLabel) {
+      profileLabel.textContent = user.full_name;
+    }
+
   } catch (error) {
     console.error("Failed to verify active session:", error);
     window.location.href = "../login/login.html";
     return;
   }
 
-  // 2. Bind Secure Logout Event
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      try {
-        await window.api.auth.logout();
-        window.location.href = "../login/login.html";
-      } catch (error) {
-        console.error("Logout error occurred:", error);
-      }
-    });
-  }
-
-  // 3. Bind Window Frame Control Handlers
-  if (minBtn) {
-    minBtn.addEventListener("click", () => window.api.window.minimize());
-  }
-  if (maxBtn) {
-    maxBtn.addEventListener("click", () => window.api.window.maximize());
-  }
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => window.api.window.close());
-  }
-
-  // Listen to background session expiration broadcast
+  // 4. Session Expiration Broadcast handler
   window.api.ipc.on("auth:session-expired", () => {
     console.warn("Session expired broadcast received. Ending connection.");
     window.location.href = "../login/login.html";

@@ -8,9 +8,7 @@
  * - License, Profile, Logout.
  */
 
-"use strict";
-
-class Sidebar {
+export default class Sidebar {
   constructor(options = {}) {
     this.options = options;
     this.element = null;
@@ -88,5 +86,3 @@ class Sidebar {
     return container;
   }
 }
-
-module.exports = Sidebar;

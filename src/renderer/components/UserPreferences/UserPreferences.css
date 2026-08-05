@@ -1,0 +1,218 @@
+/* UserPreferences.css */
+
+.user-preferences-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+.preferences-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 16px;
+}
+
+.preferences-page-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.preferences-page-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Sections Split Layout */
+.preferences-sections-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* Individual Section Card */
+.preference-section-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.preference-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 12px;
+}
+
+.preference-section-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.preference-section-subtitle {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+/* Rows inside Section Cards */
+.preference-control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: 8px 0;
+  gap: 16px;
+}
+
+.preference-control-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.preference-control-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.preference-control-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Toggle Switches */
+.preference-toggle-switch {
+  width: 40px;
+  height: 22px;
+  background-color: var(--primary-500);
+  border-radius: var(--radius-full);
+  position: relative;
+  cursor: pointer;
+  transition: background-color var(--duration-fast);
+  flex-shrink: 0;
+}
+
+.preference-toggle-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: right var(--duration-fast);
+}
+
+.preference-toggle-switch.off {
+  background-color: var(--border-light);
+}
+
+.preference-toggle-switch.off::after {
+  right: auto;
+  left: 2px;
+}
+
+/* Dropdown Select fields */
+.preference-select-dropdown {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color var(--duration-fast);
+  min-width: 140px;
+}
+
+.preference-select-dropdown:focus {
+  border-color: var(--primary-400);
+}
+
+/* Theme selector pills wrap */
+.theme-selector-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-pill-btn {
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.theme-pill-btn:hover,
+.theme-pill-btn.active {
+  background-color: var(--primary-500);
+  color: #ffffff;
+  border-color: var(--primary-500);
+}
+
+/* Colors accent selection list */
+.accent-colors-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.accent-color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform var(--duration-fast);
+}
+
+.accent-color-circle:hover {
+  transform: scale(1.15);
+}
+
+.accent-color-circle.active {
+  border-color: var(--text-primary);
+}
+
+.accent-color-circle.blue   { background-color: var(--primary-500); }
+.accent-color-circle.purple { background-color: var(--accent-500); }
+.accent-color-circle.green  { background-color: var(--success-500); }
+.accent-color-circle.amber  { background-color: #f59e0b; }
+
+/* Responsive Stack */
+@media (max-width: 1366px) {
+  .user-preferences-container {
+    padding: 20px;
+  }
+}

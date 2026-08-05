@@ -15,6 +15,7 @@ import GlobalSearch from "../../components/GlobalSearch/GlobalSearch.js";
 import CommandPalette from "../../components/CommandPalette/CommandPalette.js";
 import KeyboardManager from "../../components/KeyboardManager/KeyboardManager.js";
 import DashboardCustomizer from "../../components/DashboardCustomizer/DashboardCustomizer.js";
+import UserPreferences from "../../components/UserPreferences/UserPreferences.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -78,14 +79,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     const customizer = new DashboardCustomizer();
     document.body.appendChild(customizer.render());
 
-    // Connect sidebar settings menu click to trigger Dashboard Customizer slide-out
-    const sidebarSettingsLink = document.querySelector(".item-settings a");
-    if (sidebarSettingsLink) {
-      sidebarSettingsLink.addEventListener("click", (e) => {
-        e.preventDefault();
-        customizer.toggle(true);
+    // Connect routing clicks dynamically to swap page content viewports
+    const sidebarLinks = document.querySelectorAll(".sidebar-nav-link, .submenu-link");
+    sidebarLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        const route = link.getAttribute("data-route");
+        if (!route) return;
+
+        const pageWrapper = document.querySelector(".page-wrapper-grid");
+        if (!pageWrapper) return;
+
+        if (route === "settings") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const prefs = new UserPreferences();
+          pageWrapper.appendChild(prefs.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-active-label");
+          if (breadcrumbText) breadcrumbText.textContent = "Settings";
+        } else if (route === "dashboard") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          pageWrapper.appendChild(dashboardPage.render());
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-active-label");
+          if (breadcrumbText) breadcrumbText.textContent = "Dashboard";
+        }
       });
-    }
+    });
 
     // 3. Dynamic custom event bindings for Sidebar Navigation Actions
     const logoutLink = document.querySelector(".item-logout a");

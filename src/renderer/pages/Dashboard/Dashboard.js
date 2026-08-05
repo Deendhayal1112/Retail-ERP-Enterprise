@@ -18,6 +18,7 @@
 
 import WelcomeBanner         from "../../components/WelcomeBanner/WelcomeBanner.js";
 import { KPIGrid }           from "../../components/KPICard/KPICard.js";
+import MiniKPIGrid           from "../../components/MiniKPI/MiniKPI.js";
 import SalesTrend            from "../../components/SalesTrend/SalesTrend.js";
 import RevenueTrend          from "../../components/RevenueTrend/RevenueTrend.js";
 import InventoryDistribution from "../../components/InventoryDistribution/InventoryDistribution.js";
@@ -83,7 +84,6 @@ export class BusinessStatus {
 
 export class DashboardSection {
   constructor(options = {}) { this.className = options.className || ""; }
-
   render(headerNode, bodyNode) {
     const section = document.createElement("section");
     section.className = `dashboard-section-card ${this.className}`;
@@ -98,7 +98,6 @@ export class SectionHeader {
     this.title    = options.title    || "Section";
     this.subtitle = options.subtitle || "";
   }
-
   render() {
     const header = document.createElement("header");
     header.className = "section-card-header";
@@ -124,7 +123,6 @@ export class PlaceholderCard {
     this.value = options.value || "--";
     this.trend = options.trend || "";
   }
-
   render() {
     const container = document.createElement("div");
     container.className = "widget-card-placeholder-body";
@@ -143,7 +141,6 @@ export class PlaceholderCard {
 
 export class PlaceholderChart {
   constructor(options = {}) { this.height = options.height || 260; }
-
   render() {
     const container = document.createElement("div");
     container.className = "widget-chart-placeholder-body";
@@ -166,7 +163,6 @@ export class PlaceholderChart {
 
 export class PlaceholderList {
   constructor(options = {}) { this.itemsCount = options.itemsCount || 3; }
-
   render() {
     const container = document.createElement("div");
     container.className = "widget-list-placeholder-body";
@@ -188,7 +184,6 @@ export class PlaceholderList {
 
 export class PlaceholderPanel {
   constructor(options = {}) { this.buttons = options.buttons || ["Action 1", "Action 2"]; }
-
   render() {
     const container = document.createElement("div");
     container.className = "widget-panel-placeholder-body";
@@ -220,25 +215,31 @@ export default class DashboardHome {
     const outerContainer = document.createElement("div");
     outerContainer.className = "dashboard-grid-container";
 
-    // ── Row 1: Welcome Banner (12 cols) ───────────────────────────────────
+    // ── Row 1: Welcome Banner (12) ────────────────────────────────────────
     const welcomeCol = document.createElement("div");
     welcomeCol.className = "dashboard-grid-col col-span-12";
     welcomeCol.appendChild(new WelcomeBanner().render());
     outerContainer.appendChild(welcomeCol);
 
-    // ── Row 2: Business Status Bar (12 cols) ──────────────────────────────
+    // ── Row 2: Business Status Bar (12) ───────────────────────────────────
     const statusCol = document.createElement("div");
     statusCol.className = "dashboard-grid-col col-span-12";
     statusCol.appendChild(new BusinessStatus().render());
     outerContainer.appendChild(statusCol);
 
-    // ── Row 3: KPI Scorecards (12 cols) ───────────────────────────────────
+    // ── Row 3: KPI Scorecards (12) ────────────────────────────────────────
     const kpiCol = document.createElement("div");
     kpiCol.className = "dashboard-grid-col col-span-12";
     kpiCol.appendChild(new KPIGrid().render());
     outerContainer.appendChild(kpiCol);
 
-    // ── Row 4: Sales Trend (8 cols) + Revenue Trend (4 cols) ──────────────
+    // ── Row 4: Executive Mini KPI Charts (12) ─────────────────────────────
+    const miniKpiCol = document.createElement("div");
+    miniKpiCol.className = "dashboard-grid-col col-span-12";
+    miniKpiCol.appendChild(new MiniKPIGrid().render());
+    outerContainer.appendChild(miniKpiCol);
+
+    // ── Row 5: Sales Trend (8) + Revenue Trend (4) ────────────────────────
     const salesCol = document.createElement("div");
     salesCol.className = "dashboard-grid-col col-span-8";
     salesCol.appendChild(new SalesTrend().render());
@@ -249,7 +250,7 @@ export default class DashboardHome {
     revenueCol.appendChild(new RevenueTrend().render());
     outerContainer.appendChild(revenueCol);
 
-    // ── Row 5: Inventory Distribution (6 cols) + Category Sales (6 cols) ──
+    // ── Row 6: Inventory Distribution (6) + Category Sales (6) ───────────
     const inventoryCol = document.createElement("div");
     inventoryCol.className = "dashboard-grid-col col-span-6";
     inventoryCol.appendChild(new InventoryDistribution().render());
@@ -260,13 +261,13 @@ export default class DashboardHome {
     categoryCol.appendChild(new CategorySales().render());
     outerContainer.appendChild(categoryCol);
 
-    // ── Row 6: Business Performance Comparison (12 cols) ──────────────────
+    // ── Row 7: Business Performance Comparison (12) ───────────────────────
     const comparisonCol = document.createElement("div");
     comparisonCol.className = "dashboard-grid-col col-span-12";
     comparisonCol.appendChild(new BusinessComparison().render());
     outerContainer.appendChild(comparisonCol);
 
-    // ── Row 7: Top Selling Products (6 cols) + Recent Activities (6 cols) ─
+    // ── Row 8: Top Selling Products (6) + Recent Activities (6) ──────────
     const topSellingCol = document.createElement("div");
     topSellingCol.className = "dashboard-grid-col col-span-6";
     topSellingCol.appendChild(new TopSellingProducts().render());
@@ -277,7 +278,7 @@ export default class DashboardHome {
     recentActivitiesCol.appendChild(new RecentActivities().render());
     outerContainer.appendChild(recentActivitiesCol);
 
-    // ── Row 8: Notifications (6 cols) + Quick Actions (6 cols) ────────────
+    // ── Row 9: Notifications (6) + Quick Actions (6) ──────────────────────
     const notificationsCol = document.createElement("div");
     notificationsCol.className = "dashboard-grid-col col-span-6";
     notificationsCol.appendChild(new Notifications().render());
@@ -288,7 +289,7 @@ export default class DashboardHome {
     quickCol.appendChild(new QuickActions().render());
     outerContainer.appendChild(quickCol);
 
-    // ── Row 9: Business Health Summary (12 cols) ──────────────────────────
+    // ── Row 10: Business Health Summary (12) ──────────────────────────────
     const healthCol = document.createElement("div");
     healthCol.className = "dashboard-grid-col col-span-12";
     healthCol.appendChild(new BusinessHealth().render());

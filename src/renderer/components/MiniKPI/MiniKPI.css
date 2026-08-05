@@ -1,0 +1,200 @@
+/* MiniKPI.css */
+
+/* ─────────────────────────────────────────────
+ * GRID WRAPPER
+ * ───────────────────────────────────────────── */
+.mini-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────────
+ * INDIVIDUAL KPI CARD
+ * ───────────────────────────────────────────── */
+.mini-kpi-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--duration-fast), transform var(--duration-fast);
+}
+
+.mini-kpi-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Accent left border strip */
+.mini-kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.mini-kpi-card.sales::before       { background-color: var(--primary-500); }
+.mini-kpi-card.revenue::before     { background-color: var(--accent-500); }
+.mini-kpi-card.orders::before      { background-color: var(--success-500); }
+.mini-kpi-card.customers::before   { background-color: #f59e0b; }
+.mini-kpi-card.profit::before      { background-color: #10b981; }
+.mini-kpi-card.inventory::before   { background-color: #8b5cf6; }
+
+/* ─────────────────────────────────────────────
+ * CARD TOP ROW — ICON + TITLE + TREND BADGE
+ * ───────────────────────────────────────────── */
+.mini-kpi-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mini-kpi-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.mini-kpi-card.sales     .mini-kpi-icon-wrap { background-color: rgba(99, 102, 241, 0.12); }
+.mini-kpi-card.revenue   .mini-kpi-icon-wrap { background-color: rgba(139, 92, 246, 0.12); }
+.mini-kpi-card.orders    .mini-kpi-icon-wrap { background-color: rgba(34, 197, 94, 0.12); }
+.mini-kpi-card.customers .mini-kpi-icon-wrap { background-color: rgba(245, 158, 11, 0.12); }
+.mini-kpi-card.profit    .mini-kpi-icon-wrap { background-color: rgba(16, 185, 129, 0.12); }
+.mini-kpi-card.inventory .mini-kpi-icon-wrap { background-color: rgba(139, 92, 246, 0.10); }
+
+/* Trend badge pill */
+.mini-trend-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.mini-trend-badge.up {
+  background-color: rgba(34, 197, 94, 0.12);
+  color: var(--success-600);
+}
+
+.mini-trend-badge.down {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: var(--danger-600);
+}
+
+.mini-trend-badge.neutral {
+  background-color: var(--bg-hover);
+  color: var(--text-muted);
+}
+
+/* ─────────────────────────────────────────────
+ * TITLE + VALUE BLOCK
+ * ───────────────────────────────────────────── */
+.mini-kpi-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mini-kpi-title {
+  font-size: 0.675rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.mini-kpi-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.1;
+}
+
+/* ─────────────────────────────────────────────
+ * SPARKLINE CANVAS AREA
+ * ───────────────────────────────────────────── */
+.mini-sparkline-wrap {
+  height: 36px;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.mini-sparkline-bar {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  min-width: 4px;
+  transition: opacity var(--duration-fast);
+  opacity: 0.65;
+}
+
+.mini-sparkline-bar:hover {
+  opacity: 1;
+}
+
+/* Per-card bar color variants */
+.mini-kpi-card.sales     .mini-sparkline-bar { background-color: var(--primary-400); }
+.mini-kpi-card.revenue   .mini-sparkline-bar { background-color: var(--accent-400); }
+.mini-kpi-card.orders    .mini-sparkline-bar { background-color: var(--success-400); }
+.mini-kpi-card.customers .mini-sparkline-bar { background-color: #f59e0b; }
+.mini-kpi-card.profit    .mini-sparkline-bar { background-color: #10b981; }
+.mini-kpi-card.inventory .mini-sparkline-bar { background-color: #8b5cf6; }
+
+/* ─────────────────────────────────────────────
+ * COMPARISON LABEL FOOTER
+ * ───────────────────────────────────────────── */
+.mini-comparison-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  border-top: 1px solid var(--border-light);
+  padding-top: 8px;
+}
+
+.mini-comparison-label strong {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+/* Responsive Overrides (Laptop layout) */
+@media (max-width: 1440px) {
+  .mini-kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1366px) {
+  .mini-kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .mini-kpi-card {
+    padding: 14px 14px 12px;
+  }
+
+  .mini-kpi-value {
+    font-size: 1.15rem;
+  }
+}

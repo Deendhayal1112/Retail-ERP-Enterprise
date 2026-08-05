@@ -20,6 +20,7 @@ import RoleManagement from "../../components/RoleManagement/RoleManagement.js";
 import AppearanceSettings from "../../components/AppearanceSettings/AppearanceSettings.js";
 import LocalizationSettings from "../../components/LocalizationSettings/LocalizationSettings.js";
 import NotificationSettings from "../../components/NotificationSettings/NotificationSettings.js";
+import SecurityCenter from "../../components/SecurityCenter/SecurityCenter.js";
 
 export class SettingsCard {
   /**
@@ -279,12 +280,8 @@ export class SettingsContent {
       wrap.appendChild(locSettings.render());
 
     } else if (this.section === "security") {
-      const p1 = new SettingsSection({ title: "Password Policies Configuration" });
-      const cards1 = [
-        new SettingsCard({ title: "Min Password Length", description: "Minimum count digits credentials must possess", control: this._createInput("8 characters", "Min Length") }).render(),
-        new SettingsCard({ title: "Auto Session Logout Time", description: "Minutes of client inactivity triggering automatic lock", control: this._createInput("15 minutes", "Idle minutes timeout") }).render()
-      ];
-      wrap.appendChild(p1.render(cards1));
+      const securityCenter = new SecurityCenter();
+      wrap.appendChild(securityCenter.render());
 
     } else if (this.section === "about") {
       const p1 = new SettingsSection({ title: "Product Version & Info" });

@@ -246,7 +246,7 @@
 }
 
 .sidebar-submenu.expanded {
-  max-height: 450px; /* Animate expand height limits */
+  max-height: 800px; /* Animate expand height limits to prevent bottom items clipping */
 }
 
 .submenu-link {

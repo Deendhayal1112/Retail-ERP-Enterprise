@@ -37,6 +37,7 @@ import DeploymentCenter from "../Deploy/DeploymentCenter.js";
 import BusinessPage from "../Business/BusinessPage.js";
 import PluginCenter from "../Plugins/PluginCenter.js";
 import CompanyManagementCenter from "../Companies/CompanyManagementCenter.js";
+import WarehouseManagementCenter from "../Warehouses/WarehouseManagementCenter.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -112,7 +113,18 @@ document.addEventListener("DOMContentLoaded", async () => {
           activePerformanceModule = null;
         }
 
-        if (route === "company-center") {
+        if (route === "warehouse-center") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const warehouseCenter = new WarehouseManagementCenter();
+          warehouseCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Warehouse Management Center";
+        } else if (route === "company-center") {
           e.preventDefault();
           pageWrapper.innerHTML = "";
           const companyCenter = new CompanyManagementCenter();

@@ -126,7 +126,15 @@ const ALLOWED_SEND_CHANNELS = [
   "companies:switch",
   "companies:get-matrix",
   "companies:update-role-perms",
-  "companies:get-diagnostics"
+  "companies:get-diagnostics",
+  "warehouses:get-all",
+  "warehouses:register",
+  "warehouses:get-transfers",
+  "warehouses:submit-transfer",
+  "warehouses:approve-transfer",
+  "warehouses:receive-transfer",
+  "warehouses:get-inventory",
+  "warehouses:get-diagnostics"
 ];
 
 // Channels from Main to Renderer (Listeners)

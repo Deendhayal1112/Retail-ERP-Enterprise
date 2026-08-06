@@ -217,6 +217,18 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize Multi-Company Subsystem: ${err.message}`);
   }
 
+  // Initialize Enterprise Multi-Warehouse Subsystem
+  try {
+    const warehouseManager = require("./warehouses/WarehouseManager");
+    const { registerWarehouseIpcHandlers } = require("./ipc/warehouses.ipc");
+
+    warehouseManager.initialize();
+    registerWarehouseIpcHandlers();
+    logger.info("Enterprise Multi-Warehouse Subsystem successfully initialized in main process. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize Multi-Warehouse Subsystem: ${err.message}`);
+  }
+
   // Initialize Release and Distribution Managers
   try {
     const PackagingManager = require("./release/PackagingManager");

@@ -112,7 +112,13 @@ const ALLOWED_SEND_CHANNELS = [
   "analytics:get-kpis",
   "analytics:get-trends",
   "analytics:get-recommendations",
-  "analytics:get-forecasts"
+  "analytics:get-forecasts",
+  "plugins:get-installed",
+  "plugins:get-available",
+  "plugins:install",
+  "plugins:toggle",
+  "plugins:update-permissions",
+  "plugins:get-diagnostics"
 ];
 
 // Channels from Main to Renderer (Listeners)

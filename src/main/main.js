@@ -193,6 +193,18 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize security subsystems: ${err.message}`);
   }
 
+  // Initialize Enterprise Plugin Framework Subsystem
+  try {
+    const pluginManager = require("./plugins/PluginManager");
+    const { registerPluginIpcHandlers } = require("./ipc/plugins.ipc");
+
+    pluginManager.initialize();
+    registerPluginIpcHandlers();
+    logger.info("Enterprise Plugin Framework successfully initialized in main process. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize Plugin Framework: ${err.message}`);
+  }
+
   // Initialize Release and Distribution Managers
   try {
     const PackagingManager = require("./release/PackagingManager");

@@ -35,6 +35,7 @@ import ReleaseManagementCenter from "../ReleaseManagement/ReleaseManagementCente
 import DocumentationCenter from "../Docs/DocumentationCenter.js";
 import DeploymentCenter from "../Deploy/DeploymentCenter.js";
 import BusinessPage from "../Business/BusinessPage.js";
+import PluginCenter from "../Plugins/PluginCenter.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -110,7 +111,18 @@ document.addEventListener("DOMContentLoaded", async () => {
           activePerformanceModule = null;
         }
 
-        if (route === "security") {
+        if (route === "plugin-center") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const pluginCenter = new PluginCenter();
+          pluginCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Plugin Center";
+        } else if (route === "security") {
           e.preventDefault();
           pageWrapper.innerHTML = "";
           const securityCenter = new SecurityCenter();

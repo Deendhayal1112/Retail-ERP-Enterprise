@@ -559,13 +559,19 @@ export default class SettingsLayout {
     const pane = this.element.querySelector(".settings-content-pane");
     if (!pane) return;
 
-    // Remove existing items from content pane
-    const prevHeader = pane.querySelector(".settings-content-header");
-    const prevBody   = pane.querySelector(".settings-scroll-body");
-    if (prevHeader) prevHeader.remove();
-    if (prevBody)   prevBody.remove();
+    // Clear previous settings content
+    pane.innerHTML = "";
 
-    // 1. Header (Titles + Search Input)
+    // Render active section's scroll body content card list
+    const body = new SettingsContent({ section: this.activeSection });
+    pane.appendChild(body.render());
+  }
+
+  render() {
+    const mainWrap = document.createElement("div");
+    mainWrap.className = "settings-module-wrapper";
+
+    // 1. Header Row (Titles + Search Input) — Spans full width at the top
     const header = document.createElement("header");
     header.className = "settings-content-header";
 
@@ -584,19 +590,13 @@ export default class SettingsLayout {
       <input type="text" class="settings-search-field" placeholder="Search settings..." aria-label="Search settings configurations" />
     `;
     header.appendChild(searchWrapper);
+    mainWrap.appendChild(header);
 
-    pane.appendChild(header);
+    // 2. Main split panel layout (Sidebar on left, active content cards on right)
+    const mainLayout = document.createElement("div");
+    mainLayout.className = "settings-main-layout";
 
-    // 2. Body scroll views content card list
-    const body = new SettingsContent({ section: this.activeSection });
-    pane.appendChild(body.render());
-  }
-
-  render() {
-    const mainWrap = document.createElement("div");
-    mainWrap.className = "settings-module-wrapper";
-
-    // A. Left navigation sidebar
+    // A. Left settings navigation sidebar
     const sidebar = new SettingsSidebar({
       activeSection: this.activeSection,
       onSelect: (secKey) => {
@@ -604,15 +604,16 @@ export default class SettingsLayout {
         this._updateWorkspace();
       }
     });
-    mainWrap.appendChild(sidebar.render());
+    mainLayout.appendChild(sidebar.render());
 
-    // B. Right settings workspace viewport
+    // B. Right settings workspace scroll area container
     const contentPane = document.createElement("div");
     contentPane.className = "settings-content-pane";
-    mainWrap.appendChild(contentPane);
+    mainLayout.appendChild(contentPane);
+
+    mainWrap.appendChild(mainLayout);
 
     this.element = mainWrap;
-
     this._updateWorkspace();
 
     return mainWrap;

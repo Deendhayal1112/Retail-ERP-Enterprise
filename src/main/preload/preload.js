@@ -112,12 +112,7 @@ const ALLOWED_SEND_CHANNELS = [
   "analytics:get-kpis",
   "analytics:get-trends",
   "analytics:get-recommendations",
-  "analytics:get-forecasts",
-  "forecasting:get-sales",
-  "forecasting:get-inventory",
-  "forecasting:get-procurement",
-  "forecasting:get-financials",
-  "forecasting:simulate-scenario"
+  "analytics:get-forecasts"
 ];
 
 // Channels from Main to Renderer (Listeners)

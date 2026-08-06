@@ -89,6 +89,16 @@ export default class UserMenu {
               window.location.href = "../login/login.html";
             });
           }
+        } else if (action === "settings") {
+          const sidebarSettingsLink = document.querySelector('.sidebar-nav-link[data-route="settings"]');
+          if (sidebarSettingsLink) {
+            sidebarSettingsLink.click();
+          }
+        } else if (action === "license") {
+          const sidebarLicenseLink = document.querySelector('.sidebar-nav-link[data-route="license"]');
+          if (sidebarLicenseLink) {
+            sidebarLicenseLink.click();
+          }
         }
       });
     });

@@ -2,9 +2,10 @@
 
 .settings-module-wrapper {
   display: flex;
+  flex-direction: column;
   background-color: #F8FAFC;
   width: 100%;
-  height: calc(100vh - 112px); /* Maintain clear vertical spacing minus header and footer */
+  height: 100%;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -104,6 +105,15 @@
 /* ─────────────────────────────────────────────
  * MAIN CONTENT WORKSPACE (RIGHT COLUMN)
  * ───────────────────────────────────────────── */
+.settings-main-layout {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
 .settings-content-pane {
   flex: 1;
   display: flex;

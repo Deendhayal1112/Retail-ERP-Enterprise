@@ -1,31 +1,36 @@
-# Walkthrough - Retail ERP Enterprise Launch Integration
+# Walkthrough - Enterprise Plugin Framework (Phase 10, Step 1)
 
-This walkthrough summarizes the initial task assessment, problems found, and improvements implemented to launch Retail ERP Enterprise v0.2 as a polished, production-quality desktop application.
-
----
-
-## 1. Dependency Mapping & Assessment
-We created a comprehensive dependency map detailing the relationships between the Electron main process, the sandboxed preload bridge context, the Express backend, the SQLite database layer, and the modular client-side layout grids.
-*   **Documentation:** Saved under [dependency_map.md](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/documents/dependency_map.md) inside the project documents directory.
+This walkthrough documents the complete implementation of the **Enterprise Plugin Framework** architecture, user panels, permissions management, and developer tools.
 
 ---
 
-## 2. Core Business Screens & Route Mappings
-We resolved a major usability bottleneck where clicking sidebar links did nothing.
-*   **POS Point of Sale:** Built an interactive invoice and cart calculator with custom quantities, payment methods, CGST/SGST tax logs, and total checkout indicators denominated in Indian Rupees (₹).
-*   **Products Directory & Inventory Registry:** Rendered clean tables with product metadata, stock limits, low-stock warnings, and manual stock adjustment increment controls.
-*   **AI Invoice Import:** Implemented a drag-and-drop zone simulating Gemini OCR parsing and database committing.
-*   **Operational Logs:** Configured directories for Purchases, Customers, Employees, Marketing campaigns, License keys validation, and Profile configurations.
+## 1. Main Process Subsystems (`src/main/plugins/`)
+We created the core backend coordinator modules that simulate sandboxed plugin management:
+*   **[PluginRegistry.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/main/plugins/PluginRegistry.js)**: Declares lists of installed and available plugins with compatibility selectors, versions, ratings, and permission scopes database.
+*   **[PluginPermissionManager.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/main/plugins/PluginPermissionManager.js)**: Controls access checks (DB read/write, filesystem write, outgoing network, and UI modifications).
+*   **[PluginManifestValidator.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/main/plugins/PluginManifestValidator.js)**: Checks object manifest structures for required metadata fields.
+*   **[PluginLoader.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/main/plugins/PluginLoader.js)**: Governs mock startup discovery, loading maps, and unloading hooks.
+*   **[PluginManager.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/main/plugins/PluginManager.js)**: Orchestrates registries, loaders, permissions, and diagnostic telemetry reports.
 
 ---
 
-## 3. Dark Theme System & Performance
-We connected the top navigation's light/dark mode controls to trigger styling variables.
-*   **Toggle Switch:** Links the theme button inside the Header to apply `.dark` on `document.documentElement` and persist preferences in local storage.
-*   **Theme Bootstrap:** Added blocking scripts to the heads of [login.html](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/renderer/pages/login/login.html) and [home.html](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/renderer/pages/home/home.html) to prevent styling flashes on window creation.
+## 2. IPC Bindings & Bridge whitelists
+*   **[plugins.ipc.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/main/ipc/plugins.ipc.js)**: Registers whitelisted handlers to communicate safe calls over `plugins:get-installed`, `plugins:get-available`, `plugins:install`, `plugins:toggle`, `plugins:update-permissions`, and `plugins:get-diagnostics`.
+*   **[preload.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/main/preload/preload.js)**: Exposes these secure invoking methods in the context bridge layer.
 
 ---
 
-## 4. Git Index Hardening
-*   **PR Pruning:** Excluded and untracked the large compiled Electron binaries folder (`dist/`) that exceeded GitHub's 100MB limitation.
-*   **Gitignore Integration:** Synced the comprehensive `.gitignore` configuration across the repository layout.
+## 3. Renderer Dashboards UI Panels (`src/renderer/pages/Plugins/`)
+We created a beautiful tabbed view for users and creators:
+*   **[PluginCenter.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/renderer/pages/Plugins/PluginCenter.js)**: Mounts the main container and controls navigation switches.
+*   **[InstalledPluginsPanel.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/renderer/pages/Plugins/InstalledPluginsPanel.js)**: Renders lists of installed plugins with active toggles.
+*   **[PluginRegistryPanel.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/renderer/pages/Plugins/PluginRegistryPanel.js)**: Simulates downloads of store items.
+*   **[PluginPermissionsPanel.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/renderer/pages/Plugins/PluginPermissionsPanel.js)**: Offers checklists to customize security API boundaries.
+*   **[DeveloperToolsPanel.js](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/renderer/pages/Plugins/DeveloperToolsPanel.js)**: Hosts manifest documentation, zip scaffolding generation, and a live input JSON format validator.
+*   **[PluginCenter.css](file:///Users/deendhayalrr/Documents/Retail%20ERP%20Enterprise/src/renderer/pages/Plugins/PluginCenter.css)**: Links design tokens styling.
+
+---
+
+## 4. Verification and Push
+*   **Compilation:** Styles compiled successfully through Tailwind `npm run css:build`.
+*   **Repository status:** Staged and pushed to GitHub main branch.

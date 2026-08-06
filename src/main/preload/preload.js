@@ -118,7 +118,15 @@ const ALLOWED_SEND_CHANNELS = [
   "plugins:install",
   "plugins:toggle",
   "plugins:update-permissions",
-  "plugins:get-diagnostics"
+  "plugins:get-diagnostics",
+  "companies:get-all",
+  "companies:get-active",
+  "companies:register",
+  "companies:update",
+  "companies:switch",
+  "companies:get-matrix",
+  "companies:update-role-perms",
+  "companies:get-diagnostics"
 ];
 
 // Channels from Main to Renderer (Listeners)

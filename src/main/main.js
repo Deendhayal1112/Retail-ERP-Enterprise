@@ -205,6 +205,18 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize Plugin Framework: ${err.message}`);
   }
 
+  // Initialize Enterprise Multi-Company Subsystem
+  try {
+    const companyManager = require("./companies/CompanyManager");
+    const { registerCompanyIpcHandlers } = require("./ipc/companies.ipc");
+
+    companyManager.initialize();
+    registerCompanyIpcHandlers();
+    logger.info("Enterprise Multi-Company Subsystem successfully initialized in main process. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize Multi-Company Subsystem: ${err.message}`);
+  }
+
   // Initialize Release and Distribution Managers
   try {
     const PackagingManager = require("./release/PackagingManager");

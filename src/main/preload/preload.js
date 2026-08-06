@@ -134,7 +134,25 @@ const ALLOWED_SEND_CHANNELS = [
   "warehouses:approve-transfer",
   "warehouses:receive-transfer",
   "warehouses:get-inventory",
-  "warehouses:get-diagnostics"
+  "warehouses:get-diagnostics",
+  "api-platform:get-diagnostics",
+  "api-platform:get-endpoints",
+  "api-platform:get-endpoints-by-module",
+  "api-platform:get-modules",
+  "api-platform:get-keys",
+  "api-platform:generate-key",
+  "api-platform:revoke-key",
+  "api-platform:get-audit-logs",
+  "api-platform:get-scopes",
+  "api-platform:get-openapi-spec",
+  "api-platform:get-sample-code",
+  "api-platform:get-sdk-info",
+  "api-platform:get-webhooks",
+  "api-platform:get-webhook-events",
+  "api-platform:register-webhook",
+  "api-platform:delete-webhook",
+  "api-platform:simulate-webhook",
+  "api-platform:get-webhook-logs"
 ];
 
 // Channels from Main to Renderer (Listeners)

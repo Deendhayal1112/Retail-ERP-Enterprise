@@ -229,6 +229,18 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize Multi-Warehouse Subsystem: ${err.message}`);
   }
 
+  // Initialize Enterprise API Platform Subsystem
+  try {
+    const apiManager = require("./api-platform/APIManager");
+    const { registerAPIPlatformIpcHandlers } = require("./ipc/apiPlatform.ipc");
+
+    apiManager.initialize();
+    registerAPIPlatformIpcHandlers();
+    logger.info("Enterprise API Platform Subsystem successfully initialized in main process. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize Enterprise API Platform Subsystem: ${err.message}`);
+  }
+
   // Initialize Release and Distribution Managers
   try {
     const PackagingManager = require("./release/PackagingManager");

@@ -91,9 +91,15 @@ export default class Header {
     const themeBtn = document.createElement("button");
     themeBtn.className = "header-action-button-item button-theme-toggle";
     themeBtn.setAttribute("aria-label", "Toggle Dark/Light Mode");
-    themeBtn.innerHTML = "🌙";
+    // Set initial toggle character based on current classState
+    const isInitiallyDark = document.documentElement.classList.contains("dark");
+    themeBtn.innerHTML = isInitiallyDark ? "☀️" : "🌙";
+    
     themeBtn.addEventListener("click", () => {
-      console.log("[Header Action] Theme toggle clicked.");
+      const isDark = document.documentElement.classList.toggle("dark");
+      themeBtn.innerHTML = isDark ? "☀️" : "🌙";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      console.log(`[Header Action] Theme toggled. Dark mode active: ${isDark}`);
     });
     rightSection.appendChild(themeBtn);
 

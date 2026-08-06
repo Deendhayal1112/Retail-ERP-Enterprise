@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none';" />
+    <script>
+      (function() {
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else if (theme === "light") {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
     <title>Retail ERP Enterprise</title>
     <!-- CSS Dependencies -->
     <link rel="stylesheet" href="../../styles/output.css" />
@@ -61,6 +71,7 @@
     <link rel="stylesheet" href="../RC/ReleaseCandidateCenter.css" />
     <link rel="stylesheet" href="../AI/EnterpriseAICenter.css" />
     <link rel="stylesheet" href="../Analytics/SmartAnalyticsCenter.css" />
+    <link rel="stylesheet" href="../Business/BusinessPage.css" />
   </head>
   <body class="bg-app text-text-primary antialiased min-h-screen overflow-hidden">
     <!-- Main Shell Mount Point -->

@@ -304,10 +304,10 @@
 }
 
 /* ─────────────────────────────────────────────
-   * SYSTEM-AUTO DARK THEME VARIABLES
+   * SYSTEM-AUTO DARK THEME & EXPLICIT CLASS OVERRIDES
    * ───────────────────────────────────────────── */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
     --bg-app: var(--neutral-950);
     --bg-card: var(--neutral-900);
     --bg-input: var(--neutral-900);
@@ -372,4 +372,70 @@
     --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4);
     --shadow-focus: 0 0 0 3px rgba(99, 102, 241, 0.3);
   }
+}
+
+:root.dark {
+  --bg-app: var(--neutral-950);
+  --bg-card: var(--neutral-900);
+  --bg-input: var(--neutral-900);
+  --bg-sidebar: var(--neutral-900);
+  --bg-top-nav: var(--neutral-950);
+  --bg-footer: var(--neutral-900);
+  --bg-modal: var(--neutral-900);
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+
+  --border-light: var(--neutral-800);
+  --border-divider: var(--neutral-850);
+
+  --text-primary: var(--neutral-50);
+  --text-secondary: var(--neutral-300);
+  --text-muted: var(--neutral-500);
+  --text-placeholder: var(--neutral-600);
+
+  /* Interactive States */
+  --bg-hover: var(--neutral-800);
+  --bg-active: var(--neutral-700);
+  --bg-disabled: var(--neutral-800);
+
+  --text-disabled: var(--neutral-500);
+  --border-disabled: var(--neutral-700);
+
+  --bg-selection: var(--primary-800);
+  --text-selection: var(--primary-100);
+
+  --scrollbar-thumb: var(--neutral-700);
+  --scrollbar-hover: var(--neutral-600);
+
+  /* Status Badges */
+  --badge-success-bg: var(--success-900);
+  --badge-success-text: var(--success-100);
+
+  --badge-warning-bg: var(--warning-900);
+  --badge-warning-text: var(--warning-100);
+
+  --badge-danger-bg: var(--danger-900);
+  --badge-danger-text: var(--danger-100);
+
+  --badge-info-bg: var(--info-900);
+  --badge-info-text: var(--info-100);
+
+  /* Elevation Surface Bindings */
+  --bg-l0: var(--neutral-950);
+  --bg-l1: var(--neutral-900);
+  --bg-l2: var(--neutral-850);
+  --bg-l3: var(--neutral-800);
+  --bg-floating: var(--neutral-800);
+
+  /* Ambient shadows */
+  --shadow-xs: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+  --shadow-sm:
+    0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+  --shadow-focus: 0 0 0 3px rgba(99, 102, 241, 0.3);
 }

@@ -34,6 +34,7 @@ import DistributionCenter from "../Release/DistributionCenter.js";
 import ReleaseManagementCenter from "../ReleaseManagement/ReleaseManagementCenter.js";
 import DocumentationCenter from "../Docs/DocumentationCenter.js";
 import DeploymentCenter from "../Deploy/DeploymentCenter.js";
+import BusinessPage from "../Business/BusinessPage.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const appRoot = document.getElementById("app-root");
@@ -306,6 +307,19 @@ document.addEventListener("DOMContentLoaded", async () => {
           // Update header module breadcrumb focus label
           const breadcrumbText = document.querySelector(".breadcrumb-current");
           if (breadcrumbText) breadcrumbText.textContent = "CI/CD Pipeline";
+        } else if (["pos", "products", "inventory", "purchase", "customers", "employees", "reports", "marketing", "ai-import", "backup", "license", "profile"].includes(route)) {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const businessPage = new BusinessPage(route);
+          businessPage.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) {
+            breadcrumbText.textContent = businessPage.getFriendlyTitle();
+          }
         }
       });
     });

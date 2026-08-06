@@ -607,6 +607,49 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize AI subsystems: ${err.message}`);
   }
 
+  // Initialize Smart Analytics Subsystem
+  try {
+    const AnalyticsManager = require("./analytics/AnalyticsManager");
+    const KPIManager = require("./analytics/KPIManager");
+    const TrendManager = require("./analytics/TrendManager");
+    const ForecastManager = require("./analytics/ForecastManager");
+    const IntelligenceManager = require("./analytics/IntelligenceManager");
+    const AnalyticsEvents = require("./analytics/AnalyticsEvents");
+
+    const summaryMgr = new AnalyticsManager();
+    const kpiMgr = new KPIManager();
+    const trendMgr = new TrendManager();
+    const forecastMgr = new ForecastManager();
+    const intelMgr = new IntelligenceManager();
+
+    AnalyticsEvents.register({
+      "analytics:get-summary": async (event) => {
+        validateSender(event);
+        return await summaryMgr.getSummary();
+      },
+      "analytics:get-kpis": async (event) => {
+        validateSender(event);
+        return await kpiMgr.getKPIs();
+      },
+      "analytics:get-trends": async (event) => {
+        validateSender(event);
+        return await trendMgr.getTrends();
+      },
+      "analytics:get-recommendations": async (event) => {
+        validateSender(event);
+        return await intelMgr.getRecommendations();
+      },
+      "analytics:get-forecasts": async (event) => {
+        validateSender(event);
+        return await forecastMgr.getForecasts();
+      }
+    });
+
+    logger.info("Smart Analytics & KPI Intelligence subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize Smart Analytics subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

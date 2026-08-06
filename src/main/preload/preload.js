@@ -107,7 +107,12 @@ const ALLOWED_SEND_CHANNELS = [
   "ai:run-command",
   "ai:get-context",
   "ai:get-providers",
-  "ai:toggle-provider"
+  "ai:toggle-provider",
+  "analytics:get-summary",
+  "analytics:get-kpis",
+  "analytics:get-trends",
+  "analytics:get-recommendations",
+  "analytics:get-forecasts"
 ];
 
 // Channels from Main to Renderer (Listeners)

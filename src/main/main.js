@@ -650,6 +650,41 @@ app.whenReady().then(() => {
     logger.error(`Failed to initialize Smart Analytics subsystems: ${err.message}`);
   }
 
+  // Initialize Enterprise Forecasting & Predictive Planning Subsystem
+  try {
+    const ForecastingManager = require("./forecasting/ForecastManager");
+    const ForecastingEvents = require("./forecasting/ForecastingEvents");
+
+    const forecastingMgr = new ForecastingManager();
+
+    ForecastingEvents.register({
+      "forecasting:get-sales": async (event) => {
+        validateSender(event);
+        return await forecastingMgr.getSalesForecast();
+      },
+      "forecasting:get-inventory": async (event) => {
+        validateSender(event);
+        return await forecastingMgr.getInventoryForecast();
+      },
+      "forecasting:get-procurement": async (event) => {
+        validateSender(event);
+        return await forecastingMgr.getProcurementForecast();
+      },
+      "forecasting:get-financials": async (event) => {
+        validateSender(event);
+        return await forecastingMgr.getFinancialForecast();
+      },
+      "forecasting:simulate-scenario": async (event, growthRate) => {
+        validateSender(event);
+        return await forecastingMgr.runScenarioSimulation(growthRate);
+      }
+    });
+
+    logger.info("Enterprise Forecasting & Predictive Planning subsystems successfully initialized. ✅");
+  } catch (err) {
+    logger.error(`Failed to initialize Forecasting subsystems: ${err.message}`);
+  }
+
   // Create primary application main window
   windowManager.createMainWindow();
 

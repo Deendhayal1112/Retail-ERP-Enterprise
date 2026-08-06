@@ -28,6 +28,7 @@ import EnterpriseUATCenter from "../QA/EnterpriseUATCenter.js";
 import ReleaseCandidateCenter from "../RC/ReleaseCandidateCenter.js";
 import EnterpriseAICenter from "../AI/EnterpriseAICenter.js";
 import SmartAnalyticsCenter from "../Analytics/SmartAnalyticsCenter.js";
+import EnterpriseForecastCenter from "../Forecasting/EnterpriseForecastCenter.js";
 import CICDDashboard from "../Performance/CICDDashboard.js";
 import SecurityCenter from "../Security/SecurityCenter.js";
 import DistributionCenter from "../Release/DistributionCenter.js";
@@ -297,6 +298,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           // Update header module breadcrumb focus label
           const breadcrumbText = document.querySelector(".breadcrumb-current");
           if (breadcrumbText) breadcrumbText.textContent = "Smart Analytics Center";
+        } else if (route === "forecasting-center") {
+          e.preventDefault();
+          pageWrapper.innerHTML = "";
+          const forecastCenter = new EnterpriseForecastCenter();
+          forecastCenter.render().then(node => {
+            pageWrapper.appendChild(node);
+          });
+
+          // Update header module breadcrumb focus label
+          const breadcrumbText = document.querySelector(".breadcrumb-current");
+          if (breadcrumbText) breadcrumbText.textContent = "Enterprise Forecasting Center";
         } else if (route === "cicd-pipeline") {
           e.preventDefault();
           pageWrapper.innerHTML = "";

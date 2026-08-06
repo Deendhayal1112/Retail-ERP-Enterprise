@@ -19,12 +19,12 @@ class ForecastManager {
         { product: "Enterprise Barcode Scanner USB", status: "Optimal level", daysRemaining: 45 }
       ],
       purchases: [
-        { supplier: "TechWorld Distribution Corp", suggestedOrders: "$12,400.00", urgency: "High" },
-        { supplier: "Global Logistics Systems Inc", suggestedOrders: "$8,500.00", urgency: "Medium" }
+        { supplier: "TechWorld Distribution Corp", suggestedOrders: "₹12,400.00", urgency: "High" },
+        { supplier: "Global Logistics Systems Inc", suggestedOrders: "₹8,500.00", urgency: "Medium" }
       ],
       customerRisk: [
-        { customer: "Grand Horizon Hotel Group", riskScore: "Low (Stable)", outstandingBalance: "$1,420.00" },
-        { customer: "Westside Retail Enterprises", riskScore: "Medium (Payment Latency)", outstandingBalance: "$4,800.00" }
+        { customer: "Grand Horizon Hotel Group", riskScore: "Low (Stable)", outstandingBalance: "₹1,420.00" },
+        { customer: "Westside Retail Enterprises", riskScore: "Medium (Payment Latency)", outstandingBalance: "₹4,800.00" }
       ]
     };
   }

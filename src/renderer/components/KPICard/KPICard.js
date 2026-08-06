@@ -124,9 +124,9 @@ export class KPIGrid {
 
     // Default mock KPI panels data configurations
     this.kpis = [
-      { key: "sales", label: "Today's Sales", value: "$4,250.00", icon: "💰", type: "sales", trend: "12.5%", direction: "up" },
+      { key: "sales", label: "Today's Sales", value: "₹4,250.00", icon: "💰", type: "sales", trend: "12.5%", direction: "up" },
       { key: "orders", label: "Today's Orders", value: "32 Orders", icon: "📦", type: "orders", trend: "8.1%", direction: "up" },
-      { key: "revenue", label: "Total Revenue", value: "$124,500", icon: "📊", type: "revenue", trend: "1.2%", direction: "down" },
+      { key: "revenue", label: "Total Revenue", value: "₹1,24,500.00", icon: "📊", type: "revenue", trend: "1.2%", direction: "down" },
       { key: "stock", label: "Low Stock Items", value: "14 Items", icon: "⚠️", type: "stock", trend: "Critical", direction: "down" }
     ];
   }

@@ -24,7 +24,7 @@ export default class PredictiveInsightsPanel {
             ${(this.forecasts.sales || []).map(s => `
               <div style="display:flex; justify-content:space-between; border-bottom:1px solid #F1F5F9; padding-bottom:8px; font-size:13px;">
                 <span style="color:#6B7280;">${s.month}</span>
-                <strong style="color:#1E293B;">$${s.value.toLocaleString()} <span style="font-size:11px; color:#10B981;">(Conf. ${s.confidence})</span></strong>
+                <strong style="color:#1E293B;">₹${s.value.toLocaleString()} <span style="font-size:11px; color:#10B981;">(Conf. ${s.confidence})</span></strong>
               </div>
             `).join("")}
           </div>

@@ -26,7 +26,7 @@ export default class TrendAnalysisPanel {
             <div style="border-bottom:1px solid #F1F5F9; padding-bottom:16px;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                 <strong style="font-size:14px; color:#1E293B;">${t.month}</strong>
-                <span style="font-size:11px; color:#6B7280;">Sales: $${t.Sales.toLocaleString()} | Purchases: $${t.Purchases.toLocaleString()}</span>
+                <span style="font-size:11px; color:#6B7280;">Sales: ₹${t.Sales.toLocaleString()} | Purchases: ₹${t.Purchases.toLocaleString()}</span>
               </div>
               <div style="display:flex; flex-direction:column; gap:6px;">
                 <!-- Sales bar -->
